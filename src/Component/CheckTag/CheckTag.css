@@ -1,0 +1,57 @@
+
+.lab_g {
+    overflow: hidden;
+    display: block;
+    position: relative;
+    font-size: 15px;
+    color: #4c4c4c;
+    cursor: pointer;
+}
+
+
+.txt_check {
+    overflow: hidden;
+    display: block;
+    line-height: 22px;
+    font-size: 14px;
+    color: #252525;
+    font-weight: bold;
+}
+
+
+.txt_checkall {
+    font-size: 17px;
+    color: #333;
+    font-weight: bold;
+}
+
+.inp_g {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    opacity: .01;
+}
+
+.desc_checkall {
+    padding: 10px 40px 20px 28px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 12px;
+    color: #959595;
+    word-break: keep-all;
+}
+
+
+.ico_signup_check {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 1px 8px 0 0;
+    background-position: -30px -30px;
+    cursor: pointer;
+}
+
+.item_on .ico_signup_check {
+    background-position: 0px -30px;
+}

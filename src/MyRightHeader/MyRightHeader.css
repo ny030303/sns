@@ -1,0 +1,222 @@
+.snb_story {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 258px;
+    border-left: 1px solid #d0d0d0;
+    background-color: #f3f3f3;
+}
+
+.inner_snb {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/*------profile---------*/
+
+.snb_profile {
+    padding-top: 80px;
+    margin: 0 15px;
+}
+
+.wrap_thumb {
+    height: 121px;
+    padding-top: 18px;
+    text-align: center;
+}
+
+.right_header_profile_img_wrap {
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 9px;
+    background-position: -60px -115px;
+}
+
+.right_header_profile_img {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 0px;
+    left: 0px;
+}
+
+.right_header_profile_name {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -1px;
+    text-decoration: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.settingIcon {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: 75px;
+    left: 10px;
+    font-size: 0;
+    line-height: 0;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+
+.ico_util {
+    width: 18px;
+    height: 18px;
+    background-position: -435px 0;
+}
+
+.menuIcon {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: 75px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+.ico_mystory {
+    width: 18px;
+    height: 18px;
+    background-position: -475px 0;
+}
+/*---------------------*/
+
+/*----------친구 메뉴-----------*/
+
+.tab_friend {
+    width: 100%;
+    height: 40px;
+
+}
+.tab_friend .nav-link {
+    color: #696969 !important;
+}
+
+.tab_friend .nav-link.active {
+    background-color: #f3f3f3 !important;
+    border-radius: 0 !important;
+    border-color: #f26a41 #dee2e6 #f3f3f3 !important;
+    border-top: 2px solid #f26a41;
+    color: #333 !important;
+}
+
+.friends_list_wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.frame_type3 {
+    width: 38px;
+    height: 38px;
+    background-position: -210px -2px;
+    border-radius: 50%;
+}
+
+.frame_g {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.thumb_name {
+    display: block;
+    height: 100%;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 40px;
+    word-spacing: -4px;
+    color: #000;
+}
+
+
+/*--------밑에 소식받는 + 친구검색--------*/
+
+.cate_channel {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 39px;
+    border-top: 1px solid #d0d0d0;
+    background-color: #eaeaea;
+    cursor: pointer;
+}
+
+.box_searchbar {
+    position: absolute;
+    left: 0;
+    /*bottom: 0;*/
+    z-index: 11;
+    width: 100%;
+    height: 39px;
+    /*padding: 11px 10px 7px 15px;*/
+    background-color: #e2e2e2;
+    cursor: pointer;
+}
+
+.ico_arrow {
+    float: right;
+    width: 6px;
+    height: 10px;
+    margin: 15px 15px 0 0;
+    background-position: -95px -50px;
+}
+
+.ico_search {
+    display: inline;
+    float: right;
+    width: 15px;
+    height: 15px;
+    margin: 14px 10px 0 0;
+    background-position: -115px -50px;
+}
+
+
+
+/*---------------------*/
+/*-----쪽지------*/
+
+.ico_message {
+    width: 23px;
+    height: 18px;
+    background-position: -40px -30px;
+}
+
+
+
+/*-------추천 + 신청 목록---------*/
+
+.requestFontStyle {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: #f3f3f3;
+}
+
+.recommendFontStyle {
+    position: sticky;
+    top: 30px;
+    z-index: 5;
+    background: #f3f3f3;
+}

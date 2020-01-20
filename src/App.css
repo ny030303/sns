@@ -1,0 +1,255 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+    user-select: none;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    background: #f3f3f3;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: #f3f3f3;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+p {
+    margin: 0;
+}
+h3 {
+    margin: 0;
+}
+
+.App {
+    width: 100%;
+    height: 100%;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+}
+
+.inner_gnb_layer {
+    position: relative;
+    margin-top: 8px;
+    border: 2px solid #d0d0d0;
+    border-radius: 2px;
+    background-color: #fff;
+}
+
+.ico_ks {
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    background: url("/images/ico_ks.png") no-repeat 0 0;
+    text-indent: -9999px;
+}
+
+.ico_ks2 {
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    background: url("/images/ico_ks2.png") no-repeat 0 0;
+    text-indent: -9999px;
+}
+
+.img_profile {
+    display: block;
+    overflow: hidden;
+    background: url("/images/profile_defult.png") no-repeat 0 0;
+}
+
+
+
+.ico_account {
+    overflow: hidden;
+    display: inline-block;
+    line-height: 0;
+    font-size: 0;
+    background: url("/images/login/ico_account.png");
+    vertical-align: top;
+    text-indent: -9999px;
+}
+
+
+.ico_check {
+    margin: 0 8px 0 0;
+    background-position: -90px -140px !important;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+
+.txt_title {
+    float: left;
+}
+
+.fontStyle1 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #999;
+    line-height: 40px;
+}
+
+.flexClass {
+    display: flex;
+}
+
+/*------section------*/
+
+.section {
+    position: relative;
+    min-height: 100px;
+    margin: 19px auto 0;
+    padding: 40px 40px 0;
+    border-bottom: 1px solid #dedede;
+    background-color: #fff;
+    box-shadow: 0 1px 0 rgba(198,201,206,.2);
+    -webkit-box-shadow: 0 1px 0 rgba(198,201,206,.2);
+    -moz-box-shadow: 0 1px 0 rgba(198,201,206,.2);
+}
+
+/*------------*/
+/*---------button---------*/
+
+
+.styleNoneBtn {
+    border: 0 none;
+    background: rgba(0,0,0,0);
+    cursor: pointer;
+}
+
+.blackLineBtn {
+    border-color: #999;
+    background: #fff;
+    color: #646464;
+    height: 32px;
+    margin-left: 5px;
+    padding: 0 20px;
+    line-height: 32px;
+    font-size: 14px;
+}
+
+.orangeColorBtn {
+    color: #fff;
+    border-color: #f26a41;
+    background: #f26a41;
+    height: 32px;
+    margin-left: 5px;
+    padding: 0 20px;
+    line-height: 32px;
+    font-size: 14px;
+}
+
+.orangeColorBtn:hover {
+    color: #fff;
+}
+
+.nullTextOrangeColor:hover {
+    border-color: #f7a68d !important;
+    background: #f7a68d !important;
+}
+
+.nullTextOrangeColor {
+    border-color: #f7a68d !important;
+    background: #f7a68d !important;
+}
+
+.grayColorBtn {
+    display: block;
+    height: 30px;
+    margin: 0 15px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 32px;
+    background-color: #f0f0f0;
+    color: #717171;
+    text-decoration: none;
+    letter-spacing: -1px;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.grayColorBtn:hover {
+    border-color: #c5c5c5;
+    background-color: #e4e4e4;
+    color: #6b6b6b;
+}
+
+
+.btn_message {
+    display: block;
+    padding: 15px 0;
+}
+
+
+.btn_cover {
+    display: block;
+    width: 110px;
+    height: 30px;
+    margin-top: 10px;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    line-height: 32px;
+    color: #fff;
+    text-align: center;
+    opacity: .8;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn_cover:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+
+.btn_confirm {
+    color: #252525 !important;
+    background-color: #ffe500 !important;
+}
+
+/*----scrollBar---------*/
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0);
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 10px;
+    width: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+

@@ -1,0 +1,174 @@
+.write {
+    position: static;
+    z-index: 1;
+    width: 578px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.write .section {
+    position: relative;
+    padding: 36px 40px 16px;
+    border-radius: 0;
+    border-width: 0;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+}
+
+.tit_label {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    font-weight: 400;
+    color: #999;
+}
+
+.writeLabelStyle {
+    display: block;
+    font-size: 14px;
+    top: 36px;
+    left: 40px;
+    visibility: visible;
+}
+
+.editable {
+    width: 100%;
+    min-height: 130px;
+    background: #fff;
+    border: 0;
+    background-color: transparent;
+    line-height: 22px;
+    color: #000;
+    resize: none;
+    word-break: break-all;
+    outline: 0;
+    vertical-align: 0;
+    z-index: 1;
+    transition: .5s;
+}
+
+
+[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    display: block; /* For Firefox */
+    color: #999;
+}
+
+.div[contenteditable=true] {
+    font-size: 14px;
+}
+
+/*==========fileUploadList==========*/
+
+.fileUploadList {
+    padding: 0;
+}
+
+.write ul {
+    overflow: hidden;
+    width: auto;
+    border: 1px solid #d9d9d9;
+}
+
+.write li {
+    overflow: hidden;
+    position: relative;
+    float: left;
+    width: 165px;
+    border-left: 1px solid #d9d9d9;
+}
+
+.link_menu {
+    display: block;
+    height: 54px;
+    background-color: #fff;
+    font-size: 13px;
+    text-align: center;
+    line-height: 54px;
+    color: #646464;
+    cursor: pointer;
+}
+
+.link_menu:hover {
+    background-color: #fafafa;;
+    color: #000;
+}
+
+.txt_menu {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.ico_camera {
+    width: 18px;
+    height: 16px;
+    margin: 19px 5px 0 0;
+    background-position: -155px -430px;
+    display: inline-block;
+}
+
+.ico_music {
+    width: 14px;
+    height: 16px;
+    margin: 19px 6px 0 0;
+    background-position: -200px -430px;
+}
+
+.ico_link {
+    width: 19px;
+    height: 16px;
+    margin: 19px 5px 0 0;
+    background-position: -215px -430px;
+}
+
+input[type="file"] { /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+
+/*========bottomWriteContents=======*/
+
+.bottomWriteContents {
+    position: relative;
+}
+
+.inner_open {
+    width: 102px;
+    height: 32px;
+    display: inline-block !important;
+    margin-right: 7px;
+    border: 1px solid #d9d9d9;
+    position: relative;
+    padding: 5px 21px 5px 9px;
+    font-size: 12px;
+    line-height: 21px;
+    color: #000;
+    cursor: pointer;
+    letter-spacing: -1px;
+}
+
+.global {
+    width: 18px;
+    height: 18px;
+    margin: 1px 5px 0 0;
+    background-position: 0 -490px;
+    display: inline-block;
+}
+
+.writePostBtns {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.postIconWrap {
+
+}
+

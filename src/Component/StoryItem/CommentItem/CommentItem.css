@@ -1,0 +1,71 @@
+.commentItem {
+    position: relative;
+    padding: 12px 0 1px 46px;
+    font-size: 13px;
+    line-height: 1.35;
+    color: #36373c;
+    word-break: break-word;
+}
+
+.commentItem:hover {
+
+}
+
+.comment_user_img {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    background-position: -210px -40px;
+}
+
+.comment_name {
+    color: #222325;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.comment_time {
+    margin-left: 4px;
+    font-size: 12px;
+    color: #acb0b8;
+    font-weight: 400;
+}
+
+.comment_heartNum {
+    font-size: 12px;
+    color: #acb0b8;
+}
+
+.ico_dot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin: 8px 3px 0;
+    background-position: -55px -230px;
+    vertical-align: top;
+}
+
+.ico_love {
+    display: inline-block;
+    width: 11px;
+    height: 9px;
+    margin-top: 5px;
+    background-position: -55px -210px;
+    vertical-align: top;
+}
+
+.btn_like {
+    font-weight: 400;
+    font-size: 12px;
+    color: #acb0b8;
+}
+
+.comment_emoti {
+    width: 70px;
+    height: 70px;
+}

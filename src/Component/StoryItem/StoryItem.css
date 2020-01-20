@@ -1,0 +1,249 @@
+.frame_type6 {
+    width: 56px;
+    height: 56px;
+    background-position: 0 -115px;
+    border-radius: 50%;
+}
+
+.line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-position: -135px -255px;
+    z-index: 1;
+}
+
+.storyContentsWrap {
+    position: relative;
+}
+
+.add_top {
+    float: left;
+    width: 500px;
+    padding-left: 65px;
+    margin-top: 10px;
+}
+
+.pf_name {
+    font-weight: 700;
+    font-size: 15px;
+    color: #000;
+}
+
+.storyitem_font_style {
+    font-size: 12px;
+    color: #acb0b8;
+}
+
+.btn_top_group {
+    position: absolute;
+    right: 0;
+    top: 12px;
+    min-width: 45px;
+}
+
+.storyitem_icon_wrap {
+
+}
+
+
+/*--------top icons---------*/
+
+
+.btn_save {
+    display: inline-block;
+    vertical-align: top;
+    width: 17px;
+    height: 16px;
+    background-position: -325px -75px;
+    cursor: pointer;
+}
+
+.bn_modify {
+    display: inline-block;
+    width: 16px;
+    height: 20px;
+    background-position: -470px -44px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+/* -----circle icons-----*/
+
+.bn_feel {
+    display: inline-block;
+    background-position: 0 -250px;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.bn_feel:hover {
+    background-position: 0 -295px;
+}
+
+.bn_feel:hover + .selectFeelIcons {
+    transition: .4s;
+    bottom: 45px;
+    visibility: visible;
+}
+
+.bn_share {
+    background-position: -45px -250px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.bn_share:hover {
+    background-position: -45px -295px;
+}
+
+.bn_up {
+    background-position: -90px -250px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.bn_up:hover {
+    background-position: -90px -295px;
+}
+/*------------------color circle icons ----------------------*/
+.selectFeelIcons {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+}
+
+.selectFeelIcons:hover {
+    visibility: visible;
+    bottom: 45px;
+}
+
+.selectFeelIconStyle {
+    width: 45px;
+    height: 45px;
+    outline: 0 none;
+    display: inline-block;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.selectFeelIconStyle:hover {
+    transform: scale(1.05);
+}
+
+
+/*.animate_like {*/
+/*    background: url("/images/ani_emotion1.png") no-repeat 0 0;*/
+/*}*/
+
+/*.animate_pleasure {*/
+/*    background: url("/images/ani_emotion2.png") no-repeat 0 0;*/
+/*}*/
+
+/*.animate_sad {*/
+/*    background: url("/images/ani_emotion3.png") no-repeat 0 0;*/
+/*}*/
+
+/*.animate_cheerup {*/
+/*    background: url("/images/ani_emotion4.png") no-repeat 0 0;*/
+/*}*/
+
+/*.animate_good {*/
+/*    background: url("/images/ani_emotion5.png") no-repeat 0 0;*/
+/*}*/
+
+.bn_like {
+    background-position: -50px -200px !important;
+}
+
+.bn_pleasure {
+    background-position: -140px -200px!important;
+}
+
+.bn_sad {
+    background-position: -185px -200px !important;
+}
+
+.bn_cheerup {
+    background-position: -230px -200px!important;
+}
+.bn_good {
+    background-position: -95px -200px !important;
+}
+/*------------------------------*/
+/*------------comment--------------*/
+
+.storyCommentsWrap {
+    padding: 0 40px 15px;
+    margin: 0 -40px;
+    border-top: 1px solid #f4f4f4;
+    background: #fcfcfc;
+    position: relative;
+}
+
+.count_group {
+    position: relative;
+    z-index: 10;
+    margin-bottom: -15px;
+    border: 0 none;
+    height: 35px;
+    /*border-bottom: 1px solid #eee;*/
+    font-size: 12px;
+    line-height: 35px;
+}
+
+.count_group p {
+    display: inline-block;
+    margin-right: 8px;
+    color: #73767c;
+}
+
+.count_group p span {
+    font-weight: bold;
+}
+
+.inp_write {
+    position: relative;
+    min-height: 32px;
+    padding: 0 72px 0 10px;
+    border: 1px solid #e6eaed;
+    background: #fff;
+    margin: 20px 6px 0 0;
+    outline: 0 none;
+    width: 417px;
+    display: inline-block;
+}
+
+.inp_write[contenteditable=true] {
+    /*line-height: 2.5;*/
+    padding-top: 5px;
+    font-size: 13px;
+}
+
+.bn_emoti {
+    right: 84px;
+    cursor: pointer;
+    background-position: 0 -530px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 1px;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    outline: 0;
+}
+
+.storyCommentsList {
+
+}

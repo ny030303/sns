@@ -1,0 +1,292 @@
+
+/*---------story cover---------*/
+.story_cover {
+    position: relative;
+    z-index: 11;
+    width: 800px;
+    height: 342px;
+    margin: 0 auto;
+    background: url("/images/bg23.jpg");
+    background-size: cover;
+}
+
+.bg_cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: .2;
+}
+
+.cover_cont {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.info_pf {
+    margin: 35px 25px 0 40px;
+    position: relative;
+}
+
+.link_pf {
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    background-position: -5px -5px;
+}
+
+.bg_pf {
+    display: inline-block;
+    overflow: hidden;
+    background: url("/images/img_l.jpg") no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.ico_pf {
+    position: absolute;
+    left: 74px;
+    bottom: 6px;
+    z-index: 1;
+    width: 26px;
+    height: 26px;
+    background-position: -350px -390px;
+    cursor: pointer;
+}
+
+.userStoryName {
+    font-size: 32px;
+    line-height: 36px;
+    color: #fff;
+    word-spacing: 0;
+    cursor: pointer;
+    vertical-align: top;
+    position: absolute;
+    top: 25px;
+    left: 123px;
+}
+
+/*-----------menu-------------*/
+
+.menu_story {
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+    z-index: 40;
+    width: 100%;
+    height: 52px;
+}
+
+.story_list {
+    float: left;
+    margin-left: 40px;
+}
+
+.story_list li {
+    float: left;
+    margin-right: 16px;
+}
+
+.story_link {
+    display: block;
+    position: relative;
+    height: 52px;
+    padding: 0 6px;
+    font-size: 15px;
+    line-height: 55px;
+    color: #fff;
+    opacity: .8;
+    cursor: pointer;
+}
+
+.story_link:hover {
+    height: 49px;
+    border-bottom: 3px solid #f26a41;
+    color: #fff;
+    text-decoration: none;
+    opacity: 1;
+}
+
+.story_link_on {
+    height: 49px;
+    border-bottom: 3px solid #f26a41;
+    color: #fff;
+    text-decoration: none;
+    opacity: 1;
+}
+
+
+.info_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 211px;
+    margin-right: 40px;
+}
+
+
+.story_cont {
+    display: block;
+    overflow: visible;
+    width: 800px;
+    height: 100px;
+    margin: 0 auto;
+    clear: both;
+    *zoom: 1;
+    position: relative;
+}
+
+/*----story_post--------*/
+.story_post_wrap {
+    float: left;
+    position: relative;
+    width: 578px;
+    margin: 0 10px 0 0;
+}
+
+/*-------widgets---------*/
+
+/*정보*/
+.story_widgets {
+    position: absolute;
+    left: 66.5%;
+    top: 19px;
+    z-index: 9;
+    margin-left: 58px;
+    width: 212px;
+}
+
+.section_widgets {
+    position: relative;
+    width: 210px;
+    height: 230px;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d2d2d2;
+    background-color: #fff;
+}
+
+.tit_widgets {
+    padding: 9px 0 7px 5px;
+    border-bottom: 3px solid #e5e5e5;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1f1d1d;
+    font-weight: bold;
+}
+
+.ico_more {
+    width: 10px;
+    height: 16px;
+    margin: 8px 0 0 130px;
+    background-position: -380px -590px;
+    display: inline-block;
+}
+
+.ico_birthday {
+    position: absolute;
+    left: 2px;
+    top: 17px;
+    width: 16px;
+    height: 19px;
+    background-position: -380px -610px;
+}
+
+.ico_story {
+    position: absolute;
+    left: 2px;
+    top: 73px;
+    width: 17px;
+    height: 16px;
+    background-position: -400px -610px;
+}
+
+.subtit_info {
+    padding: 2px 0 0 2px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #1f1d1d;
+}
+
+.desc_info {
+    height: 20px;
+    padding-left: 2px;
+    font-weight: 700;
+    font-size: 17px;
+    color: #646464;
+}
+
+.list_info {
+    position: relative;
+    margin-left: 5px;
+    padding: 16px 5px 0 30px;
+}
+
+.subtit_info .ico_ks {
+    position: absolute;
+    left: 2px;
+}
+
+.tit_story {
+    margin-top: 8px;
+    padding-top: 11px;
+    border-top: 1px solid #eee;
+}
+
+.tit_qna {
+    margin-top: 9px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+.tit_qna .ico_ks {
+    top: 140px;
+}
+
+.story_widgets .ico_plus {
+    width: 17px;
+    height: 17px;
+    background-position: -440px -610px;
+}
+/*최근 키워드*/
+
+.keyword_widgets {
+    overflow: hidden;
+    height: 140px;
+    margin-top: 16px;
+}
+
+.link_keyword {
+    float: left;
+    max-width: 156px;
+    margin-bottom: 5px;
+    padding: 7px 10px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #646464;
+    cursor: pointer;
+}
+
+.link_keyword:hover {
+    padding: 5px 8px;
+    border: 2px solid #1cbbfd;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+/*test*/
+
+/*.testStyle {*/
+/*    display: inline-block;*/
+/*    position: sticky;*/
+/*    top: 30px;*/
+/*    width: 80px;*/
+/*}*/

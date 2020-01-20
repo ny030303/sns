@@ -1,0 +1,16 @@
+.mainStory {
+    width: 100%;
+    height: 100%;
+}
+
+.article_story {
+    padding: 65px 260px 0 0;
+    background-color: #f3f3f3;
+}
+
+.feed {
+    position: relative;
+    width: 578px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}

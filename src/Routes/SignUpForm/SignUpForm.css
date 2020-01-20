@@ -1,0 +1,56 @@
+.signUpForm {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    min-width: 320px;
+    display: table;
+    border-collapse: separate;
+}
+
+.signupWrap {
+    display: table-cell;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 50px 0;
+    vertical-align: middle;
+}
+
+#signupHead {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.signupLogo {
+    display: inline-block;
+    width: 88px;
+    height: 27px;
+    margin: 0 auto;
+    line-height: 1;
+    background: url("/images/login/ico_account.png");
+    vertical-align: top;
+}
+
+.signupArticle {
+    max-width: 520px;
+    min-height: 592px;
+    padding-bottom: 49px;
+    position: relative;
+    margin: 40px auto;
+    padding: 58px 69px 69px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.tit_step {
+    margin-bottom: 44px;
+    line-height: 34px;
+    font-weight: normal;
+    font-size: 24px;
+    color: #252525;
+    text-align: left;
+    text-align: left;
+}
+
