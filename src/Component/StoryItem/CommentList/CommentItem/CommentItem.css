@@ -1,0 +1,148 @@
+.commentItem {
+    position: relative;
+    padding: 12px 0 1px 46px;
+    font-size: 13px;
+    margin: 6px 0;
+    line-height: 1.35;
+    color: #36373c;
+    word-break: break-word;
+}
+
+.commentItem:hover  .bn_report {
+    display: block;
+}
+
+.commentItem:hover .cmt_setup {
+    display: block;
+}
+
+.comment_user_img {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 38px;
+    height: 38px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    border-radius: 50%;
+}
+
+.comment_user_normal_img {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    background-position: -210px -40px;
+}
+
+.comment_name {
+    color: #222325;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.comment_time {
+    margin-left: 4px;
+    font-size: 12px;
+    color: #acb0b8;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.comment_heartNum {
+    font-size: 12px;
+    color: #acb0b8;
+    margin-left: 5px;
+}
+
+.ico_dot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin: 8px 3px 0;
+    background-position: -55px -230px;
+    vertical-align: top;
+}
+
+.ico_love {
+    display: inline-block;
+    width: 11px;
+    height: 9px;
+    margin-top: 5px;
+    background-position: -55px -210px;
+    vertical-align: top;
+}
+
+.ico_love:hover {
+    background-position: -55px -220px;
+}
+
+.btn_like {
+    font-weight: 400;
+    font-size: 12px;
+    color: #acb0b8;
+    cursor: pointer;
+}
+
+.btn_like:hover {
+    text-decoration: underline;
+}
+
+.heart_on {
+    color: #eb684c;
+    background-position: -55px -220px;
+}
+
+.comment_emoti {
+    width: 70px;
+    height: 70px;
+}
+
+.bn_report {
+    background-position: -463px -324px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+.bn_report:hover {
+    background-position: -463px -344px;
+}
+
+.cmt_setup {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    /*width: 112px;*/
+}
+
+.bn_del {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+    background-position: -110px -60px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bn_edit {
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+    background-position: -80px -60px;
+    display: inline-block;
+    cursor: pointer;
+}

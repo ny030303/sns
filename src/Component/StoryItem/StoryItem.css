@@ -3,6 +3,16 @@
     height: 56px;
     background-position: 0 -115px;
     border-radius: 50%;
+    cursor: pointer;
+}
+
+.storyItemProfileImg {
+    width: 56px;
+    height: 56px;
+    background-position: 50% 50%;
+    border-radius: 50%;
+    background-size: cover;
+    cursor: pointer;
 }
 
 .line {
@@ -48,6 +58,42 @@
 
 }
 
+/*===========스토리 사진============*/
+.storyImgList {
+    width: 100%;
+    line-height: 0;
+}
+
+.storyImgList div {
+    width: 248px;
+    height: 248px;
+    border: 1px solid #dcdcdc;
+    margin: 1px 1px 1px 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.storyImgBiger {
+    width: 498px !important;
+    height: 498px !important;
+}
+
+.storyImgBig {
+    width: 331px !important;
+    height: 331px !important;
+}
+
+.storyImgSide {
+    width: 165px !important;
+    height: 165px !important;
+}
+
+.absolute {
+    position: absolute;
+}
+/*=================================*/
 
 /*--------top icons---------*/
 
@@ -116,6 +162,137 @@
 .bn_up:hover {
     background-position: -90px -295px;
 }
+
+.add_top .ic_lock {
+    width: 10px;
+    height: 13px;
+    background-position: -260px -75px;
+    display: inline-block;
+}
+
+.add_top .ic_friend {
+    width: 15px;
+    height: 13px;
+    background-position: -270px -75px;
+    display: inline-block;
+}
+
+.bn_morelike {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #73767c;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    background: url(/images/ico_ks.png) no-repeat -140px -955px;
+    position: absolute;
+    right: 0;
+}
+
+.storyItem_frame_g {
+    width: 28px;
+    height: 28px;
+    background-position: -290px -240px;
+    display: inline-block;
+}
+
+.storyItem_feeling_user_img_wrap {
+    position: relative;
+    display: inline-block;
+
+}
+
+.storyItem_feeling_user_img {
+    width: 28px;
+    height: 28px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    border-radius: 50%;
+    display: inline-block;
+    /*float: right;*/
+}
+
+.storyItem_feeling_user_img_wrap .bn_like {
+    display: inline-block;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 18px;
+    height: 18px;
+    background: url("/images/ico_ks2.png") no-repeat 0 0 !important;
+    text-indent: -9999px;
+    vertical-align: top;
+    background-position: -335px -185px !important;
+}
+
+.storyItem_feeling_user_img_wrap .bn_pleasure {
+    display: inline-block;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 18px;
+    height: 18px;
+    background: url("/images/ico_ks2.png") no-repeat 0 0 !important;
+    text-indent: -9999px;
+    vertical-align: top;
+    background-position: -375px -185px !important;
+}
+
+.storyItem_feeling_user_img_wrap .bn_sad {
+    display: inline-block;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 18px;
+    height: 18px;
+    background: url("/images/ico_ks2.png") no-repeat 0 0 !important;
+    text-indent: -9999px;
+    vertical-align: top;
+    background-position: -395px -185px !important;
+}
+
+.storyItem_feeling_user_img_wrap .bn_cheerup {
+    display: inline-block;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 18px;
+    height: 18px;
+    background: url("/images/ico_ks2.png") no-repeat 0 0 !important;
+    text-indent: -9999px;
+    vertical-align: top;
+    background-position: -415px -185px !important;
+}
+
+.storyItem_feeling_user_img_wrap .bn_good {
+    display: inline-block;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 18px;
+    height: 18px;
+    background: url("/images/ico_ks2.png") no-repeat 0 0 !important;
+    text-indent: -9999px;
+    vertical-align: top;
+    background-position: -355px -185px !important;
+}
+
+
+
+.feelingUserIconWrap {
+    width: 63px;
+    position: absolute;
+    right: 0;
+}
+
 /*------------------color circle icons ----------------------*/
 .selectFeelIcons {
     visibility: hidden;
@@ -181,16 +358,8 @@
 .bn_good {
     background-position: -95px -200px !important;
 }
-/*------------------------------*/
-/*------------comment--------------*/
+/*--------------count_group----------------*/
 
-.storyCommentsWrap {
-    padding: 0 40px 15px;
-    margin: 0 -40px;
-    border-top: 1px solid #f4f4f4;
-    background: #fcfcfc;
-    position: relative;
-}
 
 .count_group {
     position: relative;
@@ -213,37 +382,11 @@
     font-weight: bold;
 }
 
-.inp_write {
+.storyCommentsWrap {
+    padding: 0 40px 15px;
+    margin: 0 -40px;
+    border-top: 1px solid #f4f4f4;
+    background: #fcfcfc;
     position: relative;
-    min-height: 32px;
-    padding: 0 72px 0 10px;
-    border: 1px solid #e6eaed;
-    background: #fff;
-    margin: 20px 6px 0 0;
-    outline: 0 none;
-    width: 417px;
-    display: inline-block;
 }
 
-.inp_write[contenteditable=true] {
-    /*line-height: 2.5;*/
-    padding-top: 5px;
-    font-size: 13px;
-}
-
-.bn_emoti {
-    right: 84px;
-    cursor: pointer;
-    background-position: 0 -530px;
-    overflow: hidden;
-    position: absolute;
-    bottom: 1px;
-    z-index: 10;
-    width: 30px;
-    height: 30px;
-    outline: 0;
-}
-
-.storyCommentsList {
-
-}

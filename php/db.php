@@ -5,21 +5,24 @@ $dsn = "mysql:host=gondr.asuscomm.com;dbname=yy_10107;charset=utf8mb4";
 
 $con = new PDO($dsn, "yy_10107", 'jj7323751');
 
-function fetch($con, $sql, $param = []) {
+function fetch($con, $sql, $param = [])
+{
     $q = $con->prepare($sql);
     $q->execute($param);
 
     return $q->fetch(PDO::FETCH_OBJ);
 }
 
-function fetchAll($con, $sql, $param = []) {
-$q = $con->prepare($sql);
-$q->execute($param);
+function fetchAll($con, $sql, $param = [])
+{
+    $q = $con->prepare($sql);
+    $q->execute($param);
 
-return $q->fetchAll(PDO::FETCH_OBJ);
+    return $q->fetchAll(PDO::FETCH_OBJ);
 }
 
-function execsql($con, $sql, $param = []) {
+function execsql($con, $sql, $param = [])
+{
     $q = $con->prepare($sql);
     $result = $q->execute($param);
 

@@ -17,6 +17,12 @@
     top: 8px;
 }
 
+.friendItemProfileImg {
+    width: 38px;
+    height: 38px;
+    background-position: 50% 50%;
+    background-size: cover;
+}
 
 /*친구 목록*/
 .ico_message {

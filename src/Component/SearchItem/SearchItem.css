@@ -1,0 +1,71 @@
+
+.searchItem {
+    display: block;
+    overflow: hidden;
+    padding: 8px 12px 8px 56px;
+    text-decoration: none;
+    position: relative;
+    /*height: 52px;*/
+    border-top: 1px solid #f0f0f0;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.searchItem:hover {
+    background-color: #f2f2f2;
+}
+
+
+.ico_hash {
+    position: absolute;
+    display: inline-block;
+    left: 22px;
+    top: 16px;
+    width: 15px;
+    height: 18px;
+    background-position: -370px 0;
+}
+
+
+.info_user {
+    padding: 9px 0 9px 29px;
+    display: block;
+    height: 18px;
+    font-weight: 700;
+    /*line-height: 19px;*/
+    /*word-spacing: -4px;*/
+    cursor: pointer;
+}
+
+.txt_name {
+    margin-left: -29px;
+}
+
+.no_data {
+    padding: 38px 36px;
+    font-size: 13px;
+    color: #999;
+    /*text-align: center;*/
+}
+
+
+.searchImg {
+    overflow: hidden;
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    background-position: -210px -40px;
+}
+
+
+.ico_plus {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin: 0 auto;
+    background-position: -390px 0;
+}

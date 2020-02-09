@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import './App.css';
-import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import MyHeader from "./MyHeader/MyHeader";
 import MyRightHeader from "./MyRightHeader/MyRightHeader";
 import MainStory from "./Routes/MainStory/MainStory";
@@ -9,6 +9,9 @@ import LoginForm from "./Routes/LoginForm/LoginForm";
 import SignUpForm from "./Routes/SignUpForm/SignUpForm";
 import eventService from "./services/EventService";
 import {getUser, logout} from "./services/DataService";
+import waitDialog from "./services/WaitDialog";
+import {NormalSettingPage} from "./Routes/NormalSettingPage/NormalSettingPage";
+
 
 const PrivateRoute = ({component: Component, authed, ...rest}) => (
     <Route
@@ -30,6 +33,7 @@ const LoginRoute = ({component: Component, authed, ...rest}) => (
     }/>
 );
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -49,11 +53,13 @@ class App extends React.Component {
 
     componentDidMount() {
         getUser(null, null, res => {
+            console.log(res);
             if (res.result === 0) {
                 localStorage.removeItem("userInfo");
                 this.setState({authed: false});
             }
         });
+        // waitDialog.show();
     }
 
     logout = () => {
@@ -65,17 +71,18 @@ class App extends React.Component {
     render() {
     return (
         <div className="App">
-            <HashRouter>
+            <BrowserRouter>
                 {
-                    (!this.state.topMenuHide) ? (<><MyHeader/><MyRightHeader/></>) : null
+                    (!this.state.topMenuHide) ? (<div><MyHeader/><MyRightHeader/></div>) : (<div></div>)
                 }
                 <Switch>
                     <PrivateRoute exact authed={this.state.authed} path="/" component={MainStory}/>
-                    <PrivateRoute exact authed={this.state.authed}  path="/story" component={UserStory}/>
+                    <PrivateRoute exact authed={this.state.authed}  path="/story/:userId/:type" component={UserStory}/>
+                    <PrivateRoute exact authed={this.state.authed} path="/setting" component={NormalSettingPage}/>
                     <LoginRoute exact authed={this.state.authed} path="/login" component={LoginForm}/>
                     <Route exact path="/signup" component={SignUpForm}/>
                 </Switch>
-            </HashRouter>
+            </BrowserRouter>
         </div>
     )
   }

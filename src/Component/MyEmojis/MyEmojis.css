@@ -1,0 +1,30 @@
+.emojiList {
+    margin-top: 6px;
+    display: block;
+    padding: 0;
+    border: 1px solid #bdbdbd;
+    border-radius: 2px;
+    /*background: #fff;*/
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    height: 323px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 422px;
+    z-index: 15;
+    position: absolute;
+    background-color: #f2f2f2;
+}
+
+.emojiList .emoji {
+    font-size: 17px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.emojiTitle {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 0;
+}

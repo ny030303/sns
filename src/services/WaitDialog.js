@@ -8,10 +8,10 @@ class WaitDialog {
   show() {
     $('body').append(`
         <div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
-          <div class="spinner-border text-primary wait-spinner"></div>
+          <div class="spinner-border text-warning wait-spinner"></div>
         </div>`
     );
-    $('#pleaseWaitDialog').modal()
+    $('#pleaseWaitDialog').modal();
     this.timer = setTimeout(() => this.hide(1), 180000);
   }
 
@@ -19,7 +19,7 @@ class WaitDialog {
     if( bAutoClose === undefined ) {
       clearTimeout(this.timer);
     }
-    $('#pleaseWaitDialog').modal('hide')
+    $('#pleaseWaitDialog').modal('hide');
     $('#pleaseWaitDialog').remove();
   }
 }

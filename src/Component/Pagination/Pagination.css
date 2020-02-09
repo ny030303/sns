@@ -1,0 +1,28 @@
+.paginationList {
+    font-size: 13px;
+    color: #888;
+    margin-left: 0;
+}
+
+.paginationList li {
+    cursor: pointer;
+    padding: 0;
+}
+.paginationList li:hover {
+    color: #222;
+    /*font-weight: bold;*/
+}
+
+.paginationNumStyle {
+    margin: 0 4px;
+    /*border: 1px solid #f26a41;*/
+    border-radius: 50%;
+    width: 1.7em;
+    height: 1.7em;
+    text-align: center;
+}
+
+.paginationNumStyle:hover {
+    background-color: #f7a68d;
+    color: #fff;
+}

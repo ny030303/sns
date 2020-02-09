@@ -1,0 +1,10 @@
+.profileSettingItem {
+    padding: 40px;
+}
+
+.profileSettingItem .tit_collection {
+    font-size: 19px;
+    color: #000;
+    font-weight: bold;
+
+}

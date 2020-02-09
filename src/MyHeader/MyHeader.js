@@ -1,9 +1,26 @@
 import React from 'react';
 import './MyHeader.css';
 import {withRouter} from 'react-router-dom';
+import HeaderSearchInput from "../Component/HeaderSearchInput/HeaderSearchInput";
+import {ModalWritingContainer} from "../Component/ModalWritingContainer/ModalWritingContainer";
+import {SearchItem} from "../Component/SearchItem/SearchItem";
+import eventService from "../services/EventService";
 
 
 class MyHeader extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isModalWritingContainerOn: false,
+            isSearchBoxOn: false,
+
+            editPostData: null
+        };
+        this.searchInput = React.createRef();
+
+    }
+
 
     onClickIconEvent = (e) => {
         let type = e.target.dataset.type;
@@ -11,6 +28,7 @@ class MyHeader extends React.Component {
         switch (type) {
             case "write":
                 // console.log(this.props.history);
+              this.showModalWritingContainer();
                 break;
             case "newnoti":
                 break;
@@ -20,45 +38,55 @@ class MyHeader extends React.Component {
                 break;
         }
     };
+    showModalWritingContainer = () => this.setState({isModalWritingContainerOn: !this.state.isModalWritingContainerOn});
 
     gotoMain = () => {this.props.history.push("/")};
+
+
+    onSearch = () => {
+        console.log(this.searchInput.current.value);
+
+    };
+
+    componentDidMount() {
+        eventService.listenEvent("editPostToMyHeader", (editPostData) => {
+            // 입력된 내용으로 표시
+            console.log(editPostData);
+            this.setState({isModalWritingContainerOn: true, editPostData: editPostData});
+        });
+
+        this.searchInput.current.addEventListener("input", (e) => {
+            let tests = e.target.value;
+            console.log(e.data);
+            if(tests.length <= 0) {
+                this.setState({isSearchBoxOn: false});
+            } else {
+                this.setState({isSearchBoxOn: true});
+            }
+        });
+    }
 
     render() {
         return (
             <div className="myHeader">
+                {(this.state.isModalWritingContainerOn) ? (
+                  <ModalWritingContainer postData={this.state.editPostData}
+                                         showModalWritingContainer={this.showModalWritingContainer}/>) : null}
                 <div className="headerLogoWrap">
                     <div className="headerLogoMargin">
-                        <img src="/images/header/logo_kakaostory.png" style={{cursor:"pointer"}} onClick={this.gotoMain}/>
+                        <img src="/images/header/logo_kakaostory.png" style={{cursor:"pointer"}}
+                             onClick={this.gotoMain}/>
                     </div>
                 </div>
                 <div className="headerSearchWrap">
                     <div className="searchBarWrap">
-                        <div className="searchBar">
-                            <div className="searchInputWrap">
-                                <input className="searchInput" placeholder="친구, 채널, 태그, 장소 검색"/>
-                            </div>
-                            <div className="searchBtnWrap"><span className="searchBtn ico_ks">검색</span></div>
-                        </div>
+                        <HeaderSearchInput onSearch={this.onSearch} inputRef={this.searchInput}/>
                     </div>
-                    <div className="searchLayerWrap">
+                    <div className="searchLayerWrap" style={(this.state.isSearchBoxOn) ? null : {display: "none"}}>
                         <div className="inner_gnb_layer">
                             <span className="ico_ks ico_arrow_up"/>
                             <ul className="search_list">
-                                <li className="searchItem">
-                                    <div className="searchImg img_profile"/>
-                                    <div className="info_user">
-                                        <div className="txt_name">Dive with Hana</div>
-                                        <span className="ico_ks2 ico_teller1"/>
-                                    </div>
-                                    <button type="button" className="btn_plus styleNoneBtn" data-kant-id="1388"><span className="ico_ks2 ico_plus">소식받기</span></button>
-                                </li>
-                                <li className="searchItem">
-                                    <div className="ico_ks2 thumb_user"/>
-                                    <div className="info_user">
-                                        <div className="txt_name">Da Nang</div>
-                                        <p className="info_user_sub_title">Da Nang, Hải Châu District, Da Nang, Vietnam</p>
-                                    </div>
-                                </li>
+                                <SearchItem type={"no_data"}/>
                             </ul>
                         </div>
                     </div>

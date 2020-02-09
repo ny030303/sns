@@ -1,0 +1,31 @@
+.normalSettingListItem {
+    display: block;
+}
+.normalSettingPage  .subTitleText {
+    float: left;
+    width: 126px;
+    padding: 18px 0 17px 4px;
+    font-size: 13px;
+    color: #000;
+    clear: both;
+}
+
+.normalSettingPage .subText {
+    float: left;
+    width: 380px;
+    padding: 20px 0 18px;
+    border-top: 1px solid #d0d0d0;
+}
+
+.normalSettingPage .txt_id {
+    font-size: 13px;
+    color: #47484f;
+    font-weight: bold;
+}
+
+.normalSettingPage .id_inp {
+    margin-top: 3px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #646464;
+}

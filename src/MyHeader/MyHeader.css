@@ -74,56 +74,14 @@
     top: 54px;
     width: 304px;
     position: absolute;
-    display: none;
+
 }
 
 
 .search_list {
     max-height: 556px;
     overflow-y: scroll;
-}
-
-.searchItem {
-    display: block;
-    overflow: hidden;
-    padding: 8px 12px 8px 56px;
-    text-decoration: none;
-    position: relative;
-    height: 52px;
-    border-top: 1px solid #f0f0f0;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-.searchItem:hover {
-    background-color: #f2f2f2;
-}
-
-.searchImg {
-    overflow: hidden;
-    position: absolute;
-    left: 12px;
-    top: 8px;
-    width: 36px;
-    height: 36px;
-    border-radius: 36px;
-    background-position: -210px -40px;
-}
-
-
-.info_user {
-    padding: 9px 0 9px 29px;
-    display: block;
-    height: 18px;
-    font-weight: 700;
-    /*line-height: 19px;*/
-    /*word-spacing: -4px;*/
-    cursor: pointer;
-}
-
-.txt_name {
-    margin-left: -29px;
+    margin: 0;
 }
 
 .txt_with {
@@ -144,14 +102,15 @@
 }
 
 .thumb_user {
+    position: absolute;
+    display: inline-block;
     left: 22px;
     top: 16px;
     width: 16px;
     height: 19px;
     background-position: -350px 0;
-    display: inline-block;
-    position: absolute;
 }
+
 
 .ico_arrow_up {
     position: absolute;
@@ -171,14 +130,6 @@
     width: 30px;
     height: 30px;
     margin-top: -15px;
-}
-
-.ico_plus {
-    position: relative;
-    width: 12px;
-    height: 12px;
-    margin: 0 auto;
-    background-position: -390px 0;
 }
 
 

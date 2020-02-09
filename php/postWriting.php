@@ -5,21 +5,22 @@ header('Content-Type: application/json');
 require("db.php");
 
 $userid = $_POST["userid"];
-//$fileid = $_POST["fileid"] || null;
-$feeling = $_POST["feeling"] || 0;
+$feeling = $_POST["feeling"];
 $contents = $_POST["contents"];
+$fileData = $_POST["fileData"];
+$isprivate_num = $_POST["isprivatenum"];
 
-//echo $birth;
+//var_dump($fileData);
 
-$bRes = null;
 
-$query = "INSERT INTO `sns_post`(`userid`, `feeling`, `created`,`contents`) VALUES (?, ?,now(),?)";
-$bRes = execsql($con, $query, [$userid, $fileid, $feeling, $contents]);
-
-$query1 = "";
-
-$query2 = "INSERT INTO `sns_file`(`userid`, `file`, `postid`) VALUES ([value-2],[value-3],[value-4])";
-
+$query = "INSERT INTO `sns_post`(`userid`, `created`,`contents`, `isprivate_num`) VALUES (?, now(),?,?)";
+$bRes = execsql($con, $query, [$userid, $contents, $isprivate_num]);
+if( $bRes && $fileData !== "null")  {
+  $result = fetch($con, "SELECT LAST_INSERT_ID() as postid", []);
+  // var_dump($result->postid);
+  $query2 = "INSERT INTO `sns_file`(`userid`, `file`, `postid`, `filecnt`) VALUES (?,?,?,?)";
+  $files = explode("|", $fileData);
+  $bRes = execsql($con, $query2, [$userid, $fileData, $result->postid,count($files)]);
+}
 echo json_encode(array("result" => $bRes));
-
 ?>

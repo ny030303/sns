@@ -132,11 +132,19 @@ input[type="file"] { /* 파일 필드 숨기기 */
     border: 0;
 }
 
+.writeFileList {
+    border: 0 none !important;
+    grid-gap: 3px !important;
+}
+
 
 /*========bottomWriteContents=======*/
 
 .bottomWriteContents {
     position: relative;
+    display: flex;
+    /* justify-content: space-between; */
+    width: 100%;
 }
 
 .inner_open {
@@ -162,6 +170,37 @@ input[type="file"] { /* 파일 필드 숨기기 */
     display: inline-block;
 }
 
+.inner_open .arr {
+    position: absolute;
+    right: 9px;
+    top: 13px;
+    width: 7px;
+    height: 5px;
+    background-position: 0 -550px;
+}
+
+
+.ic_friend {
+    width: 20px;
+    height: 16px;
+    margin-right: 5px !important;
+    background-position: 0 -530px;
+}
+
+.ic_comfort {
+    width: 20px;
+    height: 19px;
+    margin-top: 6px;
+    background-position: -450px -850px;
+}
+
+.ic_lock {
+    width: 15px;
+    height: 19px;
+    margin-right: 10px !important;
+    background-position: 0 -510px;
+}
+
 .writePostBtns {
     position: absolute;
     right: 0;
@@ -169,6 +208,23 @@ input[type="file"] { /* 파일 필드 숨기기 */
 }
 
 .postIconWrap {
+    display: inline-block;
 
+}
+
+.postIconWrap span {
+    font-weight: bold;
+    color: #dadada;
+    font-size: 19px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.hashtag_icon {
+
+}
+
+.hashtag_icon:hover {
+    color: #aaa;
 }
 

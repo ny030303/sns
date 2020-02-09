@@ -1,0 +1,38 @@
+.normalSettingPage {
+    position: relative;
+    width: 510px;
+    margin: 0 auto;
+    padding: 39px 20px 30px;
+}
+
+.normalSettingPage .tit_modify {
+    padding-left: 4px;
+    margin-bottom: -4px;
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+}
+
+.normalSettingPage .subtit_modify {
+    float: left;
+    width: 506px;
+    padding: 19px 0 7px 4px;
+    margin-top: 20px;
+    border-top: 2px solid #d0d0d0;
+    color: #999;
+    font-size: 14px;
+}
+
+.normalSettingPage .withdrawal_wrap {
+    clear: both;
+    padding-top: 17px;
+    margin-left: 130px;
+    border-top: 1px solid #d0d0d0;
+    font-size: 13px;
+    color: #999;
+    cursor: pointer;
+}
+
+.normalSettingPage .withdrawal_wrap:hover {
+    text-decoration: underline;
+}
