@@ -32,13 +32,23 @@ class MainStory extends React.Component {
 
 
   componentDidMount() {
+    eventService.listenEvent("updatePostToMainStory", (postData) => {
+      let posts = this.state.postList;
+      let idx = posts.findIndex(v => v.id === postData.id);
+      console.log(postData, posts[idx]);
+      posts[idx] = postData;
+      this.setState({postList: posts});
+    });
+
     window.addEventListener('scroll', (e) => {
       const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
       if ((scrollTop + clientHeight) >= scrollHeight) {
         setTimeout(() => {
           this.setState({loading: false, viewCnt: this.state.viewCnt + 5});
         }, 1000);
-        this.setState({loading: true});
+        if(this.state.viewCnt < this.state.postList.length) {
+          this.setState({loading: true});
+        }
       }
     });
   }
@@ -54,14 +64,14 @@ class MainStory extends React.Component {
     getPost(this.state.userInfo.id, (data) => {
       // console.log(data);
       if (data.posts !== undefined) {
-        console.log(this);
+        // console.log(this);
         let arr = data.posts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
         this.setState({postList: data.posts, userList: data.users});
         // this.render();
         console.log(data.users);
         try {
           data.users.forEach(uv => {
-            console.log(uv);
+            // console.log(uv);
             setStoryUserData(uv.userid, uv.name, uv.profileimg);
           });
         }
@@ -70,7 +80,7 @@ class MainStory extends React.Component {
         }
 
         let posts = this.state.postList;
-        console.log(posts);
+        // console.log(posts);
         posts.forEach(v => {
           getComments(v.id, (cData) => {
             // console.log("loadComments:", cData);

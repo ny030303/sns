@@ -7,7 +7,7 @@ import {
   updateUserProfileImg,
   updateUserBgImg,
   getUserPosts,
-  getUserFriends
+  getUserFriends, setStoryUserData, getComments, deletePost
 } from "../../services/DataService";
 import {fileToDataURL} from "../../services/fileToDataURL";
 import eventService from "../../services/EventService";
@@ -34,7 +34,8 @@ class UserStory extends React.Component {
     };
     // console.log(props.match.params.userId);
     this.nowUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-    this.loadUserInfo();
+    // this.loadUserInfo();
+    // this.getPostEvent();
     this.reloadLoginUserFriends();
     document.addEventListener("scroll", e => {
       // console.log(e);
@@ -48,7 +49,7 @@ class UserStory extends React.Component {
 
   componentDidMount() {
     this.loadUserInfo();
-
+    this.getPostEvent();
     window.addEventListener('scroll', (e) => {
       const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
       if ((scrollTop + clientHeight) >= scrollHeight) {
@@ -63,37 +64,33 @@ class UserStory extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     // console.log(this.props.match.params, prevProps.match.params);
+    // console.log(prevProps.match.params.type, this.props.match.params);
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.loadUserInfo();
+      this.getPostEvent();
       this.reloadLoginUserFriends();
-    } else if(this.props.match.params.type !== prevProps.match.params.type) {
-      this.setState({infoType: this.props.match.params.type})
+    }
+    if(this.props.match.params.type !== prevProps.match.params.type) {
+      this.setState({infoType: this.props.match.params.type});
+      console.log(this.state.infoType);
     }
   }
 
   reloadLoginUserFriends = () => {
     getUserFriends(this.nowUserInfo.id, (data) => {
-      // console.log(data);
       this.setState({isFriend: false});
       data.friends.forEach((v,i) => {
         if(this.props.match.params.userId === v.friend) {
           this.setState({isFriend: true});
         }
-        // console.log(this.props.match.params.userId, v.friend);
       });
-      // console.log(this.state.isFriend);
     });
   };
 
   loadUserInfo = () => {
     getUserInfo(this.props.match.params.userId, (udata) => {
-      // console.log(udata.data);
-      this.setState({posterInfo: []});
-      this.setState({posterInfo: udata.data});
       this.getPostEvent();
-      // console.log("userStory: ", udata.data);
       // 바꿔야 함... 여긴 항상 로그인 유저만 오는 것이 아님. <= (바꿈)
-
       if (this.nowUserInfo.id === this.props.match.params.userId) {
         localStorage.setItem("userInfo", JSON.stringify(udata.data));
         eventService.emitEvent("changeUserProfile");
@@ -103,21 +100,55 @@ class UserStory extends React.Component {
 
   getPostEvent = () => {
     getUserPosts(this.props.match.params.userId, (data) => {
-      console.log(data);
+      // console.log(data);
       if (data.posts !== undefined) {
         let arr = data.posts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
         if(this.nowUserInfo.id !== this.props.match.params.userId) {
           arr = arr.filter(v => Number(v.isprivate_num) !== 1);
-          console.log(arr);
+          // console.log(arr);
         }
-        this.setState({postList: []});
-        this.setState({postList: arr});
+        this.setState({postList: arr, posterInfo: data.user});
+        setStoryUserData(data.user.userid, data.user.name, data.user.profileimg);
+
+        let posts = this.state.postList;
+        posts.forEach(v => {
+          getComments(v.id, (cData) => {
+            // console.log("loadComments:", cData);
+            v.comments = cData.data;
+            v.onUpdateComments = (comments) => {
+              let postData = this.state.postList;
+              postData.find(fv => fv.id === v.id).comments = comments;
+              this.setState({postList: postData});
+            };
+            this.setState({postList: posts});
+          });
+        });
+
       }
     });
   };
 
+  updatePostEvent = (e) => {
+    let postid = e.target.dataset.num;
+    let editPost = this.state.postList.find(v => v.id === postid);
+    eventService.emitEvent("editPostToMyHeader", editPost);
+  };
+
+  deletePostEvent = (e) => {
+    let postid = e.target.dataset.num;
+    console.log('postid:', postid, this.state.postList);
+    deletePost(postid, (res) => {
+      if(res.result == 1) {
+        // this.getPostEvent();
+        this.setState({postList: this.state.postList.filter(v => postid !== v.id)})
+      }
+      console.log('result:', res.result, this.state.postList);
+    });
+  };
+
+
   storyLinkEvent = (e) => this.setState({selectedMenuIdx: Number(e.target.dataset.midx)});
-  showBgMenu = () => this.setState({isBgMenuFade: (this.state.isBgMenuFade) ? false : true});
+  showBgMenu = () => this.setState({isBgMenuFade: !this.state.isBgMenuFade});
 
   changeUserProfileImg = (e) => {
     fileToDataURL(e.target.files[0]).then(res => {
@@ -151,9 +182,11 @@ class UserStory extends React.Component {
 
   render() {
     if (this.state.posterInfo == null) return (<div/>);
+    // console.log(this.state.posterInfo);
     const menus = ["전체", "캘린더", "사진", "동영상", "장소", "뮤직", "더보기+6"];
     const menuClass = (i) => `story_link ${i === this.state.selectedMenuIdx ? "story_link_on" : ""}`;
     const {posterInfo, postList, sideMemoFixed, infoType, isFriend} = this.state;
+    // console.log(postList);
     return (
       <div className="userStory">
         <div className="article_story">
@@ -164,9 +197,9 @@ class UserStory extends React.Component {
             <div className="cover_cont">
               <div className="info_pf">
                 {
-                  (posterInfo.profileimg == null) ? (<div className="link_pf bg_pf"/>) :
-                    (<div className="link_pf userProfileImg"
-                          style={{backgroundImage: `url(${posterInfo.profileimg})`}}/>)
+                  (posterInfo.profileimg) ?(<div className="link_pf userProfileImg"
+                                                  style={{backgroundImage: `url(${posterInfo.profileimg})`}}/>):  (<div className="link_pf bg_pf"/>)
+
                 }
                 {
                   (this.nowUserInfo.id === this.props.match.params.userId) ?
@@ -216,9 +249,9 @@ class UserStory extends React.Component {
               {
                 (infoType !== "profileSetting") ?
                   this.state.postList.map((v, i) => (i < this.state.viewCnt) ? (
-                  <StoryItem key={i} postData={v} arrnum={i} userData={[{
-                    userid: posterInfo.id, name: posterInfo.name, profileimg: posterInfo.profileimg,
-                  }]}/>) : null) :
+                  <StoryItem key={i} postData={v} arrnum={i}
+                             userData={[{userid: posterInfo.id, name: posterInfo.name, profileimg: posterInfo.profileimg}]}
+                             updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}/>) : null) :
                   (
                     <ProfileSettingItem loadUserInfo={this.loadUserInfo}/>
                   )

@@ -24,6 +24,7 @@ export default class StoryItemBody extends React.Component {
         fileArr.push(`/php/downloadImage.php?id=${postData.file}&subid=${i}`);
       })
     }
+    // console.log(postData);
     if( this.contents.current ) {
       this.contents.current.innerHTML = unescape(postData.contents);
     }

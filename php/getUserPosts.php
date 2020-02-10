@@ -11,6 +11,9 @@ $query = "SELECT a.id, a.userid, a.feeling, a.sharing, a.up, a.created, a.conten
     on a.userid=b.userid and a.id=b.postid
     where a.userid='". $userid ."'";
 
+$query2 = " SELECT * from `sns_users`where id='". $userid ."'";
+$user_data= fetch($con, $query2, []);
+
 $my_data = fetchAll($con, $query, []);
 
-echo json_encode(array("posts" => $my_data));
+echo json_encode(array("posts" => $my_data,"user" => $user_data));

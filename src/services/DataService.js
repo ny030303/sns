@@ -5,7 +5,7 @@ const config = {headers: {'Content-Type': 'application/json;charset=UTF-8'}};
 
 let storyUserInfos = {};
 
-export const getStoryUserData = (userid) => storyUserInfos[userid]
+export const getStoryUserData = (userid) => storyUserInfos[userid];
 
 export const setStoryUserData = (userid, name, img) => {
   // console.log(userid, name, img);
@@ -197,8 +197,13 @@ export const deletePost = (postid, callback) => {
   });
 };
 
-export const updatePost = () => {
-
+export const updatePost = (data, callback) => {
+  const formData = new FormData();
+  Object.keys(data).forEach(key => formData.append(key, data[key]));
+  axios.post(`/php/updateWriting.php`, formData).then(res => {
+    // console.log('updateWriting:', res.data);
+    if (callback) callback(res.data);
+  });
 };
 
 export const getUserPosts = (userid, callback) => {
@@ -305,6 +310,23 @@ export const updateUserProfileInfo = (data, callback) => {
   Object.keys(data).forEach(key => formData.append(key, data[key]));
   axios.post(`/php/updateUserProfileInfo.php`, formData).then(res => {
     // console.log('updateUserProfileInfo:', res.data);
+    if (callback) callback(res.data);
+  });
+};
+//---------search-----------
+
+export const getSearchBoxItemInfos = (data, callback) => {
+  const formData = new FormData();
+  Object.keys(data).forEach(key => formData.append(key, data[key]));
+  axios.post(`/php/getSearchBoxItemInfos.php`, formData).then(res => {
+    // console.log('updateUserProfileInfo:', res.data);
+    if (callback) callback(res.data);
+  });
+};
+
+
+export const getSnsFileData = (fileid, callback) => {
+  axios.get(`/php/getFileData.php?fileid=${fileid}`).then(res => {
     if (callback) callback(res.data);
   });
 };

@@ -37,7 +37,7 @@ class StoryItem extends React.Component {
                          deletePostEvent={this.props.deletePostEvent}/><br/><br/><br/>
           <StoryItemBody postData={this.props.postData}/>
           <br/>
-          <StoryItemTail postData={this.props.postData}/>
+          <StoryItemTail postData={this.props.postData} onFeelingCnt={(data) => this.setState({feelingCnt: data})}/>
 
           <div className="storyCommentsWrap">
             <div className="count_group">

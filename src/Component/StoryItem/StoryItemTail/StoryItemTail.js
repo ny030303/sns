@@ -56,7 +56,7 @@ export default class StoryItemTail extends React.Component {
         }
       }
       this.setState({feelingCnt: this.state.feelings.length});
-
+      this.props.onFeelingCnt(this.state.feelingCnt);
     });
   };
 
@@ -79,6 +79,7 @@ export default class StoryItemTail extends React.Component {
 
   deleteFeelingToPost = (feeling) => {
     this.setState({feelingCnt: this.state.feelingCnt -=1});
+    this.props.onFeelingCnt(this.state.feelingCnt);
     let data = {
       postid: this.props.postData.id,
       feelingInfo: JSON.stringify({userid:this.nowUserInfo.id, feeling: feeling})
@@ -91,6 +92,7 @@ export default class StoryItemTail extends React.Component {
 
   addFeelingToPost = (feeling) => {
     this.setState({feelingCnt: this.state.feelingCnt +=1});
+    this.props.onFeelingCnt(this.state.feelingCnt);
     let data = {
       postid: this.props.postData.id,
       feelingInfo: JSON.stringify({userid:this.nowUserInfo.id, feeling: feeling})

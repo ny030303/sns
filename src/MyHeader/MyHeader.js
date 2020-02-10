@@ -5,6 +5,7 @@ import HeaderSearchInput from "../Component/HeaderSearchInput/HeaderSearchInput"
 import {ModalWritingContainer} from "../Component/ModalWritingContainer/ModalWritingContainer";
 import {SearchItem} from "../Component/SearchItem/SearchItem";
 import eventService from "../services/EventService";
+import {getSearchBoxItemInfos} from "../services/DataService";
 
 
 class MyHeader extends React.Component {
@@ -15,7 +16,8 @@ class MyHeader extends React.Component {
             isModalWritingContainerOn: false,
             isSearchBoxOn: false,
 
-            editPostData: null
+            editPostData: null,
+            searchItemList: null
         };
         this.searchInput = React.createRef();
 
@@ -56,9 +58,13 @@ class MyHeader extends React.Component {
         });
 
         this.searchInput.current.addEventListener("input", (e) => {
-            let tests = e.target.value;
+            let texts = e.target.value;
             console.log(e.data);
-            if(tests.length <= 0) {
+            getSearchBoxItemInfos({text: texts}, (res) => {
+                console.log(res);
+                this.setState({searchItemList: res});
+            });
+            if(texts.length <= 0) {
                 this.setState({isSearchBoxOn: false});
             } else {
                 this.setState({isSearchBoxOn: true});
@@ -86,7 +92,15 @@ class MyHeader extends React.Component {
                         <div className="inner_gnb_layer">
                             <span className="ico_ks ico_arrow_up"/>
                             <ul className="search_list">
-                                <SearchItem type={"no_data"}/>
+                                {
+                                    (!this.state.searchItemList) ?
+                                      (<SearchItem type={"no_data"}/>) :
+                                      this.state.searchItemList.users.map((v,i) =>
+                                      (<SearchItem key={i} type={"user"} datas={v}/>))
+
+                                }
+                                {}
+
                             </ul>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './WritingContainer.css';
-import {postWriting} from "../../services/DataService";
+import {postWriting, updatePost, getSnsFileData} from "../../services/DataService";
 import FileUploadPopup from "./FileUploadPopup/FileUploadPopup";
 import alertDialog from "../../services/AlertDialog";
 import eventService from "../../services/EventService";
@@ -26,10 +26,7 @@ const replaceAll = (str, target, replacement) => {
 const htmlchar_run = (str) => {
   let  tmp=replaceAll(str,'\t',"&nbsp;&nbsp;&nbsp;&nbsp;");
   tmp=replaceAll(tmp," ","&nbsp;");
-  tmp=replaceAll(tmp,'<',"&lt;");
-  tmp=replaceAll(tmp,'>',"&gt;");
   tmp=replaceAll(tmp,'\n',"<br/>");
-  tmp= "<div>"+tmp+"</div>";
   return tmp;
 
 };
@@ -63,16 +60,11 @@ class WritingContainer extends React.Component {
 
   componentDidMount() {
     if(this.props.postData) {
+      console.log(this.props.postData);
       this.divContents.current.innerHTML = unescape(this.props.postData.contents);
       if(this.props.postData.file) {
-        let files = [];
-        for(let i = 0; i < Number(this.props.postData.filecnt); i++) {
-          files.push({
-            data: `/php/downloadImage.php?id=${this.props.postData.file}&subid=${i}`,
-          })
-        }
-
-        this.setState({files : files})
+        getSnsFileData(this.props.postData.file, res => this.setState({files : res.files}));
+        this.setState({isPrivateNum: Number(this.props.postData.isprivate_num)});
       }
     //  /php/downloadImage.php?id=19&subid=0
     }
@@ -81,6 +73,22 @@ class WritingContainer extends React.Component {
   writeEvent = (e) => {
     if (this.state.isPostOn === false) this.setState({isPostOn: true});
     this.setState({postContents: e.target.innerHTML});
+
+    let lastText = e.target.innerHTML.substr(-1,1);
+
+    if(lastText === "#") {
+      let regex = new RegExp("#[\\d|A-Z|a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*", "gm");
+      let content = e.target.innerHTML;
+      content = content.replace(regex, `<span class="hashtag_color">$&</span>`);
+      e.target.innerHTML = content;
+      this.setState({isHashLayerOn: true});
+    } else if(lastText === " " || e.target.innerHTML.length <= 0) {
+      let regex = new RegExp("\s", "g");
+      let content = e.target.innerHTML;
+      content = content.replace(regex, ``);
+      e.target.innerHTML = content;
+      this.setState({isHashLayerOn: false});
+    }
   };
 
   postOff = () => {
@@ -94,7 +102,23 @@ class WritingContainer extends React.Component {
   };
 
   postEvent = () => {
-    let fArr = this.state.files.map(v => v.data);
+    let fArr = this.state.files;
+    if(this.props.postData) { // 글 수정일때
+      let data = {
+        postid: this.props.postData.id,
+        userid: JSON.parse(localStorage.getItem("userInfo")).id,
+        contents: escape(htmlchar_run(this.state.postContents)),
+        fileData: (fArr.length <= 0) ? null : fArr.join("|"),
+        isprivatenum: this.state.isPrivateNum,
+      };
+
+      updatePost(data, (res) => {
+        console.log(res);
+        eventService.emitEvent("updatePostToMainStory", res.postData);
+        alertDialog.show("안내", "수정 되었습니다.");
+        this.postOff();
+      })
+    } else { // 글 작성일때
       let data = {
         userid: JSON.parse(localStorage.getItem("userInfo")).id,
         feeling: 0,
@@ -114,21 +138,34 @@ class WritingContainer extends React.Component {
           this.props.getPostEvent();
         }
       });
+    }
   };
 
-  // selectFile = (e) => {
-  //   console.log(e.target.files[0]);
-  //   fileToDataURL(e.target.files[0]).then(res => {
-  //     this.setState({files: [...this.state.files, ...[res]]});
-  //   });
-  // };
+  dragOverEvent = (e) => {
+    console.log("드래그 오버");
+    e.preventDefault();
+  };
+
+  dropEvent = (e) => {
+    e.preventDefault();
+    let list = Array.from(e.dataTransfer.files);
+    list.forEach(v => {
+      fileToDataURL(v).then(res => {
+        this.setState({files: [...this.state.files, ...[res]]});
+      });
+    });
+  };
+
+  selectFile = (e) => {
+    console.log(e.target.files[0]);
+    fileToDataURL(e.target.files[0]).then(res => {
+      this.setState({files: [...this.state.files, ...[res]]});
+      console.log(this.state.files);
+    });
+  };
 
   showFileUploadPopup = (popupShow) => {
     this.setState({fileUploadPopup: popupShow});
-  };
-
-  showHashtagForm = () => {
-    this.setState({isHashtagFormOn: (this.state.isHashtagFormOn) ? false : true});
   };
 
   attachFiles = (fileDatas) => {
@@ -145,19 +182,23 @@ class WritingContainer extends React.Component {
     this.setState({files: files});
   };
 
-  showIsPrivateListOn = () => this.setState({isPrivateListOn: (this.state.isPrivateListOn) ? false : true});
+  showIsPrivateListOn = () => this.setState({isPrivateListOn: !this.state.isPrivateListOn});
 
   changeIsPrivateNum = (e) => this.setState({isPrivateNum: e.target.dataset.num, isPrivateListOn: false});
 
+  // showHashtagForm = () => {
+  //   this.setState({isHashtagFormOn: !this.state.isHashtagFormOn});
+  // };
+
   render() {
     // <input type="email|file" multiple>
-    console.log(this.state.files);
+    // console.log(this.state.files);
     return (
       <div className="writingContainer">
-        {this.state.fileUploadPopup ?
-          <FileUploadPopup showFileUploadPopup={this.showFileUploadPopup} fileToDataURL={fileToDataURL} attachFiles={this.attachFiles}/> : null}
+        {/*{this.state.fileUploadPopup ?*/}
+        {/*  <FileUploadPopup showFileUploadPopup={this.showFileUploadPopup} fileToDataURL={fileToDataURL} attachFiles={this.attachFiles}/> : null}*/}
         <div className="write">
-          <div className="section">
+          <div className="section"onDragOver={this.dragOverEvent} onDrop={this.dropEvent}>
             <div ref={this.divContents} id="contents_write" className="editable" contentEditable="true"
                  onChange={this.writeEvent} onInput={this.writeEvent}
                  style={(this.state.isPostOn) ? {minHeight: "130px"} : {minHeight: "37px"}}
@@ -168,11 +209,11 @@ class WritingContainer extends React.Component {
                 this.state.files.map((v, i) => (
                   <div key={i} className="upload-item">
                     <div className="img-box">
-                      <img src={v.data} alt="img"/>
+                      <img src={v} alt="img"/>
                       <span className="ico_ks bn_x" onClick={this.deleteFile} data-lnum={i}/>
                     </div>
                     <div className="text-box">
-                      {i+1}.img
+                      img-{i+1}
                     </div>
                   </div>
                 ))
@@ -186,7 +227,7 @@ class WritingContainer extends React.Component {
                       <span className="ico_ks ico_camera"/><span>사진/동영상</span>
                   </span>
                 </label>
-                {/*<input type="file" id="ex_file" ref={this.myPostFile} onChange={this.selectFile}/>*/}
+                <input type="file" id="ex_file" ref={this.myPostFile} onChange={this.selectFile}/>
               </li>
               <li className="link_menu">
                 <div className="txt_menu">
@@ -204,12 +245,12 @@ class WritingContainer extends React.Component {
               </li>
             </ul>
 
-            {
-              (this.state.isHashtagFormOn) ?
-                (
-                 <HashtagForm/>
-                ) : null
-            }
+            {/*{*/}
+            {/*  (this.state.isHashtagFormOn) ?*/}
+            {/*    (*/}
+            {/*     <HashtagForm/>*/}
+            {/*    ) : null*/}
+            {/*}*/}
 
             <div className="bottomWriteContents" style={(this.state.isPostOn) ? {display: "block"} : {display: "none"}}>
               <div className="inner_open" onClick={this.showIsPrivateListOn}>

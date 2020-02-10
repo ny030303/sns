@@ -15,7 +15,7 @@ class StoryItemHead extends React.Component {
   }
 
   changeIsPrivateNum = (e) => {
-    console.log(e.target.dataset.num);
+    console.log(e);
     let data = {
       postid: this.props.postData.id,
       isprivate_num: e.target.dataset.num,
@@ -26,9 +26,9 @@ class StoryItemHead extends React.Component {
   };
 
   showSettingMenu = (e) => {
-    console.log(e);
+    // console.log(e);
     this.setState({isSettingMenuFade: !this.state.isSettingMenuFade});
-    console.log(this.state.isSettingMenuFade);
+    // console.log(this.state.isSettingMenuFade);
   };
 
   moveUserStoryMain = (e) => {
@@ -38,7 +38,9 @@ class StoryItemHead extends React.Component {
 
   render() {
     const {postData, userData} = this.props;
+    // console.log(userData);
     let nowPoster = userData.filter(v => postData.userid === v.userid)[0];
+
     return (
       <div>
         <div className="storyContentsWrap">
@@ -71,14 +73,20 @@ class StoryItemHead extends React.Component {
                       type: "normal",
                       data_set: postData.id,
                       data_set2: 0,
-                      eventCallback: this.props.updatePostEvent
+                      eventCallback: (e) => {
+                        this.showSettingMenu();
+                        this.props.updatePostEvent(e);
+                      }
                     },
                     {
                       text: "삭제",
                       type: "normal",
                       data_set: postData.id,
                       data_set2: 0,
-                      eventCallback: this.props.deletePostEvent,
+                      eventCallback: (e) => {
+                        this.showSettingMenu();
+                        this.props.deletePostEvent(e);
+                      },
                       style: {borderBottom: "1px solid #e5e5e5"}
                     },
                     {
@@ -86,21 +94,30 @@ class StoryItemHead extends React.Component {
                       icon: "ico_ks global",
                       type: "checkBox",
                       data_set: 3,
-                      eventCallback: this.changeIsPrivateNum
+                      eventCallback: (e) => {
+                        this.showSettingMenu();
+                        this.changeIsPrivateNum(e);
+                      }
                     },
                     {
                       text: "친구공개",
                       icon: "ico_ks ic_friend",
                       type: "checkBox",
                       data_set: 2,
-                      eventCallback: this.changeIsPrivateNum
+                      eventCallback: (e) => {
+                        this.showSettingMenu();
+                        this.changeIsPrivateNum(e);
+                      }
                     },
                     {
                       text: "나만보기",
                       icon: "ico_ks ic_lock",
                       type: "checkBox",
                       data_set: 1,
-                      eventCallback: this.changeIsPrivateNum
+                      eventCallback: (e) => {
+                        this.showSettingMenu();
+                        this.changeIsPrivateNum(e);
+                      }
                     },
                   ]} menuStyle={{left: "-91px"}}/>) :
                   (<MyMenu menuInfo={[
