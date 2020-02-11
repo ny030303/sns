@@ -40,7 +40,9 @@ class MyHeader extends React.Component {
                 break;
         }
     };
-    showModalWritingContainer = () => this.setState({isModalWritingContainerOn: !this.state.isModalWritingContainerOn});
+    showModalWritingContainer = () => {
+        this.setState({isModalWritingContainerOn: !this.state.isModalWritingContainerOn, editPostData: null});
+    };
 
     gotoMain = () => {this.props.history.push("/")};
 

@@ -72,7 +72,7 @@ class App extends React.Component {
     render() {
     return (
         <div className="App">
-            <BrowserRouter>
+            <HashRouter>
                 {
                     (!this.state.topMenuHide) ? (<div><MyHeader/><MyRightHeader/></div>) : (<div></div>)
                 }
@@ -84,7 +84,7 @@ class App extends React.Component {
                     <LoginRoute exact authed={this.state.authed} path="/login" component={LoginForm}/>
                     <Route exact path="/signup" component={SignUpForm}/>
                 </Switch>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     )
   }

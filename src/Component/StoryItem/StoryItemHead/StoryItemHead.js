@@ -42,13 +42,13 @@ class StoryItemHead extends React.Component {
   render() {
     const {postData, userData} = this.props;
     // console.log(userData);
-    let nowPoster = userData.filter(v => postData.userid === v.userid)[0];
+    let nowPoster = userData.filter(v => postData.userid === v.userid)[0] || {};
 
     return (
       <div>
         <div className="storyContentsWrap">
           {
-            (nowPoster.profileimg === undefined || nowPoster.profileimg === null) ?
+            (!nowPoster.profileimg) ?
               (
                 <span className="img_profile frame_g frame_type6" onClick={this.moveUserStoryMain}>
                   <span className="img_profile line"/>

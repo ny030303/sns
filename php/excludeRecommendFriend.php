@@ -8,7 +8,8 @@ $userid = $_GET["userid"];
 $friend = $_GET["friend"];
 
 
-$query1 = "INSERT INTO `sns_friend`(`userid`, `friend`, `request`) VALUES (?,?,0)";
+$query1 = "INSERT INTO `sns_friend`(`userid`, `friend`, `request`) VALUES (?,?,0) 
+on duplicate key update request = values(request)";
 $result1 = execsql($con, $query1, [$userid, $friend]);
 
 

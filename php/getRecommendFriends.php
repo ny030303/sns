@@ -36,6 +36,14 @@ foreach (  $friend_list as $value ) {
     $query .= $friend_query;
 }
 
+//select * from sns_users where id not in (
+//    select 'admin'
+//	union
+//	SELECT friend FROM `sns_friend` where userid = 'admin'
+//	union
+//	select userid from `sns_friend` where friend = 'admin'
+//)
+
 $query .= "`id`!='" . $userid . "'";
 
 $data = fetchAll($con, $query, []);

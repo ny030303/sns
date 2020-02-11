@@ -4,6 +4,7 @@ import {addApplyFriend, addFriend, deleteFriend, excludeRecommendFriend} from ".
 import alertDialog from "../../services/AlertDialog";
 import eventService from "../../services/EventService";
 import {withRouter} from "react-router-dom";
+import waitDialog from "../../services/WaitDialog";
 
 class FriendItem extends React.Component {
 
@@ -51,12 +52,14 @@ class FriendItem extends React.Component {
           });
         });
         break;
-      case "recommendList": // 추천 친구 (delete element + insert request(1) friend table)
+      case "recommendList": // 추천 친구 추가(delete element + insert request(1) friend table)
+        waitDialog.show();
         addApplyFriend(this.state.userInfo.id, this.props.data.id, (res) => {
           eventService.emitEvent("reloadFriends", {
             id:  this.props.data.id,
             type: "recommend",
           });
+          waitDialog.hide();
         });
         break;
     }
