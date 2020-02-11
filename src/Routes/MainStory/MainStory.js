@@ -40,6 +40,15 @@ class MainStory extends React.Component {
       this.setState({postList: posts});
     });
 
+    eventService.listenEvent("updateIsPrivateNumToMainAndUserStory", (isPrivateNumData) => {
+      let posts = this.state.postList;
+      let idx = posts.findIndex(v => v.id === isPrivateNumData.postid);
+      console.log(isPrivateNumData, posts[idx]);
+      if(posts[idx].isprivate_num)  posts[idx].isprivate_num = isPrivateNumData.isprivate_num;
+      // posts[idx] = postData;
+      this.setState({postList: posts});
+    });
+
     window.addEventListener('scroll', (e) => {
       const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
       if ((scrollTop + clientHeight) >= scrollHeight) {

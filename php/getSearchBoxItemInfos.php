@@ -8,7 +8,7 @@ $text = $_POST["text"];
 if($text != "") {
     $query = "SELECT `id`, `name`, `profileimg`
             FROM `sns_users`
-            WHERE allow_search=1 and (id  LIKE '%".$text."%' or name LIKE '%".$text."%')  limit 10";
+            WHERE allow_search=1 and (name LIKE '%".$text."%')  limit 10";
     $data = fetchAll($con, $query, []);
 
     $tag_query = "SELECT * FROM `sns_hashtag` WHERE `name` like '%".$text."%'  limit 10";

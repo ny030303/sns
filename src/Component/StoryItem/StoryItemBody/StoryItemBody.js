@@ -37,17 +37,36 @@ export default class StoryItemBody extends React.Component {
           {
             (fileArr !== null) ? (<div className="storyImgList">
               {
-                fileArr.map((v, i) => (
-                  <div style={{backgroundImage: `url(${v})`}} key={i}
-                       onClick={() => this.setState({isOpen: true, photoIndex: i})}
-                       className={(fileArr.length === 3 ?
-                         (i === 0) ?
-                           "storyImgBig" :
-                           (i === 1) ?
-                             "storyImgSide absolute" :
-                             "storyImgSide" :
-                         (fileArr.length === 1 ? "storyImgBiger" : ""))}/>
-                ))
+                (fileArr !== null) ?
+                  (fileArr.length > 4) ?
+                    fileArr.slice(0, 4).map((v,i) =>
+                      (
+                        <div style={{backgroundImage: `url(${v})`}} key={i}
+                             onClick={() => this.setState({isOpen: true, photoIndex: i})}>
+                          {
+                            (i === 3) ? (
+                              <>
+                                <span className="bg_gr"/>
+                                <span className="photo_more">
+                                  <span className="ico_ks ico_photo">이미지 더보기</span>+{fileArr.length-4}
+                                </span>
+                              </>
+                            ) : null
+                          }
+                        </div>
+                      )
+                    ) :
+                    fileArr.map((v, i) => (
+                      <div style={{backgroundImage: `url(${v})`}} key={i}
+                           onClick={() => this.setState({isOpen: true, photoIndex: i})}
+                           className={(fileArr.length === 3 ?
+                             (i === 0) ?
+                               "storyImgBig" :
+                               (i === 1) ?
+                                 "storyImgSide absolute" :
+                                 "storyImgSide" :
+                             (fileArr.length === 1 ? "storyImgBiger" : ""))}/>
+                    )) : null
               }
             </div>) : null
           }

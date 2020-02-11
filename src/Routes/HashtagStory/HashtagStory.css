@@ -1,0 +1,57 @@
+.hash {
+    position: relative;
+    z-index: 1;
+    width: 578px;
+    margin: 0 auto;
+}
+
+.hash .inner_hash {
+    position: relative;
+    margin: 0 auto;
+    color: #36373c;
+    padding: 28px 90px 19px 0;
+    border-bottom: 1px solid #dedede;
+}
+
+.hash .tit_hash {
+    display: block;
+    font-size: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    color: #0007;
+}
+
+.hash .btn_wh {
+    position: absolute;
+    top: 24px;
+    right: 0;
+    width: 77px;
+    /*height: 16px;*/
+    padding: 7px 0;
+    font-size: 14px;
+    line-height: 16px;
+    border-color: #999;
+    background: #fff;
+    color: #646464;
+    display: inline-block;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none;
+}
+.wrap_recomm {
+    width: 578px;
+    margin: 0 auto;
+    padding-bottom: 89px;
+}
+
+.tit_recomm {
+    display: block;
+    padding: 31px 0 4px;
+    font-weight: 400;
+    color: #000;
+    font-size: 14px;
+}

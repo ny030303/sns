@@ -93,14 +93,17 @@ class MyHeader extends React.Component {
                             <span className="ico_ks ico_arrow_up"/>
                             <ul className="search_list">
                                 {
-                                    (!this.state.searchItemList) ?
-                                      (<SearchItem type={"no_data"}/>) :
+                                    (this.state.searchItemList) ?
                                       this.state.searchItemList.users.map((v,i) =>
-                                      (<SearchItem key={i} type={"user"} datas={v}/>))
-
+                                      (<SearchItem key={i} type={"user"} datas={v} callbackEvent={() => this.props.history.push(`/story/${v.id}/main`)}/>))
+                                      : (<SearchItem type={"no_data"}/>)
                                 }
-                                {}
-
+                                {
+                                    (this.state.searchItemList) ?
+                                      this.state.searchItemList.tags.map((v,i) =>
+                                        (<SearchItem key={i} type={"hashtag"} datas={v} callbackEvent={() => this.props.history.push(`/hashtag/${v.name.slice(1)}`)}/>))
+                                      : null
+                                }
                             </ul>
                         </div>
                     </div>

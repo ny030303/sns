@@ -10,9 +10,9 @@ export class SearchItem extends React.Component {
 
 
   render() {
-    const {type} = this.props;
+    const {type, datas, callbackEvent} = this.props;
     return (
-      <li className="searchItem" style={(type !== "no_data") ? {height: "52px"} : null}>
+      <li className="searchItem" style={(type !== "no_data") ? {height: "52px"} : null} onClick={callbackEvent}>
         {
           (type === "hash") ?
             (<>
@@ -27,11 +27,11 @@ export class SearchItem extends React.Component {
                 <>
                   <div className="searchImg img_profile"/>
                   <div className="info_user">
-                    <div className="txt_name">Dive with Hana</div>
+                    <div className="txt_name">{datas.name}</div>
                     <span className="ico_ks2 ico_teller1"/>
                   </div>
-                  <button type="button" className="btn_plus styleNoneBtn" data-kant-id="1388"><span
-                    className="ico_ks2 ico_plus">소식받기</span></button>
+                  {/*<button type="button" className="btn_plus styleNoneBtn" data-kant-id="1388"><span*/}
+                  {/*  className="ico_ks2 ico_plus">소식받기</span></button>*/}
                 </>
               ) :
               (type === "have_side_title") ?

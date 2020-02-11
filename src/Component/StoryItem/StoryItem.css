@@ -73,6 +73,7 @@
     background-position: 50% 50%;
     display: inline-block;
     cursor: pointer;
+    position: relative;
 }
 
 .storyImgBiger {
@@ -91,8 +92,37 @@
 }
 
 .absolute {
-    position: absolute;
+    position: absolute !important;
 }
+
+.bg_gr {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    background: url("/images/bg_gr2.png") repeat-x 0 100%;
+}
+
+.photo_more {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    height: 13px;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 15px;
+    color: #fff;
+}
+
+.storyImgList .ico_photo {
+    float: left;
+    width: 15px;
+    height: 13px;
+    margin-right: 4px;
+    background-position: 0 -210px;
+}
+
 /*=================================*/
 
 /*--------top icons---------*/
@@ -194,8 +224,9 @@
 .storyItem_frame_g {
     width: 28px;
     height: 28px;
-    background-position: -290px -240px;
+    background-position: -76px -181px;
     display: inline-block;
+    border-radius: 50%;
 }
 
 .storyItem_feeling_user_img_wrap {

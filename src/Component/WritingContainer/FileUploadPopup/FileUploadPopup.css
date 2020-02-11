@@ -16,6 +16,7 @@
 
 .img-box {
     position: relative;
+    overflow: hidden;
 }
 
 

@@ -176,11 +176,11 @@ class MyRightHeader extends React.Component {
                   }
                 </ul>
               </div>
-              <div className="cate_channel">
-                <span className="fontStyle1" style={{padding: "0 0 0 13px"}}>소식받는
-                    <span className="ico_ks ico_arrow"/>
-                </span>
-              </div>
+              {/*<div className="cate_channel">*/}
+              {/*  <span className="fontStyle1" style={{padding: "0 0 0 13px"}}>소식받는*/}
+              {/*      <span className="ico_ks ico_arrow"/>*/}
+              {/*  </span>*/}
+              {/*</div>*/}
               <div className="box_searchbar">
                 <span className="fontStyle1" style={{padding: "0 0 0 13px"}}>친구 검색
                     <span className="ico_ks ico_search"/>

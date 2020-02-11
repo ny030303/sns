@@ -14,6 +14,7 @@ import eventService from "../../services/EventService";
 import {MyMenu} from "../../Component/MyMenu/MyMenu";
 import {LoadingIndicator} from "../../services/LoadingIndicator";
 import {ProfileSettingItem} from "../../Component/ProfileSettingItem/ProfileSettingItem";
+import {UserStoryCalendar} from "../../Component/UserStoryCalendar/UserStoryCalendar";
 
 class UserStory extends React.Component {
 
@@ -33,6 +34,7 @@ class UserStory extends React.Component {
       infoType: this.props.match.params.type
     };
     // console.log(props.match.params.userId);
+    this.menus = ["main", "calendar", "images", "videos"];
     this.nowUserInfo = JSON.parse(localStorage.getItem("userInfo"));
     // this.loadUserInfo();
     // this.getPostEvent();
@@ -50,14 +52,29 @@ class UserStory extends React.Component {
   componentDidMount() {
     this.loadUserInfo();
     this.getPostEvent();
+
+    let idx = this.menus.findIndex(v => v === this.props.match.params.type);
+    this.setState({selectedMenuIdx: idx});
+
     window.addEventListener('scroll', (e) => {
       const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
       if ((scrollTop + clientHeight) >= scrollHeight) {
         setTimeout(() => {
           this.setState({loading: false, viewCnt: this.state.viewCnt + 5});
         }, 1000);
-        this.setState({loading: true});
+        if (this.state.viewCnt < this.state.postList.length) {
+          this.setState({loading: true});
+        }
       }
+    });
+
+    eventService.listenEvent("updateIsPrivateNumToMainAndUserStory", (isPrivateNumData) => {
+      let posts = this.state.postList;
+      let idx = posts.findIndex(v => v.id === isPrivateNumData.postid);
+      console.log(isPrivateNumData, posts[idx]);
+      if (posts[idx].isprivate_num) posts[idx].isprivate_num = isPrivateNumData.isprivate_num;
+      // posts[idx] = postData;
+      this.setState({postList: posts});
     });
   }
 
@@ -70,17 +87,17 @@ class UserStory extends React.Component {
       this.getPostEvent();
       this.reloadLoginUserFriends();
     }
-    if(this.props.match.params.type !== prevProps.match.params.type) {
-      this.setState({infoType: this.props.match.params.type});
-      console.log(this.state.infoType);
+    if (this.props.match.params.type !== prevProps.match.params.type) {
+      let idx = this.menus.findIndex(v => v === this.props.match.params.type);
+      this.setState({infoType: this.props.match.params.type, selectedMenuIdx: idx});
     }
   }
 
   reloadLoginUserFriends = () => {
     getUserFriends(this.nowUserInfo.id, (data) => {
       this.setState({isFriend: false});
-      data.friends.forEach((v,i) => {
-        if(this.props.match.params.userId === v.friend) {
+      data.friends.forEach((v, i) => {
+        if (this.props.match.params.userId === v.friend) {
           this.setState({isFriend: true});
         }
       });
@@ -103,7 +120,7 @@ class UserStory extends React.Component {
       // console.log(data);
       if (data.posts !== undefined) {
         let arr = data.posts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
-        if(this.nowUserInfo.id !== this.props.match.params.userId) {
+        if (this.nowUserInfo.id !== this.props.match.params.userId) {
           arr = arr.filter(v => Number(v.isprivate_num) !== 1);
           // console.log(arr);
         }
@@ -138,7 +155,7 @@ class UserStory extends React.Component {
     let postid = e.target.dataset.num;
     console.log('postid:', postid, this.state.postList);
     deletePost(postid, (res) => {
-      if(res.result == 1) {
+      if (res.result == 1) {
         // this.getPostEvent();
         this.setState({postList: this.state.postList.filter(v => postid !== v.id)})
       }
@@ -147,7 +164,26 @@ class UserStory extends React.Component {
   };
 
 
-  storyLinkEvent = (e) => this.setState({selectedMenuIdx: Number(e.target.dataset.midx)});
+  storyLinkEvent = (e) => {
+    this.setState({selectedMenuIdx: Number(e.target.dataset.midx)});
+    switch (Number(e.target.dataset.midx)) {
+      case 0:
+        this.props.history.push(`/story/${this.props.match.params.userId}/main`);
+        break;
+      case 1:
+        this.props.history.push(`/story/${this.props.match.params.userId}/calendar`);
+        break;
+      case 2:
+        this.props.history.push(`/story/${this.props.match.params.userId}/images`);
+        break;
+      case 3:
+        this.props.history.push(`/story/${this.props.match.params.userId}/videos`);
+        break;
+    }
+    // console.log(this.state.selectedMenuIdx);
+  };
+
+
   showBgMenu = () => this.setState({isBgMenuFade: !this.state.isBgMenuFade});
 
   changeUserProfileImg = (e) => {
@@ -197,8 +233,9 @@ class UserStory extends React.Component {
             <div className="cover_cont">
               <div className="info_pf">
                 {
-                  (posterInfo.profileimg) ?(<div className="link_pf userProfileImg"
-                                                  style={{backgroundImage: `url(${posterInfo.profileimg})`}}/>):  (<div className="link_pf bg_pf"/>)
+                  (posterInfo.profileimg) ? (<div className="link_pf userProfileImg"
+                                                  style={{backgroundImage: `url(${posterInfo.profileimg})`}}/>) : (
+                    <div className="link_pf bg_pf"/>)
 
                 }
                 {
@@ -228,17 +265,18 @@ class UserStory extends React.Component {
                     (this.nowUserInfo.id === this.props.match.params.userId) ?
                       (<div className="btn_cover" onClick={this.showBgMenu}>배경 사진 편집</div>) :
                       (isFriend) ? (<>
-                                      <div className="btn_friend_cover">친구</div>
-                                      <div className="area_ico">
-                                        <span className="ico_ks ico_open"/>
-                                      </div>
-                                    </>) :
+                          <div className="btn_friend_cover">친구</div>
+                          <div className="area_ico">
+                            <span className="ico_ks ico_open"/>
+                          </div>
+                        </>) :
                         (<div className="btn_cover">친구신청</div>)
                   }
 
                   {(this.state.isBgMenuFade) ? (
                     <MyMenu menuInfo={[{text: "사진 업로드", type: "file", eventCallback: this.selectRandomBgImg},
-                      {text: "기본 이미지", type: "normal", eventCallback: (e) => this.changeUserBgImg(e)}]} menuStyle={{marginTop: "35px"}}/>) : null}
+                      {text: "기본 이미지", type: "normal", eventCallback: (e) => this.changeUserBgImg(e)}]}
+                            menuStyle={{marginTop: "35px"}}/>) : null}
                 </div>
               </div>
             </div>
@@ -247,22 +285,31 @@ class UserStory extends React.Component {
             <div className="story_post_wrap">
 
               {
-                (infoType !== "profileSetting") ?
+                (infoType === "main") ?
                   this.state.postList.map((v, i) => (i < this.state.viewCnt) ? (
-                  <StoryItem key={i} postData={v} arrnum={i}
-                             userData={[{userid: posterInfo.id, name: posterInfo.name, profileimg: posterInfo.profileimg}]}
-                             updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}/>) : null) :
-                  (
-                    <ProfileSettingItem loadUserInfo={this.loadUserInfo}/>
-                  )
+                    <StoryItem key={i} postData={v} arrnum={i}
+                               userData={[{
+                                 userid: posterInfo.id,
+                                 name: posterInfo.name,
+                                 profileimg: posterInfo.profileimg
+                               }]}
+                               updatePostEvent={this.updatePostEvent}
+                               deletePostEvent={this.deletePostEvent}/>) : null) :
+                  (infoType === "profileSetting") ?
+                    (
+                      <ProfileSettingItem loadUserInfo={this.loadUserInfo}/>
+                    ) :
+                    (infoType === "calendar") ?
+                      (<UserStoryCalendar/>)
+                      : null
                 //updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}
               }
 
               {
-                (infoType !== "profileSetting") ?
-                (this.state.loading) ? (<div style={{textAlign: "center", margin: "30px 0"}}>
-                  <div className="spinner-border text-warning"/>
-                </div>) : (<LoadingIndicator/>)
+                (infoType === "main") ?
+                  (this.state.loading) ? (<div style={{textAlign: "center", margin: "30px 0"}}>
+                    <div className="spinner-border text-warning"/>
+                  </div>) : (<LoadingIndicator/>)
                   : null
               }
 

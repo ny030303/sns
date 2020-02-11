@@ -11,6 +11,7 @@ import eventService from "./services/EventService";
 import {getUser, logout} from "./services/DataService";
 import waitDialog from "./services/WaitDialog";
 import {NormalSettingPage} from "./Routes/NormalSettingPage/NormalSettingPage";
+import {HashtagStory} from "./Routes/HashtagStory/HashtagStory";
 
 
 const PrivateRoute = ({component: Component, authed, ...rest}) => (
@@ -78,6 +79,7 @@ class App extends React.Component {
                 <Switch>
                     <PrivateRoute exact authed={this.state.authed} path="/" component={MainStory}/>
                     <PrivateRoute exact authed={this.state.authed}  path="/story/:userId/:type" component={UserStory}/>
+                    <PrivateRoute exact authed={this.state.authed}  path="/hashtag/:tag" component={HashtagStory}/>
                     <PrivateRoute exact authed={this.state.authed} path="/setting" component={NormalSettingPage}/>
                     <LoginRoute exact authed={this.state.authed} path="/login" component={LoginForm}/>
                     <Route exact path="/signup" component={SignUpForm}/>

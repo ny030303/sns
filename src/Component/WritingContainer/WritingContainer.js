@@ -134,7 +134,7 @@ class WritingContainer extends React.Component {
           " 지금 올린 스토리를 확인해보세요.");
         this.postOff();
         eventService.emitEvent("reloadStorys", "asdf");
-        if(this.props.getPostEvent !== null) {
+        if(this.props.getPostEvent) {
           this.props.getPostEvent();
         }
       });
@@ -208,12 +208,19 @@ class WritingContainer extends React.Component {
               {
                 this.state.files.map((v, i) => (
                   <div key={i} className="upload-item">
-                    <div className="img-box">
-                      <img src={v} alt="img"/>
+                    <div className="img-box" style={(v.substr(5,5) === "video") ? {backgroundColor: "#000"} : null}>
+                      {
+                        (v.substr(5,5) === "image") ?
+                          (<img src={v} alt="img"/>) :
+                          (<video style={{position: "absolute", top: "50%", transform: "translate(0, -50%)"}}>
+                            <source src={v} type={v.substr(5,9)}/>
+                          </video>)
+                      }
+
                       <span className="ico_ks bn_x" onClick={this.deleteFile} data-lnum={i}/>
                     </div>
                     <div className="text-box">
-                      img-{i+1}
+                      {v.substr(5,5)} ({i+1})
                     </div>
                   </div>
                 ))

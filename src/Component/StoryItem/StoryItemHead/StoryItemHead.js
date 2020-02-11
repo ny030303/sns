@@ -2,6 +2,7 @@ import * as React from 'react';
 import {MyMenu} from "../../MyMenu/MyMenu";
 import {updateStoryIsPrivateNum} from "../../../services/DataService";
 import {withRouter} from "react-router-dom";
+import eventService from "../../../services/EventService";
 
 class StoryItemHead extends React.Component {
 
@@ -20,8 +21,10 @@ class StoryItemHead extends React.Component {
       postid: this.props.postData.id,
       isprivate_num: e.target.dataset.num,
     };
+    eventService.emitEvent("updateIsPrivateNumToMainAndUserStory", data);
     updateStoryIsPrivateNum(data, (res) => {
       console.log(res);
+
     });
   };
 
@@ -45,7 +48,7 @@ class StoryItemHead extends React.Component {
       <div>
         <div className="storyContentsWrap">
           {
-            (nowPoster.profileimg == null) ?
+            (nowPoster.profileimg === undefined || nowPoster.profileimg === null) ?
               (
                 <span className="img_profile frame_g frame_type6" onClick={this.moveUserStoryMain}>
                   <span className="img_profile line"/>
