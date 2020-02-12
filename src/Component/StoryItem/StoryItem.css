@@ -189,6 +189,14 @@
     cursor: pointer;
 }
 
+.bn_up.on {
+    background-position: -135px -250px;
+}
+
+.bn_up.on:hover {
+    background-position: -135px -250px;
+}
+
 .bn_up:hover {
     background-position: -90px -295px;
 }

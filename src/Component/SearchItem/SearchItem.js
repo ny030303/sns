@@ -14,18 +14,23 @@ export class SearchItem extends React.Component {
     return (
       <li className="searchItem" style={(type !== "no_data") ? {height: "52px"} : null} onClick={callbackEvent}>
         {
-          (type === "hash") ?
+          (type === "hashtag") ?
             (<>
               <div className="ico_ks2 ico_hash"/>
               <div className="info_user">
-                <div className="txt_name">Dive with Hana</div>
+                <div className="txt_name">{datas.name.slice(1)}</div>
                 <span className="ico_ks2 ico_teller1"/>
               </div>
             </>) :
             (type === "user") ?
               (
                 <>
-                  <div className="searchImg img_profile"/>
+                  {
+                    (!datas.profileimg) ?
+                      (<div className="searchImg img_profile"/>) :
+                      (<div className="searchImg searchImgStyle2"
+                            style={{backgroundImage: `url(${datas.profileimg})`}}/>)
+                  }
                   <div className="info_user">
                     <div className="txt_name">{datas.name}</div>
                     <span className="ico_ks2 ico_teller1"/>

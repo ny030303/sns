@@ -9,7 +9,7 @@ import LoginForm from "./Routes/LoginForm/LoginForm";
 import SignUpForm from "./Routes/SignUpForm/SignUpForm";
 import eventService from "./services/EventService";
 import {getUser, logout} from "./services/DataService";
-import waitDialog from "./services/WaitDialog";
+import waitDialog from "./services/WaitDialog/WaitDialog";
 import {NormalSettingPage} from "./Routes/NormalSettingPage/NormalSettingPage";
 import {HashtagStory} from "./Routes/HashtagStory/HashtagStory";
 

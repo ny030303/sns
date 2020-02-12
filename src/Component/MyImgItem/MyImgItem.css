@@ -1,0 +1,109 @@
+.myImgItem {
+    position: relative;
+    width: 188px;
+    height: 189px;
+    margin: 4px 2px 0;
+    cursor: pointer;
+    display: inline-block;
+    /*;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.myImgItem:hover .myImgItem_hover {
+    display: block;
+}
+
+.link_thumb {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    width: 190px;
+    height: 191px;
+}
+
+/*.img_item {*/
+/*    background-image: url("/images/bg23.jpg");*/
+/*}*/
+
+.txt_item {
+    background-color: #fff;
+}
+
+.link_txt {
+    display: block;
+
+    overflow: hidden;
+    width: 154px;
+    height: 151px;
+    margin: 22px 18px 18px;
+    font-size: 15px;
+    line-height: 20px;
+    color: #000;
+    background-color: #fff;
+    position: relative;
+}
+
+.txt_info {
+    display: block;
+    display: -webkit-box;
+    overflow: hidden;
+    height: 98px;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+
+.myImgItem .txt_date {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 12px;
+    color: #c4c4c4;
+}
+
+.txt_empathy {
+    float: left;
+    margin-right: 6px;
+    line-height: 15px;
+    cursor: pointer;
+    display: flex;
+}
+
+.myImgItem .ico_imagefeel {
+    width: 14px;
+    height: 12px;
+    margin-right: 5px;
+    background-position: -250px -615px;
+}
+
+.myImgItem .ico_imagecmt {
+    width: 14px;
+    height: 12px;
+    margin-right: 5px;
+    background-position: -270px -615px;
+}
+.myImgItem_dark {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: .3;
+}
+
+.cont_empathy {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 10;
+    font-size: 13px;
+    color: #fff;
+}
+
+.myImgItem_hover {
+    display: none;
+}

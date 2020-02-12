@@ -1,7 +1,13 @@
 import * as React from 'react';
 import {MyMenu} from "../../MyMenu/MyMenu";
 import Lightbox from "react-image-lightbox";
-import {addPostFeeling, deletePostFeeling, getPostFeeling} from "../../../services/DataService";
+import {
+  addPostFeeling,
+  addPostUp,
+  deletePostFeeling,
+  deletePostUp,
+  getPostFeeling
+} from "../../../services/DataService";
 
 export default class StoryItemTail extends React.Component {
 
@@ -9,7 +15,9 @@ export default class StoryItemTail extends React.Component {
     super(props);
     this.state = {
       feelIconClass: "",
-      feelingCnt: 0
+      feelingCnt: 0,
+      isUpOn: false,
+      feelings: null
     };
     this.feelIcons = [
       "bn_feel",
@@ -37,27 +45,28 @@ export default class StoryItemTail extends React.Component {
   }
 
   loadFeelings = () => {
-    getPostFeeling(this.props.postData.id, (cData) => {
-      // console.log("loadFeelings:", cData);
-      // console.log(this.state.feelings);
-      if(Array.isArray(cData.data)) {
-        this.setState({feelings: cData.data.map(v => JSON.parse(v))});
-        console.log(this.state.feelings);
-        this.state.feelings.forEach((v,i) => {
+    if(this.props.postData.feeling !== "") {
+      let cData = this.props.postData.feeling.split("|");
+      console.log(cData.length);
+      console.log(cData.map(v => JSON.parse(v)));
+
+      if(Array.isArray(cData)) {
+        // console.log(this.state.feelings);
+        cData.map(v => JSON.parse(v)).forEach((v,i) => {
           if(v.userid === this.nowUserInfo.id) {
             this.setState({feelIconClass: v.feeling});
           }
         });
       } else {
-        this.setState({feelings: JSON.parse(cData.data)});
-        console.log(this.state.feelings);
+        // this.setState({feelings: JSON.parse(cData)});
+        // console.log(this.state.feelings);
         if(this.state.feelings.userid === this.nowUserInfo.id) {
-          this.setState({feelIconClass: this.state.feelings.feeling});
+          this.setState({feelIconClass: JSON.parse(cData).feeling});
         }
       }
-      this.setState({feelingCnt: this.state.feelings.length});
-      this.props.onFeelingCnt(this.state.feelingCnt);
-    });
+      this.setState({feelingCnt: cData.length});
+      this.props.onFeelingCnt(cData.length);
+    }
   };
 
 
@@ -102,6 +111,21 @@ export default class StoryItemTail extends React.Component {
     });
   };
 
+  onUpClickEvent = () => {
+    console.log(this.props.postData);
+
+    if(this.state.isUpOn) { // 삭제
+      deletePostUp(this.props.postData.id, this.nowUserInfo.id, (res) => {
+        console.log(res);
+      });
+    } else { // 추가
+      addPostUp(this.props.postData.id, this.nowUserInfo.id, (res) => {
+        console.log(res);
+      });
+    }
+    this.setState({isUpOn: !this.state.isUpOn});
+  };
+
   render() {
     return (
       <div>
@@ -122,7 +146,7 @@ export default class StoryItemTail extends React.Component {
             }
 
             <div className="ico_ks2 bn_share"/>
-            <div className="ico_ks2 bn_up"/>
+            <div className={`ico_ks2 bn_up ${(this.state.isUpOn) ? "on" : ""}`} onClick={this.onUpClickEvent}/>
             <div className="relative feelingUserIconWrap" style={{display: "inline-block"}}>
               {
                 (this.state.feelIconClass !== "") ? (this.nowUserInfo.profileimg == null) ?

@@ -4,7 +4,7 @@ import {addApplyFriend, addFriend, deleteFriend, excludeRecommendFriend} from ".
 import alertDialog from "../../services/AlertDialog";
 import eventService from "../../services/EventService";
 import {withRouter} from "react-router-dom";
-import waitDialog from "../../services/WaitDialog";
+import waitDialog from "../../services/WaitDialog/WaitDialog";
 
 class FriendItem extends React.Component {
 
@@ -14,6 +14,7 @@ class FriendItem extends React.Component {
     this.state = {
       userInfo: JSON.parse(localStorage.getItem("userInfo")),
     };
+    // waitDialog.show();
   }
 
 
@@ -21,7 +22,9 @@ class FriendItem extends React.Component {
     switch (this.props.listName) {
       case "AcceptList":  // 받은 신청 (delete element + delete request(1) friend table)
         console.log("props data: ", this.props.data);
+        waitDialog.show();
         deleteFriend(this.props.data.userid, this.state.userInfo.id, 1, (v) => {
+          waitDialog.hide();
           eventService.emitEvent("reloadFriends", {
             id: this.props.data.userid,
             type: "accept",
@@ -29,7 +32,9 @@ class FriendItem extends React.Component {
         });
         break;
       case "recommendList": // 추천 친구 (delete element + insert request(0) friend table)
+        waitDialog.show();
         excludeRecommendFriend(this.state.userInfo.id, this.props.data.id, (res) => {
+          waitDialog.hide();
           eventService.emitEvent("reloadFriends", {
             id: this.props.data.id,
             type: "recommend",
@@ -42,10 +47,12 @@ class FriendItem extends React.Component {
   agreeEvent = () => {
     switch (this.props.listName) {
       case "AcceptList":  // 받은 신청 (delete element + update request(100) friend table + insert request(100)[상대 꺼 만들어주기])
+        waitDialog.show();
         addFriend({
           userid: this.state.userInfo.id,
           friend: this.props.data.userid
         }, (res) => {
+          waitDialog.hide();
           eventService.emitEvent("reloadFriends", {
             id: this.props.data.userid,
             type: "accept",
@@ -65,19 +72,22 @@ class FriendItem extends React.Component {
     }
   };
 
+  onProfileClick = (e) => {
+    e.preventDefault();
+    this.props.history.push(`/story/${this.props.data.id}/main`);
+  };
 
   render() {
     const {data} = this.props;
     // console.log(data);
     return (
-      <li className="friendItem" onClick={(e) => {
-        e.preventDefault();
-        this.props.history.push(`/story/${data.id}/main`);
-      }}>
+      <li className="friendItem" >
         {
           (data.profileimg === null) ?
-            (<span className="frame_type3 frame_g img_profile"/>) :
-            (<span className="friendItemProfileImg frame_type3 frame_g" style={{backgroundImage: `url(${data.profileimg})`}}/>)
+            (<span className="frame_type3 frame_g img_profile" onClick={this.onProfileClick}/>) :
+            (<span className="friendItemProfileImg frame_type3 frame_g"
+                   style={{backgroundImage: `url(${data.profileimg})`}}
+                   onClick={this.onProfileClick}/>)
         }
 
         <span className="thumb_name">{data.name}</span>

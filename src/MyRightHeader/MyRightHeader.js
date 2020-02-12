@@ -61,7 +61,9 @@ class MyRightHeader extends React.Component {
   };
 
   componentDidMount() {
-
+    eventService.listenEvent("reloadFriendListToRightHeader", () => {
+      this.updateFrientEvent(this.state.userInfo);
+    });
   }
 
   getFriendEvent = () => {

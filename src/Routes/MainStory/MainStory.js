@@ -6,7 +6,7 @@ import {deletePost, getComments, getPost, setStoryUserData} from "../../services
 import eventService from "../../services/EventService";
 import {ModalWritingContainer} from "../../Component/ModalWritingContainer/ModalWritingContainer";
 import {LoadingIndicator} from "../../services/LoadingIndicator";
-import waitDialog from "../../services/WaitDialog";
+import waitDialog from "../../services/WaitDialog/WaitDialog";
 
 class MainStory extends React.Component {
 
@@ -32,7 +32,8 @@ class MainStory extends React.Component {
 
 
   componentDidMount() {
-    eventService.listenEvent("updatePostToMainStory", (postData) => {
+    this.getPostEvent();
+    eventService.listenEvent("updatePostToMainAndUserStory", (postData) => {
       let posts = this.state.postList;
       let idx = posts.findIndex(v => v.id === postData.id);
       console.log(postData, posts[idx]);
@@ -71,7 +72,7 @@ class MainStory extends React.Component {
 
   getPostEvent = () => {
     getPost(this.state.userInfo.id, (data) => {
-      // console.log(data);
+      console.log(data);
       if (data.posts !== undefined) {
         // console.log(this);
         let arr = data.posts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
@@ -135,8 +136,10 @@ class MainStory extends React.Component {
 
             {
               this.state.postList.map((v, i) => (i < this.state.viewCnt) ? (
-                  <StoryItem key={i} postData={v} arrnum={i} userData={this.state.userList}
-                             updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}/>
+                  <StoryItem key={i} postData={v} arrnum={i}
+                             userData={this.state.userList}
+                             updatePostEvent={this.updatePostEvent}
+                             deletePostEvent={this.deletePostEvent}/>
                 ) : null
               )
             }

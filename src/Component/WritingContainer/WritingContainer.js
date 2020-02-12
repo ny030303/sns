@@ -114,7 +114,7 @@ class WritingContainer extends React.Component {
 
       updatePost(data, (res) => {
         console.log(res);
-        eventService.emitEvent("updatePostToMainStory", res.postData);
+        eventService.emitEvent("updatePostToMainAndUserStory", res.postData);
         alertDialog.show("안내", "수정 되었습니다.");
         this.postOff();
       })

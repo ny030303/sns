@@ -2,12 +2,13 @@ import React from 'react';
 import './UserStory.css';
 import StoryItem from "../../Component/StoryItem/StoryItem";
 import FriendItem from "../../Component/FriendItem/FriendItem";
+import "../../services/WaitDialog/WaitDialog.css";
 import {
   getUserInfo,
   updateUserProfileImg,
   updateUserBgImg,
   getUserPosts,
-  getUserFriends, setStoryUserData, getComments, deletePost
+  getUserFriends, setStoryUserData, getComments, deletePost, deleteUserFriend
 } from "../../services/DataService";
 import {fileToDataURL} from "../../services/fileToDataURL";
 import eventService from "../../services/EventService";
@@ -15,6 +16,8 @@ import {MyMenu} from "../../Component/MyMenu/MyMenu";
 import {LoadingIndicator} from "../../services/LoadingIndicator";
 import {ProfileSettingItem} from "../../Component/ProfileSettingItem/ProfileSettingItem";
 import {UserStoryCalendar} from "../../Component/UserStoryCalendar/UserStoryCalendar";
+import alertDialog from "../../services/AlertDialog";
+import waitDialog from "../../services/WaitDialog/WaitDialog";
 
 class UserStory extends React.Component {
 
@@ -68,6 +71,14 @@ class UserStory extends React.Component {
       }
     });
 
+    eventService.listenEvent("updatePostToMainAndUserStory", (postData) => {
+      let posts = this.state.postList;
+      let idx = posts.findIndex(v => v.id === postData.id);
+      console.log(postData, posts[idx]);
+      posts[idx] = postData;
+      this.setState({postList: posts});
+    });
+
     eventService.listenEvent("updateIsPrivateNumToMainAndUserStory", (isPrivateNumData) => {
       let posts = this.state.postList;
       let idx = posts.findIndex(v => v.id === isPrivateNumData.postid);
@@ -75,6 +86,11 @@ class UserStory extends React.Component {
       if (posts[idx].isprivate_num) posts[idx].isprivate_num = isPrivateNumData.isprivate_num;
       // posts[idx] = postData;
       this.setState({postList: posts});
+    });
+
+    eventService.listenEvent("reloadStorys", (res) => {
+      console.log(res);
+      this.getPostEvent();
     });
   }
 
@@ -122,7 +138,6 @@ class UserStory extends React.Component {
         let arr = data.posts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
         if (this.nowUserInfo.id !== this.props.match.params.userId) {
           arr = arr.filter(v => Number(v.isprivate_num) !== 1);
-          // console.log(arr);
         }
         this.setState({postList: arr, posterInfo: data.user});
         setStoryUserData(data.user.userid, data.user.name, data.user.profileimg);
@@ -180,13 +195,14 @@ class UserStory extends React.Component {
         this.props.history.push(`/story/${this.props.match.params.userId}/videos`);
         break;
     }
-    // console.log(this.state.selectedMenuIdx);
   };
 
+  // ================ 메뉴 function ================
 
   showBgMenu = () => this.setState({isBgMenuFade: !this.state.isBgMenuFade});
 
   changeUserProfileImg = (e) => {
+    this.showBgMenu();
     fileToDataURL(e.target.files[0]).then(res => {
       updateUserProfileImg({userid: JSON.parse(localStorage.getItem("userInfo")).id, img: res}, () => {
         this.loadUserInfo();
@@ -195,6 +211,7 @@ class UserStory extends React.Component {
   };
 
   changeUserBgImg = () => {
+    this.showBgMenu();
     // console.log("changeUserBgImg");
     let randomNum = Math.floor(Math.random() * (25 - 10) + 10);
     updateUserBgImg({
@@ -206,12 +223,30 @@ class UserStory extends React.Component {
   };
 
   selectRandomBgImg = (e) => {
+    this.showBgMenu();
     // console.log("selectRandomBgImg: ", e);
     console.log(e.target.files);
     fileToDataURL(e.target.files[0]).then(res => {
       updateUserBgImg({userid: JSON.parse(localStorage.getItem("userInfo")).id, img: res}, () => {
         this.loadUserInfo();
       });
+    });
+  };
+
+  onUnfriendingEvent = () => {
+    this.showBgMenu();
+    waitDialog.show();
+    deleteUserFriend(this.nowUserInfo.id, this.props.match.params.userId, (res) => {
+      console.log(res);
+      waitDialog.hide();
+      if(res.result1 === 1 && res.result2 === 1) {
+        alertDialog.show("안내", "친구를 끊었습니다.");
+        this.setState({isFriend: false});
+        this.getPostEvent();
+        eventService.emitEvent("reloadFriendListToRightHeader");
+      } else {
+        alertDialog.show("오류!", "친구 끊기를 실패했습니다.");
+      }
     });
   };
 
@@ -265,7 +300,7 @@ class UserStory extends React.Component {
                     (this.nowUserInfo.id === this.props.match.params.userId) ?
                       (<div className="btn_cover" onClick={this.showBgMenu}>배경 사진 편집</div>) :
                       (isFriend) ? (<>
-                          <div className="btn_friend_cover">친구</div>
+                          <div className="btn_friend_cover" onClick={this.showBgMenu}>친구</div>
                           <div className="area_ico">
                             <span className="ico_ks ico_open"/>
                           </div>
@@ -273,10 +308,18 @@ class UserStory extends React.Component {
                         (<div className="btn_cover">친구신청</div>)
                   }
 
-                  {(this.state.isBgMenuFade) ? (
-                    <MyMenu menuInfo={[{text: "사진 업로드", type: "file", eventCallback: this.selectRandomBgImg},
-                      {text: "기본 이미지", type: "normal", eventCallback: (e) => this.changeUserBgImg(e)}]}
-                            menuStyle={{marginTop: "35px"}}/>) : null}
+                  {
+                    (this.state.isBgMenuFade) ?
+                      (this.nowUserInfo.id === this.props.match.params.userId) ?
+                        (<MyMenu menuInfo={[{text: "사진 업로드", type: "file", eventCallback: this.selectRandomBgImg},
+                          {text: "기본 이미지", type: "normal", eventCallback: (e) => this.changeUserBgImg(e)}]}
+                                 menuStyle={{marginTop: "35px"}}/>)
+                        : (isFriend) ?
+                        (<MyMenu menuInfo={[{text: "친구 끊기", type: "normal", eventCallback: this.onUnfriendingEvent},
+                          {text: "차단하기", type: "normal"}]}
+                                 menuStyle={{marginTop: "35px"}}/>) : null
+                      : null
+                  }
                 </div>
               </div>
             </div>
@@ -286,15 +329,28 @@ class UserStory extends React.Component {
 
               {
                 (infoType === "main") ?
-                  this.state.postList.map((v, i) => (i < this.state.viewCnt) ? (
-                    <StoryItem key={i} postData={v} arrnum={i}
-                               userData={[{
-                                 userid: posterInfo.id,
-                                 name: posterInfo.name,
-                                 profileimg: posterInfo.profileimg
-                               }]}
-                               updatePostEvent={this.updatePostEvent}
-                               deletePostEvent={this.deletePostEvent}/>) : null) :
+                  (this.nowUserInfo.id === this.props.match.params.userId || isFriend) ?
+                    this.state.postList.map((v, i) =>
+                      (i < this.state.viewCnt) ? (
+                        <StoryItem key={i} postData={v} arrnum={i}
+                                   userData={[{
+                                     userid: posterInfo.id,
+                                     name: posterInfo.name,
+                                     profileimg: posterInfo.profileimg
+                                   }]}
+                                   updatePostEvent={this.updatePostEvent}
+                                   deletePostEvent={this.deletePostEvent}/>) : null)
+
+                    : postList.filter(v => Number(v.isprivate_num) !== 2).map((v, i) =>
+                      (i < this.state.viewCnt) ? (
+                        <StoryItem key={i} postData={v} arrnum={i}
+                                   userData={[{
+                                     userid: posterInfo.id,
+                                     name: posterInfo.name,
+                                     profileimg: posterInfo.profileimg
+                                   }]}
+                                   updatePostEvent={this.updatePostEvent}
+                                   deletePostEvent={this.deletePostEvent}/>) : null) :
                   (infoType === "profileSetting") ?
                     (
                       <ProfileSettingItem loadUserInfo={this.loadUserInfo}/>

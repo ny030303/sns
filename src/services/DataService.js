@@ -134,6 +134,13 @@ export const getUserFriends = (uid,callback) => {
   });
 };
 
+export const deleteUserFriend = (uid,friend, callback) => {
+  axios.get(`/php/deleteUserFriend.php?userid=${uid}&friend=${friend}`).then(res => {
+    if (callback) callback(res.data);
+  });
+};
+
+
 //---------Story----------
 
 export const postWriting = (data, callback) => {
@@ -215,9 +222,20 @@ export const getUserPosts = (userid, callback) => {
   );
 };
 
-// export const addPostFeeling = () => {
-//
-// };
+
+export const addPostUp = (postid, userid, callback) => {
+  axios.get(`/php/addPostUp.php?postid=${postid}&userid=${userid}`).then(res => {
+    // console.log('deletePost: ', res.data);
+    if (callback) callback(res.data);
+  });
+};
+
+export const deletePostUp = (postid, userid, callback) => {
+  axios.get(`/php/deletePostUp.php?postid=${postid}&userid=${userid}`).then(res => {
+    // console.log('deletePost: ', res.data);
+    if (callback) callback(res.data);
+  });
+};
 
 //-----------Comment-----------
 
