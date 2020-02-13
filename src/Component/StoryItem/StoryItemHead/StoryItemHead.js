@@ -41,12 +41,20 @@ class StoryItemHead extends React.Component {
 
   render() {
     const {postData, userData} = this.props;
-    // console.log(userData);
+    // console.log(postData);
     let nowPoster = userData.filter(v => postData.userid === v.userid)[0] || {};
 
     return (
       <div>
         <div className="storyContentsWrap">
+          {
+            (postData.upid) ?
+              (
+                <div className="action_graph">
+                  <div className="txt_action"><strong>{postData.upid}</strong>님이 UP 했어요.</div>
+                </div>
+              ) : null
+          }
           {
             (!nowPoster.profileimg) ?
               (

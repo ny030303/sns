@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1fb93a97-cd4a-4ed9-91a0-bc566567a71f" name="Default Changelist" comment="평가전 연습 26번 백업">
-      <change afterPath="$PROJECT_DIR$/php/addPostUp.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/php/deletePostUp.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/php/deleteUserFriend.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/ModalStoryItem/ModalStoryItem.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/ModalStoryItem/ModalStoryItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/WaitDialog/WaitDialog.css" afterDir="false" />
+    <list default="true" id="1fb93a97-cd4a-4ed9-91a0-bc566567a71f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Component/UserStoryImages/UserStoryImages.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Component/UserStoryImages/UserStoryImages.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/addPostUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/addPostUp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/deletePostUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/deletePostUp.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/getPost.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getPost.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/getUserFriends.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getUserFriends.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/getUserPosts.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getUserPosts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/FriendItem/FriendItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/FriendItem/FriendItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/SearchItem/SearchItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/SearchItem/SearchItem.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/SearchItem/SearchItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/SearchItem/SearchItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemHead/StoryItemHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemHead/StoryItemHead.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemTail/StoryItemTail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemTail/StoryItemTail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/WritingContainer/WritingContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/WritingContainer/WritingContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyHeader/MyHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyHeader/MyHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/UserStoryCalendar/UserStoryCalendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UserStoryCalendar/UserStoryCalendar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/UserStoryCalendar/UserStoryCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UserStoryCalendar/UserStoryCalendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Routes/MainStory/MainStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/MainStory/MainStory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Routes/UserStory/UserStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/UserStory/UserStory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DataService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DataService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/WaitDialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/WaitDialog/WaitDialog.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +167,8 @@
       <workItem from="1581258430323" duration="962000" />
       <workItem from="1581339357136" duration="4921000" />
       <workItem from="1581428942583" duration="3961000" />
-      <workItem from="1581468614319" duration="28559000" />
+      <workItem from="1581468614319" duration="28878000" />
+      <workItem from="1581554847689" duration="30635000" />
     </task>
     <task id="LOCAL-00001" summary="평가전 연습 26번 백업">
       <created>1581258569368</created>
@@ -181,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581258569368</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="-친구 끊기&#10;-userStory에서 글쓴거 갱신하는 것&#10;-태그 검색 UI 만듦">
+      <created>1581504724011</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581504724011</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,29 +215,34 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="평가전 연습 26번 백업" />
-    <option name="LAST_COMMIT_MESSAGE" value="평가전 연습 26번 백업" />
+    <MESSAGE value="-친구 끊기&#10;-userStory에서 글쓴거 갱신하는 것&#10;-태그 검색 UI 만듦" />
+    <option name="LAST_COMMIT_MESSAGE" value="-친구 끊기&#10;-userStory에서 글쓴거 갱신하는 것&#10;-태그 검색 UI 만듦" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Deployment" timestamp="1580964334489">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#Deployment/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580964334489" />
-    <state width="1877" height="55" key="GridCell.Tab.0.bottom" timestamp="1581468703014">
+    <state x="579" y="112" key="CommitChangelistDialog2" timestamp="1581504723343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="55" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581468703014" />
-    <state width="1877" height="55" key="GridCell.Tab.0.center" timestamp="1581468703014">
+    <state x="579" y="112" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581504723343" />
+    <state width="1877" height="55" key="GridCell.Tab.0.bottom" timestamp="1581573119390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="55" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581468703014" />
-    <state width="1877" height="55" key="GridCell.Tab.0.left" timestamp="1581468703013">
+    <state width="1877" height="55" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581573119390" />
+    <state width="1877" height="55" key="GridCell.Tab.0.center" timestamp="1581573119390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="55" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581468703013" />
-    <state width="1877" height="55" key="GridCell.Tab.0.right" timestamp="1581468703014">
+    <state width="1877" height="55" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581573119390" />
+    <state width="1877" height="55" key="GridCell.Tab.0.left" timestamp="1581573119390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="55" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581468703014" />
+    <state width="1877" height="55" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581573119390" />
+    <state width="1877" height="55" key="GridCell.Tab.0.right" timestamp="1581573119390">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="55" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581573119390" />
     <state x="837" y="375" key="NewPhpFileDialog" timestamp="1581500961149">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -243,10 +251,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1579482843880" />
-    <state x="652" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1581468616274">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1581504742205">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="652" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581468616274" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581504742205" />
+    <state x="652" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1581554847736">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="652" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581554847736" />
     <state x="92" y="92" width="1736" height="856" key="dock-window-1" timestamp="1580964268013">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

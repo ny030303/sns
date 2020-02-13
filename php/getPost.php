@@ -141,7 +141,25 @@ SELECT distinct a.userid, b.name, b.profileimg
     where a.isprivate_num=3";
 $user_data= fetchAll($con, $query2, []);
 
+// up 데이터
+$query3 = "
+SELECT a.userid as upid, a.created as upcreated, b.userid, b.id, b.sharing, b.up, b.feeling, b.created, b.contents, b.isprivate_num,
+c.id as file , c.postid, c.filecnt
+
+    FROM `sns_up` as a
+    inner JOIN `sns_post` as b on a.userid=b.userid and a.postid=b.id
+    left outer JOIN `sns_file` as c on b.userid=c.userid and b.id=c.postid
+    where a.userid='". $userid ."'
+UNION 
+SELECT a.userid as upid, a.created as upcreated, b.userid, b.id, b.sharing, b.up, b.feeling, b.created, b.contents, b.isprivate_num,
+c.id as file , c.postid, c.filecnt
+
+    FROM `sns_up` as a
+    inner JOIN `sns_post` as b on a.userid=b.userid and a.postid=b.id
+    left outer JOIN `sns_file` as c on b.userid=c.userid and b.id=c.postid
+    where b.userid in (SELECT friend FROM `sns_friend` WHERE userid='". $userid ."' and request=100)";
+$up_data = fetchAll($con, $query3, []);
 
 
-echo json_encode(array("posts" => $my_data, "users" => $user_data));
+echo json_encode(array("posts" => $my_data, "users" => $user_data, "ups"=>$up_data));
 ?>

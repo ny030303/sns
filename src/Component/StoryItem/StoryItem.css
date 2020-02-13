@@ -123,6 +123,19 @@
     background-position: 0 -210px;
 }
 
+.action_graph {
+    height: 47px;
+    padding-top: 22px;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 20px;
+}
+
+.action_graph .txt_action {
+    font-size: 13px;
+    line-height: 0;
+    color: #222;
+}
+
 /*=================================*/
 
 /*--------top icons---------*/

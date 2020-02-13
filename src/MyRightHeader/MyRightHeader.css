@@ -151,7 +151,7 @@
 .frame_g {
     position: absolute;
     left: 0;
-    top: 0;
+    /*top: 0;*/
 }
 
 .thumb_name {

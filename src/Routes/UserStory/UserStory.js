@@ -18,6 +18,7 @@ import {ProfileSettingItem} from "../../Component/ProfileSettingItem/ProfileSett
 import {UserStoryCalendar} from "../../Component/UserStoryCalendar/UserStoryCalendar";
 import alertDialog from "../../services/AlertDialog";
 import waitDialog from "../../services/WaitDialog/WaitDialog";
+import {UserStoryImages} from "../../Component/UserStoryImages/UserStoryImages";
 
 class UserStory extends React.Component {
 
@@ -357,6 +358,8 @@ class UserStory extends React.Component {
                     ) :
                     (infoType === "calendar") ?
                       (<UserStoryCalendar/>)
+                      : (infoType === "images") ?
+                      (<UserStoryImages postData={this.state.postList}/>)
                       : null
                 //updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}
               }

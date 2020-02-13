@@ -72,11 +72,13 @@ class MainStory extends React.Component {
 
   getPostEvent = () => {
     getPost(this.state.userInfo.id, (data) => {
-      console.log(data);
-      if (data.posts !== undefined) {
-        // console.log(this);
-        let arr = data.posts.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
-        this.setState({postList: data.posts, userList: data.users});
+      // console.log([...data.posts, ...data.ups]);
+      if (data.posts !== undefined && data.ups !== undefined) {
+        console.log(data);
+        let arr = [...data.posts, ...data.ups].sort((a, b) =>
+          new Date((b.upcreated) ? b.upcreated : b.created).getTime() - new Date((a.upcreated) ? a.upcreated : a.created).getTime());
+        console.log(arr);
+        this.setState({postList: arr, userList: data.users});
         // this.render();
         console.log(data.users);
         try {

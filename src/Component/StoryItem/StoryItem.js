@@ -30,7 +30,7 @@ class StoryItem extends React.Component {
     const {postData} = this.props;
     let comments = postData.comments || [];
     return (
-      <div className="StoryItem section">
+      <div className="StoryItem section" style={(postData.upid) ? {paddingTop: "26px"} : null}>
         <div className="storyContentsWrap">
           <StoryItemHead postData={this.props.postData} userData={this.props.userData}
                          updatePostEvent={this.props.updatePostEvent}
@@ -44,7 +44,7 @@ class StoryItem extends React.Component {
               <p>느낌 <span>{this.state.feelingCnt}</span></p>
               <p>댓글 <span>{Number(comments.length)}</span></p>
               <p>공유 <span>{Number(postData.sharing)}</span></p>
-              <p>UP <span>{Number(postData.up)}</span></p>
+              <p>UP <span>{(postData.up !== "") ? postData.up.split("|").length : 0}</span></p>
             </div>
             <CommentList comments={comments} postid={this.props.postData.id} onUpdateComments={this.props.postData.onUpdateComments}/>
           </div>

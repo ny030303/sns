@@ -45,28 +45,29 @@ export default class StoryItemTail extends React.Component {
   }
 
   loadFeelings = () => {
-    if(this.props.postData.feeling !== "") {
-      let cData = this.props.postData.feeling.split("|");
-      console.log(cData.length);
-      console.log(cData.map(v => JSON.parse(v)));
-
-      if(Array.isArray(cData)) {
-        // console.log(this.state.feelings);
-        cData.map(v => JSON.parse(v)).forEach((v,i) => {
-          if(v.userid === this.nowUserInfo.id) {
-            this.setState({feelIconClass: v.feeling});
-          }
-        });
-      } else {
-        // this.setState({feelings: JSON.parse(cData)});
-        // console.log(this.state.feelings);
-        if(this.state.feelings.userid === this.nowUserInfo.id) {
-          this.setState({feelIconClass: JSON.parse(cData).feeling});
-        }
-      }
-      this.setState({feelingCnt: cData.length});
-      this.props.onFeelingCnt(cData.length);
-    }
+    // if(this.props.postData.feeling !== "") {
+    //   let cData = this.props.postData.feeling.split("|");
+    //   // console.log(cData.length);
+    //   // console.log(cData);
+    //   // console.log(cData.map(v => JSON.parse(v)));
+    //
+    //   if(Array.isArray(cData)) {
+    //     // console.log(this.state.feelings);
+    //     cData.map(v => JSON.parse(v)).forEach((v,i) => {
+    //       if(v.userid === this.nowUserInfo.id) {
+    //         this.setState({feelIconClass: v.feeling});
+    //       }
+    //     });
+    //   } else {
+    //     // this.setState({feelings: JSON.parse(cData)});
+    //     // console.log(this.state.feelings);
+    //     if(this.state.feelings.userid === this.nowUserInfo.id) {
+    //       this.setState({feelIconClass: JSON.parse(cData).feeling});
+    //     }
+    //   }
+    //   this.setState({feelingCnt: cData.length});
+    //   this.props.onFeelingCnt(cData.length);
+    // }
   };
 
 
@@ -127,6 +128,7 @@ export default class StoryItemTail extends React.Component {
   };
 
   render() {
+    // console.log(this.props.postData.feeling)
     return (
       <div>
         <div className="storyContentsWrap">

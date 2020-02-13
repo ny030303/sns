@@ -22,6 +22,7 @@ export class HashtagStory extends React.Component {
 
   render() {
     console.log(this.props);
+
     return (
       <div className="hashtagStory">
         {
@@ -37,10 +38,10 @@ export class HashtagStory extends React.Component {
           <div className="wrap_recomm">
             <div className="tit_recomm">게시물</div>
             <div className="img_wrap">
-              <MyImgItem onClickEvent={this.showStoryItem}/>
-              <MyImgItem/>
-              <MyImgItem/>
-              <MyImgItem type="txt"/>
+              {/*<MyImgItem onClickEvent={this.showStoryItem}/>*/}
+              {/*<MyImgItem/>*/}
+              {/*<MyImgItem/>*/}
+              {/*<MyImgItem type="txt"/>*/}
             </div>
           </div>
         </div>

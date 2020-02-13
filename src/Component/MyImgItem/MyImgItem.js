@@ -3,10 +3,11 @@ import "./MyImgItem.css";
 
 export class MyImgItem extends React.Component {
   render() {
-    const {data, type} = this.props;
+    const {imgSrc, type, imgsPostData} = this.props;
+
     return (
       <div className={`myImgItem ${(type === "txt") ? "txt_item" : ""}`}
-           style={(type !== "txt") ? {backgroundImage: `url("/images/bg23.jpg")`} : null}
+           style={(type !== "txt") ? {backgroundImage: `url("${imgSrc}")`} : null}
             onClick={this.props.onClickEvent}>
         {
           (type === "txt") ?
@@ -22,10 +23,10 @@ export class MyImgItem extends React.Component {
           <div className="myImgItem_dark"/>
           <span className="cont_empathy">
             <span className="txt_empathy">
-              <span className="ico_ks ico_imagefeel">느낌</span>0
+              <span className="ico_ks ico_imagefeel">느낌</span>{imgsPostData.feeling.split("|").length}
             </span>
             <span className="txt_empathy">
-              <span className="ico_ks ico_imagecmt">댓글</span>0
+              <span className="ico_ks ico_imagecmt">댓글</span>{(imgsPostData.comments) ? imgsPostData.comments.length : 0}
             </span>
           </span>
         </div>
