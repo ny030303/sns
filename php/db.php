@@ -28,3 +28,7 @@ function execsql($con, $sql, $param = [])
 
     return $result ? 1 : 0;
 }
+
+function startsWith($haystack, $needle) {
+    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+}

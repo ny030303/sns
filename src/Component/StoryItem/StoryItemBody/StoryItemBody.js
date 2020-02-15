@@ -19,21 +19,30 @@ export default class StoryItemBody extends React.Component {
     const {postData} = this.props;
     const {photoIndex, isOpen} = this.state;
     let fileArr = [];
+    let videoUrls = postData.urls ? postData.urls.split('|') : [];
     if( postData.file !== null ) {
       Array(Number(postData.filecnt)).fill(0).forEach((v,i) => {
         fileArr.push(`/php/downloadImage.php?id=${postData.file}&subid=${i}`);
       })
     }
-    // console.log(postData);
+    console.log(postData);
     if( this.contents.current ) {
-      this.contents.current.innerHTML = unescape(postData.contents);
+      let contentHtml = unescape(postData.contents);
+      this.contents.current.innerHTML = contentHtml.replace(/#[\\d|A-Z|a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*/gm,
+        `<span class="hashtag_color">$&</span>`);
     }
     return (
       <div>
         <div className="storyContentsWrap">
           <div style={{fontSize: "14px", wordBreak: "break-all"}} ref={this.contents}/>
           {/*<div className="storyitem_font_style" style={{cursor:"pointer"}}>...더보기</div>*/}
-
+          {
+            videoUrls.map((v,i) => (
+              <video style={{marginBottom: "5px"}} key={i} controls onLoadedData={(e) => e.target.currentTime = 1}>
+                <source src={`${v}`} type={"video/" + v.substr(v.length-3,3)}/>
+              </video>
+            ))
+          }
           {
             (fileArr !== null) ? (<div className="storyImgList">
               {

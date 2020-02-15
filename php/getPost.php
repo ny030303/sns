@@ -101,19 +101,19 @@ $userid = $_GET["userid"];
 //a.feeling,
 // 글 데이터
 $query = "
-SELECT a.id, a.userid, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, b.id as file , b.postid, b.filecnt
+SELECT a.id, a.userid, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, b.id as file , b.postid, b.urls, b.filecnt
     FROM `sns_post` as a
     left outer JOIN `sns_file` as b
     on a.userid=b.userid and a.id=b.postid
     where a.userid='". $userid ."' and (a.isprivate_num=2)
 UNION
-SELECT a.id, a.userid, a.sharing, a.up, a.feeling,  a.created, a.contents, a.isprivate_num, b.id as file, b.postid, b.filecnt
+SELECT a.id, a.userid, a.sharing, a.up, a.feeling,  a.created, a.contents, a.isprivate_num, b.id as file, b.postid, b.urls, b.filecnt
     FROM `sns_post` as a
     left outer join `sns_file` as b
     on a.userid=b.userid and a.id=b.postid
     where a.userid in (SELECT friend FROM `sns_friend` WHERE userid='". $userid ."' and request=100)  and (a.isprivate_num=2)
 UNION
-SELECT a.id, a.userid, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, b.id as file, b.postid, b.filecnt
+SELECT a.id, a.userid, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, b.id as file, b.postid, b.urls, b.filecnt
     FROM `sns_post` as a
     left outer JOIN `sns_file` as b
     on a.userid=b.userid and a.id=b.postid

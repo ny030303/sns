@@ -1,5 +1,6 @@
-import axios from "axios";
+﻿import axios from "axios";
 import {trackPromise} from 'react-promise-tracker';
+import waitDialog from "./WaitDialog/WaitDialog";
 
 const config = {headers: {'Content-Type': 'application/json;charset=UTF-8'}};
 
@@ -146,9 +147,11 @@ export const deleteUserFriend = (uid,friend, callback) => {
 export const postWriting = (data, callback) => {
   const formData = new FormData();
   Object.keys(data).forEach(key => formData.append(key, data[key]));
+  waitDialog.show();
   axios.post(`/php/postWriting.php`, formData).then(res => {
     // console.log('postWriting:', res.data);
     if (callback) callback(res.data);
+    waitDialog.hide();
   });
 };
 
@@ -170,11 +173,11 @@ export const getPostFeeling = (pid, callback) => {
   );
 };
 
-export const addPostFeeling = (data, callback) => {
+export const updatePostFeeling = (data, callback) => {
   const formData = new FormData();
   Object.keys(data).forEach(key => formData.append(key, data[key]));
   axios.post(`/php/addPostFeeling.php`, formData).then(res => {
-    // console.log('addPostFeeling: ', res.data);
+    // console.log('updatePostFeeling: ', res.data);
     if (callback) callback(res.data);
   });
 };
@@ -198,9 +201,11 @@ export const updateStoryIsPrivateNum = (data, callback) => {
 };
 
 export const deletePost = (postid, callback) => {
+  waitDialog.show();
   axios.get(`/php/deletePost.php?postid=${postid}`).then(res => {
-    // console.log('deletePost: ', res.data);
+    console.log('deletePost: ', res.data);
     if (callback) callback(res.data);
+    waitDialog.hide();
   });
 };
 

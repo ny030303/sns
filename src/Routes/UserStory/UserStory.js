@@ -1,24 +1,23 @@
-import React from 'react';
+﻿import React from 'react';
+import LazyLoad from 'react-lazyload';
 import './UserStory.css';
-import StoryItem from "../../Component/StoryItem/StoryItem";
-import FriendItem from "../../Component/FriendItem/FriendItem";
 import "../../services/WaitDialog/WaitDialog.css";
+
 import {
-  getUserInfo,
-  updateUserProfileImg,
-  updateUserBgImg,
-  getUserPosts,
+  getUserInfo,  updateUserProfileImg,  updateUserBgImg,  getUserPosts,
   getUserFriends, setStoryUserData, getComments, deletePost, deleteUserFriend
 } from "../../services/DataService";
-import {fileToDataURL} from "../../services/fileToDataURL";
 import eventService from "../../services/EventService";
-import {MyMenu} from "../../Component/MyMenu/MyMenu";
-import {LoadingIndicator} from "../../services/LoadingIndicator";
-import {ProfileSettingItem} from "../../Component/ProfileSettingItem/ProfileSettingItem";
-import {UserStoryCalendar} from "../../Component/UserStoryCalendar/UserStoryCalendar";
 import alertDialog from "../../services/AlertDialog";
 import waitDialog from "../../services/WaitDialog/WaitDialog";
+import {fileToDataURL} from "../../services/CommonUtils";
+
+import {MyMenu} from "../../Component/MyMenu/MyMenu";
+import StoryItem, {StoryItemLoading} from "../../Component/StoryItem/StoryItem";
+import {ProfileSettingItem} from "../../Component/ProfileSettingItem/ProfileSettingItem";
+import {UserStoryCalendar} from "../../Component/UserStoryCalendar/UserStoryCalendar";
 import {UserStoryImages} from "../../Component/UserStoryImages/UserStoryImages";
+
 
 class UserStory extends React.Component {
 
@@ -30,7 +29,7 @@ class UserStory extends React.Component {
       isBgMenuFade: false,
       postList: [],
       sideMemoFixed: false,
-      viewCnt: 5,
+
       loading: false,
       loginUserFriendsList: [],
       isFriend: false,
@@ -47,7 +46,8 @@ class UserStory extends React.Component {
       // console.log(e);
       if (window.scrollY >= 364) {
         this.setState({sideMemoFixed: true});
-      } else {
+      }
+      else {
         this.setState({sideMemoFixed: false});
       }
     })
@@ -59,18 +59,6 @@ class UserStory extends React.Component {
 
     let idx = this.menus.findIndex(v => v === this.props.match.params.type);
     this.setState({selectedMenuIdx: idx});
-
-    window.addEventListener('scroll', (e) => {
-      const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
-      if ((scrollTop + clientHeight) >= scrollHeight) {
-        setTimeout(() => {
-          this.setState({loading: false, viewCnt: this.state.viewCnt + 5});
-        }, 1000);
-        if (this.state.viewCnt < this.state.postList.length) {
-          this.setState({loading: true});
-        }
-      }
-    });
 
     eventService.listenEvent("updatePostToMainAndUserStory", (postData) => {
       let posts = this.state.postList;
@@ -87,6 +75,15 @@ class UserStory extends React.Component {
       if (posts[idx].isprivate_num) posts[idx].isprivate_num = isPrivateNumData.isprivate_num;
       // posts[idx] = postData;
       this.setState({postList: posts});
+    });
+
+    eventService.listenEvent("feelingUpdateToMainAndUserStory", (data) => {
+      console.log(data);
+      let posts = this.state.postList;
+      [posts.find(v => v.id === data.postid)].forEach(v => {
+        v.feeling = data.feeling;
+        this.setState({postList: posts});
+      });
     });
 
     eventService.listenEvent("reloadStorys", (res) => {
@@ -240,12 +237,13 @@ class UserStory extends React.Component {
     deleteUserFriend(this.nowUserInfo.id, this.props.match.params.userId, (res) => {
       console.log(res);
       waitDialog.hide();
-      if(res.result1 === 1 && res.result2 === 1) {
+      if (res.result1 === 1 && res.result2 === 1) {
         alertDialog.show("안내", "친구를 끊었습니다.");
         this.setState({isFriend: false});
         this.getPostEvent();
         eventService.emitEvent("reloadFriendListToRightHeader");
-      } else {
+      }
+      else {
         alertDialog.show("오류!", "친구 끊기를 실패했습니다.");
       }
     });
@@ -257,8 +255,14 @@ class UserStory extends React.Component {
     // console.log(this.state.posterInfo);
     const menus = ["전체", "캘린더", "사진", "동영상", "장소", "뮤직", "더보기+6"];
     const menuClass = (i) => `story_link ${i === this.state.selectedMenuIdx ? "story_link_on" : ""}`;
-    const {posterInfo, postList, sideMemoFixed, infoType, isFriend} = this.state;
+    const {posterInfo, sideMemoFixed, infoType, isFriend} = this.state;
     // console.log(postList);
+    const userData = [{userid: posterInfo.id, name: posterInfo.name, profileimg: posterInfo.profileimg}];
+    let postList = this.state.postList;
+    if (!(this.nowUserInfo.id === this.props.match.params.userId || isFriend)) {
+      postList = postList.filter(v => Number(v.isprivate_num) !== 2);
+    }
+
     return (
       <div className="userStory">
         <div className="article_story">
@@ -329,47 +333,23 @@ class UserStory extends React.Component {
             <div className="story_post_wrap">
 
               {
-                (infoType === "main") ?
-                  (this.nowUserInfo.id === this.props.match.params.userId || isFriend) ?
-                    this.state.postList.map((v, i) =>
-                      (i < this.state.viewCnt) ? (
-                        <StoryItem key={i} postData={v} arrnum={i}
-                                   userData={[{
-                                     userid: posterInfo.id,
-                                     name: posterInfo.name,
-                                     profileimg: posterInfo.profileimg
-                                   }]}
-                                   updatePostEvent={this.updatePostEvent}
-                                   deletePostEvent={this.deletePostEvent}/>) : null)
-
-                    : postList.filter(v => Number(v.isprivate_num) !== 2).map((v, i) =>
-                      (i < this.state.viewCnt) ? (
-                        <StoryItem key={i} postData={v} arrnum={i}
-                                   userData={[{
-                                     userid: posterInfo.id,
-                                     name: posterInfo.name,
-                                     profileimg: posterInfo.profileimg
-                                   }]}
-                                   updatePostEvent={this.updatePostEvent}
-                                   deletePostEvent={this.deletePostEvent}/>) : null) :
-                  (infoType === "profileSetting") ?
-                    (
-                      <ProfileSettingItem loadUserInfo={this.loadUserInfo}/>
-                    ) :
-                    (infoType === "calendar") ?
-                      (<UserStoryCalendar/>)
-                      : (infoType === "images") ?
-                      (<UserStoryImages postData={this.state.postList}/>)
-                      : null
-                //updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}
-              }
-
-              {
-                (infoType === "main") ?
-                  (this.state.loading) ? (<div style={{textAlign: "center", margin: "30px 0"}}>
-                    <div className="spinner-border text-warning"/>
-                  </div>) : (<LoadingIndicator/>)
-                  : null
+                (() => {
+                  switch (infoType) {
+                    case "profileSetting":
+                      return (<ProfileSettingItem loadUserInfo={this.loadUserInfo}/>);
+                    case "calendar":
+                      return (<UserStoryCalendar/>);
+                    case "images":
+                      return (<UserStoryImages postData={postList}/>);
+                  }
+                  // "main" and default
+                  return postList.map((v, i) => (
+                    <LazyLoad key={i} placeholder={<StoryItemLoading/>}>
+                      <StoryItem key={i} postData={v} arrnum={i} userData={userData}
+                                 updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}/>
+                    </LazyLoad>
+                  ));
+                })()
               }
 
             </div>

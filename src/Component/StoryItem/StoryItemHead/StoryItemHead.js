@@ -1,4 +1,4 @@
-import * as React from 'react';
+﻿import * as React from 'react';
 import {MyMenu} from "../../MyMenu/MyMenu";
 import {updateStoryIsPrivateNum} from "../../../services/DataService";
 import {withRouter} from "react-router-dom";
@@ -9,7 +9,6 @@ class StoryItemHead extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSettingMenuFade: false,
     };
 
     this.nowUserInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -28,12 +27,6 @@ class StoryItemHead extends React.Component {
     });
   };
 
-  showSettingMenu = (e) => {
-    // console.log(e);
-    this.setState({isSettingMenuFade: !this.state.isSettingMenuFade});
-    // console.log(this.state.isSettingMenuFade);
-  };
-
   moveUserStoryMain = (e) => {
     e.preventDefault();
     this.props.history.push(`/story/${this.props.postData.userid}/main`);
@@ -41,20 +34,12 @@ class StoryItemHead extends React.Component {
 
   render() {
     const {postData, userData} = this.props;
-    // console.log(postData);
+    // console.log(userData);
     let nowPoster = userData.filter(v => postData.userid === v.userid)[0] || {};
 
     return (
       <div>
         <div className="storyContentsWrap">
-          {
-            (postData.upid) ?
-              (
-                <div className="action_graph">
-                  <div className="txt_action"><strong>{postData.upid}</strong>님이 UP 했어요.</div>
-                </div>
-              ) : null
-          }
           {
             (!nowPoster.profileimg) ?
               (
@@ -73,10 +58,9 @@ class StoryItemHead extends React.Component {
           {/*          style={{backgroundImage:`url(${this.nowPoster.profileimg})`}} */}
           <div className="btn_top_group">
             <span className="ico_ks btn_save" uk-tooltip="관심글로 저장하기"/>
-            <span className="ico_ks bn_modify"
-                  data-user={postData.userid} onClick={this.showSettingMenu}/>
-            {
-              (this.state.isSettingMenuFade) ?
+            <div className="uk-inline">
+              <span className="ico_ks bn_modify" data-user={postData.userid}/>
+              {
                 (postData.userid === this.nowUserInfo.id) ?
                   (<MyMenu menuInfo={[
                     {
@@ -84,20 +68,14 @@ class StoryItemHead extends React.Component {
                       type: "normal",
                       data_set: postData.id,
                       data_set2: 0,
-                      eventCallback: (e) => {
-                        this.showSettingMenu();
-                        this.props.updatePostEvent(e);
-                      }
+                      eventCallback: this.props.updatePostEvent
                     },
                     {
                       text: "삭제",
                       type: "normal",
                       data_set: postData.id,
                       data_set2: 0,
-                      eventCallback: (e) => {
-                        this.showSettingMenu();
-                        this.props.deletePostEvent(e);
-                      },
+                      eventCallback: this.props.deletePostEvent,
                       style: {borderBottom: "1px solid #e5e5e5"}
                     },
                     {
@@ -105,37 +83,28 @@ class StoryItemHead extends React.Component {
                       icon: "ico_ks global",
                       type: "checkBox",
                       data_set: 3,
-                      eventCallback: (e) => {
-                        this.showSettingMenu();
-                        this.changeIsPrivateNum(e);
-                      }
+                      eventCallback: this.props.deletePostEvent
                     },
                     {
                       text: "친구공개",
                       icon: "ico_ks ic_friend",
                       type: "checkBox",
                       data_set: 2,
-                      eventCallback: (e) => {
-                        this.showSettingMenu();
-                        this.changeIsPrivateNum(e);
-                      }
+                      eventCallback: this.props.deletePostEvent
                     },
                     {
                       text: "나만보기",
                       icon: "ico_ks ic_lock",
                       type: "checkBox",
                       data_set: 1,
-                      eventCallback: (e) => {
-                        this.showSettingMenu();
-                        this.changeIsPrivateNum(e);
-                      }
+                      eventCallback: this.props.deletePostEvent
                     },
                   ]} menuStyle={{left: "-91px"}}/>) :
                   (<MyMenu menuInfo={[
                     {text: "글 숨기기", type: "normal"},
                   ]} menuStyle={{width: "141px", left: "-103px"}}/>)
-                : null
-            }
+              }
+            </div>
           </div>
           <div className="add_top">
             {/*2020-01-22 14:06:08*/}

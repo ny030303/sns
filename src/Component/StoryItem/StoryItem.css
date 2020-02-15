@@ -58,6 +58,10 @@
 
 }
 
+.hashtag_color {
+    color: #00b5ff;
+}
+
 /*===========스토리 사진============*/
 .storyImgList {
     width: 100%;

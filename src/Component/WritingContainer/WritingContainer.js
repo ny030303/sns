@@ -1,23 +1,12 @@
 import React from 'react';
+import axios from "axios";
 import './WritingContainer.css';
 import {postWriting, updatePost, getSnsFileData} from "../../services/DataService";
 import FileUploadPopup from "./FileUploadPopup/FileUploadPopup";
 import alertDialog from "../../services/AlertDialog";
 import eventService from "../../services/EventService";
 import {MyMenu} from "../MyMenu/MyMenu";
-import {HashtagForm} from "../HashtagForm/HashtagForm";
-
-
-const fileToDataURL = async (inputfile) => {
-  if (inputfile === undefined) return null;
-  //console.log(inputfile.files[0]);
-  let fileData = await new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = (e) => resolve(reader.result);
-    reader.readAsDataURL(inputfile);
-  });
-  return fileData;
-};
+import {fileToDataURL, fileToServerURL} from "../../services/CommonUtils";
 
 const replaceAll = (str, target, replacement) => {
   return str.split(target).join(replacement);
@@ -62,33 +51,44 @@ class WritingContainer extends React.Component {
     if(this.props.postData) {
       console.log(this.props.postData);
       this.divContents.current.innerHTML = unescape(this.props.postData.contents);
+      let files = [];
+      (this.props.postData.urls || '').split('|').forEach(v => files.push(v));
       if(this.props.postData.file) {
-        getSnsFileData(this.props.postData.file, res => this.setState({files : res.files}));
+        getSnsFileData(this.props.postData.file, res => {
+          if(res.files) {
+            files = [...files, ...res.files];
+          }
+          this.setState({files : files})
+        });
         this.setState({isPrivateNum: Number(this.props.postData.isprivate_num)});
       }
     //  /php/downloadImage.php?id=19&subid=0
     }
   }
 
+  onKeyEvent  = (e) => {
+    console.log(e.keyCode);
+  };
+
   writeEvent = (e) => {
     if (this.state.isPostOn === false) this.setState({isPostOn: true});
     this.setState({postContents: e.target.innerHTML});
 
-    let lastText = e.target.innerHTML.substr(-1,1);
+    // let lastText = e.target.innerHTML.substr(-1,1);
 
-    if(lastText === "#") {
-      let regex = new RegExp("#[\\d|A-Z|a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*", "gm");
-      let content = e.target.innerHTML;
-      content = content.replace(regex, `<span class="hashtag_color">$&</span>`);
-      e.target.innerHTML = content;
-      this.setState({isHashLayerOn: true});
-    } else if(lastText === " " || e.target.innerHTML.length <= 0) {
-      let regex = new RegExp("\s", "g");
-      let content = e.target.innerHTML;
-      content = content.replace(regex, ``);
-      e.target.innerHTML = content;
-      this.setState({isHashLayerOn: false});
-    }
+    // if(lastText === "#") {
+    //   let regex = new RegExp("#[\\d|A-Z|a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*", "gm");
+    //   let content = e.target.innerHTML;
+    //   content = content.replace(regex, `<span class="hashtag_color">$&</span>`);
+    //   e.target.innerHTML = content;
+    //   this.setState({isHashLayerOn: true});
+    // } else if(lastText === " " || e.target.innerHTML.length <= 0) {
+    //   let regex = new RegExp("\s", "g");
+    //   let content = e.target.innerHTML;
+    //   content = content.replace(regex, ``);
+    //   e.target.innerHTML = content;
+    //   this.setState({isHashLayerOn: false});
+    // }
   };
 
   postOff = () => {
@@ -111,7 +111,7 @@ class WritingContainer extends React.Component {
         fileData: (fArr.length <= 0) ? null : fArr.join("|"),
         isprivatenum: this.state.isPrivateNum,
       };
-
+      console.log(data);
       updatePost(data, (res) => {
         console.log(res);
         eventService.emitEvent("updatePostToMainAndUserStory", res.postData);
@@ -158,10 +158,18 @@ class WritingContainer extends React.Component {
 
   selectFile = (e) => {
     console.log(e.target.files[0]);
-    fileToDataURL(e.target.files[0]).then(res => {
-      this.setState({files: [...this.state.files, ...[res]]});
-      console.log(this.state.files);
-    });
+    if( e.target.files[0].type.startsWith('video') ) {
+      fileToServerURL(e.target.files[0]).then(res => {
+        this.setState({files: [...this.state.files, ...[res]]});
+        console.log('fileToServerURL:', res);
+      })
+    }
+    else {
+      fileToDataURL(e.target.files[0]).then(res => {
+        this.setState({files: [...this.state.files, ...[res]]});
+        console.log(this.state.files);
+      });
+    }
   };
 
   showFileUploadPopup = (popupShow) => {
@@ -189,10 +197,9 @@ class WritingContainer extends React.Component {
   // showHashtagForm = () => {
   //   this.setState({isHashtagFormOn: !this.state.isHashtagFormOn});
   // };
-
   render() {
     // <input type="email|file" multiple>
-    // console.log(this.state.files);
+    console.log(this.state.files);
     return (
       <div className="writingContainer">
         {/*{this.state.fileUploadPopup ?*/}
@@ -200,7 +207,7 @@ class WritingContainer extends React.Component {
         <div className="write">
           <div className="section"onDragOver={this.dragOverEvent} onDrop={this.dropEvent}>
             <div ref={this.divContents} id="contents_write" className="editable" contentEditable="true"
-                 onChange={this.writeEvent} onInput={this.writeEvent}
+                 onChange={this.writeEvent} onInput={this.writeEvent} onKeyUp={this.onKeyEvent}
                  style={(this.state.isPostOn) ? {minHeight: "130px"} : {minHeight: "37px"}}
                  placeholder={this.state.postMsg[this.randomNum]}/>
             <br/>
@@ -208,12 +215,13 @@ class WritingContainer extends React.Component {
               {
                 this.state.files.map((v, i) => (
                   <div key={i} className="upload-item">
-                    <div className="img-box" style={(v.substr(5,5) === "video") ? {backgroundColor: "#000"} : null}>
+                    <div className="img-box" style={v.startsWith("/movies") ? {backgroundColor: "#000"} : null}>
                       {
                         (v.substr(5,5) === "image") ?
                           (<img src={v} alt="img"/>) :
-                          (<video style={{position: "absolute", top: "50%", transform: "translate(0, -50%)"}}>
-                            <source src={v} type={v.substr(5,9)}/>
+                          (<video style={{position: "absolute", top: "50%", transform: "translate(0, -50%)"}}
+                                  onLoadedData={(e) => e.target.currentTime = 1}>
+                            <source src={`http://localhost${v}`} type={"video/" + v.substr(v.length-3,3)}/>
                           </video>)
                       }
 
@@ -234,7 +242,7 @@ class WritingContainer extends React.Component {
                       <span className="ico_ks ico_camera"/><span>사진/동영상</span>
                   </span>
                 </label>
-                <input type="file" id="ex_file" ref={this.myPostFile} onChange={this.selectFile}/>
+                <input type="file" id="ex_file" accept="image/*,video/*" ref={this.myPostFile} onChange={this.selectFile}/>
               </li>
               <li className="link_menu">
                 <div className="txt_menu">

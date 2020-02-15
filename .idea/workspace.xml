@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1fb93a97-cd4a-4ed9-91a0-bc566567a71f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/UserStoryImages/UserStoryImages.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/UserStoryImages/UserStoryImages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="1fb93a97-cd4a-4ed9-91a0-bc566567a71f" name="Default Changelist" comment="평가전 연습 26번 백업">
+      <change afterPath="$PROJECT_DIR$/php/uploadMovieFile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/addPostUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/addPostUp.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/deletePostUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/deletePostUp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/addPostFeeling.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/addPostFeeling.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/downloadImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/downloadImage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/getPost.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getPost.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/getUserPosts.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getUserPosts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/postWriting.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/postWriting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/updateWriting.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/updateWriting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/MyMenu/MyMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MyMenu/MyMenu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemBody/StoryItemBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemBody/StoryItemBody.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemHead/StoryItemHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemHead/StoryItemHead.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemTail/StoryItemTail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemTail/StoryItemTail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/UserStoryCalendar/UserStoryCalendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UserStoryCalendar/UserStoryCalendar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/UserStoryCalendar/UserStoryCalendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UserStoryCalendar/UserStoryCalendar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/WritingContainer/WritingContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/WritingContainer/WritingContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Routes/MainStory/MainStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/MainStory/MainStory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Routes/UserStory/UserStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/UserStory/UserStory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/DataService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DataService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/EventService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/EventService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/fileToDataURL.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/CommonUtils.js" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,6 +72,13 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Study\sns\php" />
+      <recent name="C:\xampp\htdocs\sns\php" />
+      <recent name="C:\xampp\htdocs\sns2\php" />
+      <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem\StoryItemTail" />
+      <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem\CommentList" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\sns\src\services\WaitDialog" />
       <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem" />
@@ -77,13 +86,18 @@
       <recent name="C:\xampp\htdocs\sns\src\Component\StoryItem\CommentList" />
       <recent name="C:\xampp\htdocs\sns_react\public" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\sns\php" />
-      <recent name="C:\xampp\htdocs\sns2\php" />
-      <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem\StoryItemTail" />
-      <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem\CommentList" />
-      <recent name="C:\xampp\htdocs\sns\src\Component\MyEmojis" />
-    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="npm.start">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -91,6 +105,16 @@
       <command value="run" />
       <scripts>
         <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -109,21 +133,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -169,6 +182,8 @@
       <workItem from="1581428942583" duration="3961000" />
       <workItem from="1581468614319" duration="28878000" />
       <workItem from="1581554847689" duration="30635000" />
+      <workItem from="1581659205810" duration="10246000" />
+      <workItem from="1581721636832" duration="15831000" />
     </task>
     <task id="LOCAL-00001" summary="평가전 연습 26번 백업">
       <created>1581258569368</created>

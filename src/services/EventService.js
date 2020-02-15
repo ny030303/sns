@@ -7,7 +7,9 @@ export const setObserverVisibility = (element, callback) => {
 };
 
 const getCallerClassName= () => {
-    let callerClass = (new Error()).stack.split("\n")[3].trim().split(" ")[1];
+    let errorStack = (new Error()).stack.split("\n");
+    let callerClass = errorStack[3].trim().split(" ");
+    callerClass = (callerClass[1] === 'new' ) ? callerClass[2] : callerClass[1];
     return callerClass.indexOf('.') > 0 ? callerClass.substr(0, callerClass.indexOf('.')) : callerClass;
 };
 

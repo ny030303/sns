@@ -11,18 +11,30 @@ $postid = $_POST["postid"];
 $query1 = "SELECT `feeling` FROM `sns_post` WHERE `id`='" . $postid . "'";
 $result1 = fetch($con, $query1, []);
 
+$feelings = explode("|", $result1->feeling);
 
-var_dump(explode("|", $result1->feeling));
-//$object = json_decode();
-//var_dump($object->message->result->translatedText);
+$updatedFeeling = false;
+$addFeel = json_decode($feelingInfo);
 
-$query2 = "UPDATE `sns_post` SET  `feeling`=? where  `id`='" . $postid . "'";
-if($result1->feeling === "") {
-    $result2 = execsql($con, $query2, [$feelingInfo]);
-} else {
-
-    $data = $result1->feeling . "|" . $feelingInfo;
-    $result2 = execsql($con, $query2, [$data]);
+for($i=count($feelings); $i>=0; $i--) {
+    $tempFeeling = json_decode($feelings[$i]);
+    if( $addFeel->userid == $tempFeeling->userid ) {
+        if( strlen($addFeel->feeling) > 0 ) {
+            $tempFeeling->feeling = $addFeel->feeling;
+            $feelings[$i] = json_encode($tempFeeling);
+        }
+        else {
+            array_splice($feelings, $i, 1);
+        }
+        $updated = true;
+    }
 }
-echo json_encode(array("result"=>$result2));
+if( $updatedFeeling == false && strlen($addFeel->feeling) > 0) {
+    array_push($feelings, $feelingInfo);
+}
+$postFeelings = implode("|", $feelings);
+$query2 = "UPDATE `sns_post` SET  `feeling`=? where  `id`='" . $postid . "'";
+$result2 = execsql($con, $query2, [$postFeelings]);
+
+echo json_encode(array("result"=>$result2, "data"=>array("postid"=>$postid, "feeling"=>$postFeelings)));
 ?>

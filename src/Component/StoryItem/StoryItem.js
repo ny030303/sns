@@ -1,9 +1,9 @@
-import React from 'react';
+﻿import React from 'react';
 import './StoryItem.css';
 import 'react-image-lightbox/style.css';
 import {CommentList} from "./CommentList/CommentList";
 import {
-  addPostFeeling,
+  updatePostFeeling,
   deletePostFeeling,
   getComments,
   getPostFeeling,
@@ -13,18 +13,35 @@ import StoryItemBody from "./StoryItemBody/StoryItemBody";
 import StoryItemTail from "./StoryItemTail/StoryItemTail";
 import StoryItemHead from "./StoryItemHead/StoryItemHead";
 
+export const StoryItemLoading = () => (
+  <div style={{textAlign: "center", margin: "30px 0", height: "300px"}}>
+    <div className="spinner-border text-warning"/>
+  </div>
+);
+
 class StoryItem extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      comments: [],
-      userInfo: [],
-
-      feelingCnt: 0
     };
-
   }
+
+  componentDidMount() {
+    this.updateComments(this.props.postData);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if( prevProps.postData !== this.props.postData ) {
+      this.updateComments(this.props.postData);
+    }
+  }
+
+  updateComments = (postData) => {
+    getComments(postData.id, (cData) => {
+      if( postData.onUpdateComments ) postData.onUpdateComments(cData.data);
+    });
+  };
 
   render() {
     const {postData} = this.props;
@@ -35,18 +52,18 @@ class StoryItem extends React.Component {
           <StoryItemHead postData={this.props.postData} userData={this.props.userData}
                          updatePostEvent={this.props.updatePostEvent}
                          deletePostEvent={this.props.deletePostEvent}/><br/><br/><br/>
-          <StoryItemBody postData={this.props.postData}/>
+          <StoryItemBody postData={postData}/>
           <br/>
-          <StoryItemTail postData={this.props.postData} onFeelingCnt={(data) => this.setState({feelingCnt: data})}/>
+          <StoryItemTail postData={postData}/>
 
           <div className="storyCommentsWrap">
             <div className="count_group">
-              <p>느낌 <span>{this.state.feelingCnt}</span></p>
-              <p>댓글 <span>{Number(comments.length)}</span></p>
+              <p>느낌 <span>{postData.feeling ? postData.feeling.split("|").length : 0}</span></p>
+              <p>댓글 <span>{comments.length}</span></p>
               <p>공유 <span>{Number(postData.sharing)}</span></p>
-              <p>UP <span>{(postData.up !== "") ? postData.up.split("|").length : 0}</span></p>
+              <p>UP <span>{isNaN(postData.up) ? 0 : Number(postData.up)}</span></p>
             </div>
-            <CommentList comments={comments} postid={this.props.postData.id} onUpdateComments={this.props.postData.onUpdateComments}/>
+            <CommentList comments={comments} postid={postData.id} onUpdateComments={postData.onUpdateComments}/>
           </div>
         </div>
       </div>
