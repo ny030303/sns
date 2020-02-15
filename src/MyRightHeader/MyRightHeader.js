@@ -7,6 +7,8 @@ import eventService from "../services/EventService";
 import {getFriends, getApplyFriends, getRecommendFriend, logout} from "../services/DataService";
 import {MyMenu} from "../Component/MyMenu/MyMenu";
 import {MessageWriting} from "../Component/MessageWriting/MessageWriting";
+import * as uikit from "uikit/dist/js/uikit.min";
+import SnsMessage from "./SnsMessage/SnsMessage";
 
 // class UserInfo {
 //   constructor()  {
@@ -31,9 +33,10 @@ class MyRightHeader extends React.Component {
       friendsList: [],
       acceptFriendList: [],
       recommendFriendList: [],
-      isMyMenuFade: false,
-      isMessageWritingFade: false
+      isMessageWritingFade: false,
+
     };
+    this.msgData = null;
 
     this.updateFrientEvent(this.state.userInfo);
     eventService.listenEvent("reloadFriends", data => {
@@ -90,7 +93,6 @@ class MyRightHeader extends React.Component {
       });
     });
   };
-  showMyMenu = () => this.setState({isMyMenuFade: (this.state.isMyMenuFade) ? false : true});
 
   // getSendFriendEvent = () => {
   //   if (this.state.userInfo === null) return;
@@ -108,15 +110,22 @@ class MyRightHeader extends React.Component {
     });
   };
 
-  showMessageWriting = () => this.setState({isMessageWritingFade: !this.state.isMessageWritingFade});
+  showMessageWriting = (e, msgData) => {
+    console.log(msgData);
+    this.msgData = msgData || null;
+    this.setState({isMessageWritingFade: !this.state.isMessageWritingFade});
+  };
+
 
   render() {
-    const {userInfo, isMyMenuFade} = this.state;
+    const {userInfo} = this.state;
     // console.log(userInfo);
     if (!userInfo) return null;
     return (
       <>
-        {(this.state.isMessageWritingFade) ? <MessageWriting showMessageWriting={this.showMessageWriting}/> : null}
+        {(this.state.isMessageWritingFade) ?
+          <MessageWriting data={this.msgData} closeMessageWriting={this.showMessageWriting}/> : null}
+
         <div className="snb_story">
           <div className="inner_snb">
             <div className="snb_profile">
@@ -135,26 +144,25 @@ class MyRightHeader extends React.Component {
                 <div className="right_header_profile_name">{userInfo.name}</div>
               </div>
               <div className="settingContainer">
-                {
-                  (isMyMenuFade) ?
-                    (<MyMenu menuInfo={[
-                      {
-                        text: "프로필 설정", type: "normal", eventCallback: () => {
-                          this.props.history.push(`/story/${userInfo.id}/profileSetting`)
-                        }
-                      },
-                      {
-                        text: "일반 설정", type: "normal", eventCallback: () => {
-                          this.props.history.push(`/setting`)
-                        }
-                      },
-                      {text: "로그아웃", type: "normal", eventCallback: this.logoutEvent}]}
-                             menuStyle={{top: "100px", left: "-30px"}}/>) : null
-                }
-
-                <div className="settingIcon" onClick={this.showMyMenu}>
-                  <span className="ico_ks ico_util">설정 메뉴</span>
+                <div className="uk-inline">
+                  <div className="settingIcon">
+                    <span className="ico_ks ico_util">설정 메뉴</span>
+                  </div>
+                  <MyMenu menuInfo={[
+                    {
+                      text: "프로필 설정", type: "normal", eventCallback: () => {
+                        this.props.history.push(`/story/${userInfo.id}/profileSetting`)
+                      }
+                    },
+                    {
+                      text: "일반 설정", type: "normal", eventCallback: () => {
+                        this.props.history.push(`/setting`)
+                      }
+                    },
+                    {text: "로그아웃", type: "normal", eventCallback: this.logoutEvent}]}
+                          menuStyle={{top: "100px", left: "-30px"}} menuPos={"bottom-center"}/>
                 </div>
+
 
               </div>
               <div className="menuContainer">
@@ -233,16 +241,7 @@ class MyRightHeader extends React.Component {
 
               </div>
               <div id="menu2" className="tab-pane fade">
-                <div className="btn_message">
-                  <div className="grayColorBtn" onClick={this.showMessageWriting}>새 쪽지 작성</div>
-                  <div className="friends_list_wrap"
-                       style={{overflow: "hidden", height: "626px", width: "100%", overflowY: "scroll"}}>
-                    <ul className="friends_list" style={{height: "100%", margin: "0"}}>
-                      {/*friendItem 정보 넣기*/}
-                      <MessageItem/>
-                    </ul>
-                  </div>
-                </div>
+                <SnsMessage showMessageWriting={this.showMessageWriting} userInfo={this.state.userInfo}/>
               </div>
             </div>
           </div>

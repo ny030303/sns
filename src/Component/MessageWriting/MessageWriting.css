@@ -69,6 +69,7 @@
 .friends_search {
     height: 54px;
     padding: 0 17px;
+    position:relative;
 }
 
 .box_writing .tf_from {
@@ -146,4 +147,13 @@
     text-align: center;
     font-size: 14px;
     border-radius: 3px;
+}
+
+.triangleDown {
+    position: absolute;
+    right: 9px;
+    top: 13px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
 }

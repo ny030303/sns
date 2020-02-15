@@ -49,6 +49,15 @@
     background-position: -85px -30px;
 }
 
+.ico_out {
+    position: absolute;
+    right: -5px;
+    bottom: -2px;
+    width: 17px;
+    height: 16px;
+    background-position: -65px -30px;
+}
+
 .desc_message {
     display: block;
     padding-bottom: 5px;

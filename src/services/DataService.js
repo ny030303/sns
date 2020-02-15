@@ -353,3 +353,20 @@ export const getSnsFileData = (fileid, callback) => {
     if (callback) callback(res.data);
   });
 };
+
+//--------message-----------
+
+export const addSnsMessage = (data, callback) => {
+  const formData = new FormData();
+  Object.keys(data).forEach(key => formData.append(key, data[key]));
+  axios.post(`/php/addSnsMessage.php`, formData).then(res => {
+    // console.log('updateUserProfileInfo:', res.data);
+    if (callback) callback(res.data);
+  });
+};
+
+export const getSnsMessage = (userid, callback) => {
+  axios.get(`/php/getSnsMessage.php?userid=${userid}`).then(res => {
+    if (callback) callback(res.data);
+  });
+};

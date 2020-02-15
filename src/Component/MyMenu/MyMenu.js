@@ -19,10 +19,10 @@ export class MyMenu extends React.Component {
   };
 
   render() {
-    const {menuInfo} = this.props;
+    const {menuInfo, menuPos} = this.props;
     const menuStyle = Object.assign(this.props.menuStyle || {}, {minWidth: "120px"})
     return (
-      <div uk-dropdown="mode: click; pos: bottom-right" className="cover_layer p-1" style={menuStyle}>
+      <div uk-dropdown={`mode: click; pos: ${menuPos || "bottom-right"}`} className="cover_layer p-1" style={menuStyle}>
         {
           menuInfo.filter(v => v.type === "normal").map((v, i) =>
             (<div className="mymenu_li" key={i} onClick={(e) => this.onSelectDropDown(e, v.eventCallback)}

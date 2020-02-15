@@ -1,5 +1,9 @@
 <?php
 
+// php.ini 파일에 아래와 같이 설정해야 대용량파일이 업로드 됨. (기본 8M)
+// upload_max_filesize = 2000M
+// post_max_size = 2000M;
+
 header('Content-Type: application/json');
 
 function gen_uuid() {
