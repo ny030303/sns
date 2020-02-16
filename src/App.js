@@ -8,9 +8,10 @@ import UserStory from "./Routes/UserStory/UserStory";
 import LoginForm from "./Routes/LoginForm/LoginForm";
 import SignUpForm from "./Routes/SignUpForm/SignUpForm";
 import eventService from "./services/EventService";
-import {getUser, logout} from "./services/DataService";
+import {getUser, getUserInfoAll, logout} from "./services/DataService";
 import {NormalSettingPage} from "./Routes/NormalSettingPage/NormalSettingPage";
 import {HashtagStory} from "./Routes/HashtagStory/HashtagStory";
+import waitDialog from "./services/WaitDialog/WaitDialog";
 
 
 const PrivateRoute = ({component: Component, authed, ...rest}) => (
@@ -59,7 +60,7 @@ class App extends React.Component {
         this.setState({authed: false});
       }
     });
-    // waitDialog.show();
+    getUserInfoAll(res => eventService.emitEvent("updateUserInfoAll", null));
   }
 
   logout = () => {

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import "./MessageWriting.css";
 import {addSnsMessage, getFriends} from "../../services/DataService";
+import alertDialog from "../../services/AlertDialog";
+import eventService from "../../services/EventService";
 
 export class MessageWriting extends React.Component {
 
@@ -32,6 +34,7 @@ export class MessageWriting extends React.Component {
   };
 
   sendMessageToFriends = () => {
+    alertDialog.show("안내", "메시지를 전송했습니다.");
     let ids = this.state.targets.filter(fv => fv.checked).map(mv => mv.id);
     let data = {
       toIds: ids.join(','),
@@ -42,6 +45,8 @@ export class MessageWriting extends React.Component {
     addSnsMessage(data, res => {
       console.log(res);
     });
+    eventService.emitEvent("updateSendMessage", data);
+    this.props.closeMessageWriting();
   };
 
   render() {

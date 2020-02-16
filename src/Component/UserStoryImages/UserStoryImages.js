@@ -33,7 +33,7 @@ export class UserStoryImages extends React.Component {
       <div className="userStoryImages">
         {
           fileArr.map((v,i) => (
-            <MyImgItem key={i} imgSrc={v} imgsPostData={imgsPostData[i]} onClickEvent={() => this.setState({isOpen: true, photoIndex: i})}/>
+            <MyImgItem key={i} imgSrc={v} postData={imgsPostData[i]} onClickEvent={() => this.setState({isOpen: true, photoIndex: i})}/>
           ))
         }
 

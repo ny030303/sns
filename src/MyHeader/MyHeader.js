@@ -51,7 +51,6 @@ class MyHeader extends React.Component {
 
   onSearch = () => {
     console.log(this.searchInput.current.value);
-
   };
 
   componentDidMount() {

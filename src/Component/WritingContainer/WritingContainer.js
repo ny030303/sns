@@ -55,8 +55,9 @@ class WritingContainer extends React.Component {
       (this.props.postData.urls || '').split('|').forEach(v => files.push(v));
       if(this.props.postData.file) {
         getSnsFileData(this.props.postData.file, res => {
-          if(res.files) {
-            files = [...files, ...res.files];
+          if(res.files && res.files.length > 0) {
+            let filteredFiles = res.files.filter(v => v.length > 10);
+            files = [...files, ...filteredFiles];
           }
           this.setState({files : files})
         });

@@ -11,7 +11,7 @@ if($text != "") {
             WHERE allow_search=1 and (name LIKE '%".$text."%')  limit 10";
     $data = fetchAll($con, $query, []);
 
-    $tag_query = "SELECT * FROM `sns_hashtag` WHERE `name` like '%".$text."%'  limit 10";
+    $tag_query = "SELECT distinct(`name`) FROM `sns_hashtag` WHERE `name` like '".$text."%'  limit 10";
     $tag_data = fetchAll($con, $tag_query, []);
 } else {
     $data = [];

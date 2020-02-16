@@ -2,13 +2,7 @@
 import './StoryItem.css';
 import 'react-image-lightbox/style.css';
 import {CommentList} from "./CommentList/CommentList";
-import {
-  updatePostFeeling,
-  deletePostFeeling,
-  getComments,
-  getPostFeeling,
-  updateStoryIsPrivateNum
-} from "../../services/DataService";
+import {getComments} from "../../services/DataService";
 import StoryItemBody from "./StoryItemBody/StoryItemBody";
 import StoryItemTail from "./StoryItemTail/StoryItemTail";
 import StoryItemHead from "./StoryItemHead/StoryItemHead";
@@ -23,8 +17,7 @@ class StoryItem extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -32,20 +25,25 @@ class StoryItem extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if( prevProps.postData !== this.props.postData ) {
+    if (prevProps.postData !== this.props.postData) {
       this.updateComments(this.props.postData);
     }
   }
 
   updateComments = (postData) => {
     getComments(postData.id, (cData) => {
-      if( postData.onUpdateComments ) postData.onUpdateComments(cData.data);
+      if (postData.onUpdateComments) postData.onUpdateComments(cData.data);
     });
   };
 
+
+
   render() {
     const {postData} = this.props;
+    console.log(postData);
     let comments = postData.comments || [];
+    let feelingCnt = 0;
+    postData.feeling.split("|").forEach(v => feelingCnt += (( v.length > 2) ?  1 : 0));
     return (
       <div className="StoryItem section" style={(postData.upid) ? {paddingTop: "26px"} : null}>
         <div className="storyContentsWrap">
@@ -58,7 +56,7 @@ class StoryItem extends React.Component {
 
           <div className="storyCommentsWrap">
             <div className="count_group">
-              <p>느낌 <span>{postData.feeling ? postData.feeling.split("|").length : 0}</span></p>
+              <p>느낌 <span>{feelingCnt}</span></p>
               <p>댓글 <span>{comments.length}</span></p>
               <p>공유 <span>{Number(postData.sharing)}</span></p>
               <p>UP <span>{isNaN(postData.up) ? 0 : Number(postData.up)}</span></p>

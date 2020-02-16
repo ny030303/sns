@@ -15,6 +15,12 @@ export default class StoryItemBody extends React.Component {
   }
 
 
+  componentDidMount() {
+    let contentHtml = unescape(this.props.postData.contents);
+    this.contents.current.innerHTML = contentHtml.replace(/#[\\d|A-Z|a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*/gm,
+      `<span class="hashtag_color">$&</span>`);
+  }
+
   render() {
     const {postData} = this.props;
     const {photoIndex, isOpen} = this.state;
@@ -38,7 +44,7 @@ export default class StoryItemBody extends React.Component {
           {/*<div className="storyitem_font_style" style={{cursor:"pointer"}}>...더보기</div>*/}
           {
             videoUrls.map((v,i) => (
-              <video style={{marginBottom: "5px"}} key={i} controls onLoadedData={(e) => e.target.currentTime = 1}>
+              <video style={{marginBottom: "5px"}} key={v} controls onLoadedData={(e) => e.target.currentTime = 1}>
                 <source src={`${v}`} type={"video/" + v.substr(v.length-3,3)}/>
               </video>
             ))

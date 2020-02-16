@@ -11,22 +11,15 @@ class MessageItem extends React.Component {
 
     render() {
         const {data,userid} = this.props;
-        // id: "1"
-        // myid: "asdf"
-        // fromid: "admin"
-        // message: "ddddfdfdfdfdffd"
-        // created: "2020-02-15 22:36:21"
-        // isread: "0"
-
         let msgUser = getStoryUserData((data.myid === userid) ? data.fromid : data.myid) || {};
         let userIconStyle = msgUser.img ? {
-            background: `url(${msgUser.img}) no-repeat 0 0`,
+            background: `url(${msgUser.img}) 50% 50% / cover no-repeat`,
             backgroundSize: "cover",
             backgroundPosition: "50% 50%"
         } : {
-            background: `url("/images/profile_defult.png"}) no-repeat 0 0`,
+            background: `url("/images/profile_defult.png"}) 50% 50% / cover no-repeat`,
         };
-        console.log(msgUser);
+        console.log(userid, msgUser);
         return (
             <li className="massageItem" data-msgrd="1" onClick={(e) => this.props.showMessageWriting(e, data)}>
                 <div className="link_message">

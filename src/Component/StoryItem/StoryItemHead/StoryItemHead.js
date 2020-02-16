@@ -21,10 +21,7 @@ class StoryItemHead extends React.Component {
       isprivate_num: e.target.dataset.num,
     };
     eventService.emitEvent("updateIsPrivateNumToMainAndUserStory", data);
-    updateStoryIsPrivateNum(data, (res) => {
-      console.log(res);
-
-    });
+    updateStoryIsPrivateNum(data, (res) => console.log(res));
   };
 
   moveUserStoryMain = (e) => {
@@ -34,7 +31,7 @@ class StoryItemHead extends React.Component {
 
   render() {
     const {postData, userData} = this.props;
-    // console.log(userData);
+    console.log(postData, userData);
     let nowPoster = userData.filter(v => postData.userid === v.userid)[0] || {};
 
     return (
@@ -83,21 +80,21 @@ class StoryItemHead extends React.Component {
                       icon: "ico_ks global",
                       type: "checkBox",
                       data_set: 3,
-                      eventCallback: this.props.deletePostEvent
+                      eventCallback: this.changeIsPrivateNum
                     },
                     {
                       text: "친구공개",
                       icon: "ico_ks ic_friend",
                       type: "checkBox",
                       data_set: 2,
-                      eventCallback: this.props.deletePostEvent
+                      eventCallback: this.changeIsPrivateNum
                     },
                     {
                       text: "나만보기",
                       icon: "ico_ks ic_lock",
                       type: "checkBox",
                       data_set: 1,
-                      eventCallback: this.props.deletePostEvent
+                      eventCallback: this.changeIsPrivateNum
                     },
                   ]} menuStyle={{left: "-91px"}}/>) :
                   (<MyMenu menuInfo={[

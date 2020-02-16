@@ -10,7 +10,7 @@ export const getStoryUserData = (userid) => storyUserInfos[userid];
 
 export const setStoryUserData = (userid, name, img) => {
   // console.log(userid, name, img);
-  if(storyUserInfos[userid]) {
+  if (storyUserInfos[userid]) {
     storyUserInfos[userid].name = name || storyUserInfos[userid].name;
     storyUserInfos[userid].img = img || storyUserInfos[userid].img;
   }
@@ -18,6 +18,34 @@ export const setStoryUserData = (userid, name, img) => {
     storyUserInfos[userid] = {name: name, img: img};
   }
 };
+
+const addHashtag = (contents, postid) => {
+  let hashTags = unescape(contents).match(/#[\d|A-Z|a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*/gm);
+  // console.log(unescape(data.contents), hashTags);
+  axios.get(`/php/deleteHashTag.php?postid=${postid}`).then(res => {
+    // console.log("addHashtag: ", res, ", ", formData1);
+    if (Array.isArray(hashTags)) {
+      hashTags.forEach(v => {
+        if(v.length > 1) {
+          const formData1 = new FormData();
+          formData1.append('hashname', v);
+          formData1.append('postid', postid);
+          axios.post(`/php/addHashTag.php`, formData1).then(res => {
+            // console.log("addHashtag: ", res, ", ", formData1);
+          });
+        }
+      });
+    }
+  });
+};
+
+export const getPostFromHashTag = (hashtag, callback) => {
+  axios.get(`/php/getPostFromHashTag.php?hashtag=${hashtag}`).then(res => {
+
+    if (callback) callback(res.data);
+  });
+};
+
 
 export const getLoginInfo = () => {
   let data = localStorage.getItem('loginUser');
@@ -40,14 +68,31 @@ export const getUser = (uid, pwd, callback) => {
   });
 };
 
-export const getUserInfo = (uid, callback) => {
-  trackPromise(
+export const getUserInfo = (uid, callback, passTrack) => {
+  if (passTrack) {
     axios.get(`/php/getUser.php?userid=${uid}`, config).then(res => {
       const {name, profileimg} = res.data;
       setStoryUserData(uid, name, profileimg);
       if (callback) callback(res.data);
     })
-  );
+  }
+  else {
+    trackPromise(
+      axios.get(`/php/getUser.php?userid=${uid}`, config).then(res => {
+        const {name, profileimg} = res.data;
+        setStoryUserData(uid, name, profileimg);
+        if (callback) callback(res.data);
+      })
+    );
+  }
+};
+
+export const getUserInfoAll = (callback) => {
+  axios.get(`/php/getUserInfoAll.php`, config).then(res => {
+    res.data.users.forEach(v => setStoryUserData(v.id, v.name, v.profileimg));
+    console.log(res.data);
+    if (callback) callback(res.data);
+  })
 };
 
 
@@ -56,8 +101,10 @@ export const putUser = (data, callback) => {
   Object.keys(data).forEach(key => formData.append(key, data[key]));
   axios.post(`/php/signup.php`, formData).then(res => {
     // console.log('putUser:', res.data);
+    getUserInfo(data.id, () => console.log('pass'), true);
     if (callback) callback(res.data);
   });
+
 };
 
 export const logout = (callback) => {
@@ -129,13 +176,13 @@ export const excludeRecommendFriend = (uid, friend, callback) => {
   });
 };
 
-export const getUserFriends = (uid,callback) => {
+export const getUserFriends = (uid, callback) => {
   axios.get(`/php/getUserFriends.php?userid=${uid}`).then(res => {
     if (callback) callback(res.data);
   });
 };
 
-export const deleteUserFriend = (uid,friend, callback) => {
+export const deleteUserFriend = (uid, friend, callback) => {
   axios.get(`/php/deleteUserFriend.php?userid=${uid}&friend=${friend}`).then(res => {
     if (callback) callback(res.data);
   });
@@ -145,11 +192,14 @@ export const deleteUserFriend = (uid,friend, callback) => {
 //---------Story----------
 
 export const postWriting = (data, callback) => {
+
   const formData = new FormData();
   Object.keys(data).forEach(key => formData.append(key, data[key]));
   waitDialog.show();
   axios.post(`/php/postWriting.php`, formData).then(res => {
-    // console.log('postWriting:', res.data);
+    console.log('postWriting:', res.data);
+// data.contents,res.data.postid
+    addHashtag(data.contents, res.data.postid);
     if (callback) callback(res.data);
     waitDialog.hide();
   });
@@ -201,6 +251,7 @@ export const updateStoryIsPrivateNum = (data, callback) => {
 };
 
 export const deletePost = (postid, callback) => {
+  addHashtag("", postid);
   waitDialog.show();
   axios.get(`/php/deletePost.php?postid=${postid}`).then(res => {
     console.log('deletePost: ', res.data);
@@ -210,10 +261,12 @@ export const deletePost = (postid, callback) => {
 };
 
 export const updatePost = (data, callback) => {
+  addHashtag(data.contents, data.postid);
   const formData = new FormData();
   Object.keys(data).forEach(key => formData.append(key, data[key]));
   axios.post(`/php/updateWriting.php`, formData).then(res => {
     // console.log('updateWriting:', res.data);
+
     if (callback) callback(res.data);
   });
 };

@@ -63,6 +63,7 @@ class UserStory extends React.Component {
     eventService.listenEvent("updatePostToMainAndUserStory", (postData) => {
       let posts = this.state.postList;
       let idx = posts.findIndex(v => v.id === postData.id);
+      console.log(posts, postData.id);
       console.log(postData, posts[idx]);
       posts[idx] = postData;
       this.setState({postList: posts});
@@ -141,19 +142,17 @@ class UserStory extends React.Component {
         setStoryUserData(data.user.userid, data.user.name, data.user.profileimg);
 
         let posts = this.state.postList;
+        // console.log(posts);
         posts.forEach(v => {
-          getComments(v.id, (cData) => {
-            // console.log("loadComments:", cData);
-            v.comments = cData.data;
-            v.onUpdateComments = (comments) => {
-              let postData = this.state.postList;
-              postData.find(fv => fv.id === v.id).comments = comments;
-              this.setState({postList: postData});
-            };
-            this.setState({postList: posts});
-          });
+          v.onUpdateComments = (comments) => {
+            console.log(v.id, comments);
+            [this.state.postList.find(fv => fv.id === v.id)].forEach(postData => {
+              postData.comments = comments;
+              this.setState({postList: this.state.postList});
+            });
+          };
         });
-
+        this.setState({postList: posts});
       }
     });
   };
@@ -202,9 +201,28 @@ class UserStory extends React.Component {
   changeUserProfileImg = (e) => {
     this.showBgMenu();
     fileToDataURL(e.target.files[0]).then(res => {
-      updateUserProfileImg({userid: JSON.parse(localStorage.getItem("userInfo")).id, img: res}, () => {
-        this.loadUserInfo();
-      });
+      let canvas = document.createElement("canvas");
+      canvas.setAttribute("width", 100);
+      canvas.setAttribute("height", 100);
+      let ctx = canvas.getContext("2d");
+      let img = new Image();
+      img.onload = () => {
+        let rtSrc = {x: 0, y: 0, w: img.width, h: img.height};
+        if( img.width > img.height ) {
+          rtSrc.w = img.height;
+          rtSrc.x = (img.width - rtSrc.w) / 2;
+        }
+        else {
+          rtSrc.h = img.width;
+          rtSrc.y = (img.height - rtSrc.h) / 2;
+        }
+        console.log(rtSrc);
+        ctx.drawImage(img, rtSrc.x,rtSrc.y, rtSrc.w, rtSrc.h, 0, 0, 100, 100);
+        updateUserProfileImg({userid: JSON.parse(localStorage.getItem("userInfo")).id, img: canvas.toDataURL()}, () => {
+          this.loadUserInfo();
+        });
+      };
+      img.src = res;
     });
   };
 

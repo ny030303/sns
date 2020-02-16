@@ -2,20 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fb93a97-cd4a-4ed9-91a0-bc566567a71f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/php/addSnsMessage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/php/getSnsMessage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MyRightHeader/SnsMessage/SnsMessage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MyRightHeader/SnsMessage/SnsMessage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/addHashTag.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/deleteHashTag.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/getPostFromHashTag.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/getUserInfoAll.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/addMessage.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/uploadMovieFile.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/uploadMovieFile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/addPostFeeling.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/addPostFeeling.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/getSearchBoxItemInfos.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getSearchBoxItemInfos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/postWriting.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/postWriting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/CheckTag/CheckTag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/CheckTag/CheckTag.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/MyMenu/MyMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MyMenu/MyMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemBody/StoryItemBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemBody/StoryItemBody.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemHead/StoryItemHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemHead/StoryItemHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/UserStoryImages/UserStoryImages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UserStoryImages/UserStoryImages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/WritingContainer/WritingContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/WritingContainer/WritingContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyHeader/MyHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyHeader/MyHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyRightHeader/NoteItem/MessageItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/NoteItem/MessageItem.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyRightHeader/NoteItem/MessageItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/NoteItem/MessageItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyRightHeader/SnsMessage/SnsMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/SnsMessage/SnsMessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/HashtagStory/ModalStoryItem/ModalStoryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/ModalStoryItem/ModalStoryItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/SignUpForm/AgreeForm/AgreeForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/SignUpForm/AgreeForm/AgreeForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/UserStory/UserStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/UserStory/UserStory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/DataService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DataService.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,19 +85,19 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\sns\php" />
+      <recent name="D:\Study\sns\php" />
+      <recent name="C:\xampp\htdocs\sns2\php" />
+      <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem\StoryItemTail" />
+      <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem\CommentList" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\sns\src\MyRightHeader" />
       <recent name="C:\xampp\htdocs\sns\src\services\WaitDialog" />
       <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem" />
       <recent name="C:\xampp\htdocs\sns\src\Component" />
       <recent name="C:\xampp\htdocs\sns\src\Component\StoryItem\CommentList" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Study\sns\php" />
-      <recent name="C:\xampp\htdocs\sns\php" />
-      <recent name="C:\xampp\htdocs\sns2\php" />
-      <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem\StoryItemTail" />
-      <recent name="C:\xampp\htdocs\sns2\src\Component\StoryItem\CommentList" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -188,6 +199,7 @@
       <workItem from="1581554847689" duration="30635000" />
       <workItem from="1581659205810" duration="10246000" />
       <workItem from="1581721636832" duration="15831000" />
+      <workItem from="1581819942740" duration="26735000" />
     </task>
     <task id="LOCAL-00001" summary="평가전 연습 26번 백업">
       <created>1581258569368</created>

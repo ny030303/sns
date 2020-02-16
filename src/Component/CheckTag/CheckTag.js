@@ -5,29 +5,18 @@ export class CheckTag extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isCheckOn: false
-    };
+
   }
 
-  checkEvent = (e) => {
-    let check = (this.state.isCheckOn) ? false : true;
-    this.setState({isCheckOn: check});
-    console.log(check)
-    // if (check) eventService.emitEvent("signupCheckOn", (this.props.type === "checkAll") ? 7 : 1);
-    // else eventService.emitEvent("signupCheckOff", (this.props.type === "checkAll") ? 0 : 1);
-  };
-
-
   render() {
-    const {type} = this.props;
-    const {text} = this.props;
-    const {isCheckOn} = this.state;
+    const {type, onCheckChange, text, agree, agreeNum} = this.props;
+    console.log(type, onCheckChange, text, agree, agreeNum);
     return (
       <div style={{margin:"10px 0"}}>
-        <label htmlFor={(type === "checkAll") ? "checkAll" : null} className={`lab_g ${(isCheckOn) ? "item_on" : null}`} onClick={this.checkEvent}>
-          <span className="ico_account ico_signup_check"/>
-          <span className={`txt_check ${(type === "checkAll") ? "txt_checkall" : null}`}
+        <label htmlFor={(type === "checkAll") ? "checkAll" : null} className={`lab_g ${(agree) ? "item_on" : null}`}
+               data-num={agreeNum} onClick={onCheckChange}>
+          <span data-num={agreeNum} className="ico_account ico_signup_check"/>
+          <span data-num={agreeNum} className={`txt_check ${(type === "checkAll") ? "txt_checkall" : null}`}
                 style={ (type === "login") ? {color: "#fff"}: null}>{text}</span>
         </label>
       </div>

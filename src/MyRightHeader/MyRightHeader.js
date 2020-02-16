@@ -117,6 +117,7 @@ class MyRightHeader extends React.Component {
   };
 
 
+
   render() {
     const {userInfo} = this.state;
     // console.log(userInfo);
@@ -124,7 +125,7 @@ class MyRightHeader extends React.Component {
     return (
       <>
         {(this.state.isMessageWritingFade) ?
-          <MessageWriting data={this.msgData} closeMessageWriting={this.showMessageWriting}/> : null}
+          <MessageWriting data={this.msgData} updateMessage={this.updateMessage} closeMessageWriting={this.showMessageWriting}/> : null}
 
         <div className="snb_story">
           <div className="inner_snb">
