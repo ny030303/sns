@@ -12,6 +12,7 @@ import {getUser, getUserInfoAll, logout} from "./services/DataService";
 import {NormalSettingPage} from "./Routes/NormalSettingPage/NormalSettingPage";
 import {HashtagStory} from "./Routes/HashtagStory/HashtagStory";
 import waitDialog from "./services/WaitDialog/WaitDialog";
+import {AdminPage} from "./Routes/AdminPage/AdminPage";
 
 
 const PrivateRoute = ({component: Component, authed, ...rest}) => (
@@ -49,6 +50,7 @@ class App extends React.Component {
       localStorage.removeItem("isSaveUserInfo");
     } else {
       this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
     }
 
     this.state.authed = this.userInfo ? true : false;
@@ -91,6 +93,7 @@ class App extends React.Component {
               <PrivateRoute exact authed={this.state.authed} path="/story/:userId/:type" component={UserStory}/>
               <PrivateRoute exact authed={this.state.authed} path="/hashtag/:tag" component={HashtagStory}/>
               <PrivateRoute exact authed={this.state.authed} path="/setting" component={NormalSettingPage}/>
+              <PrivateRoute exact authed={this.state.authed} path="/adminpage" component={AdminPage}/>
               <LoginRoute exact authed={this.state.authed} path="/login" component={LoginForm}/>
               <Route exact path="/signup" component={SignUpForm}/>
             </Switch>

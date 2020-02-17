@@ -4,8 +4,8 @@ import './UserStory.css';
 import "../../services/WaitDialog/WaitDialog.css";
 
 import {
-  getUserInfo,  updateUserProfileImg,  updateUserBgImg,  getUserPosts,
-  getUserFriends, setStoryUserData, getComments, deletePost, deleteUserFriend
+  getUserInfo, updateUserProfileImg, updateUserBgImg, getUserPosts,
+  getUserFriends, setStoryUserData, getComments, deletePost, deleteUserFriend, addApplyFriend, addFriend
 } from "../../services/DataService";
 import eventService from "../../services/EventService";
 import alertDialog from "../../services/AlertDialog";
@@ -33,6 +33,8 @@ class UserStory extends React.Component {
       loading: false,
       loginUserFriendsList: [],
       isFriend: false,
+      isSendFriend: false,
+      isAcceptFriend: false,
 
       infoType: this.props.match.params.type
     };
@@ -116,6 +118,20 @@ class UserStory extends React.Component {
       data.friends.forEach((v, i) => {
         if (this.props.match.params.userId === v.friend) {
           this.setState({isFriend: true});
+        }
+      });
+      // 내친구, 내가 친구신청 보낸 사람, 내게 친구신청 보낸 사람
+      // "friends" => $data1, "sendFriends"=>$data2,  "acceptFriends"=>$data3))
+      data.sendFriends.forEach((v,i) => {
+        if (this.props.match.params.userId === v.friend && v.request == 1) { // 내가 친구신청한 사람인가?
+          this.setState({isSendFriend: true});
+          // isSendFriend: false,
+          //     isAcceptFriend: false,
+        }
+      });
+      data.acceptFriends.forEach((v,i) => {
+        if(this.props.match.params.userId === v.userid && v.request == 1) {
+          this.setState({isAcceptFriend: true});
         }
       });
     });
@@ -269,13 +285,42 @@ class UserStory extends React.Component {
     });
   };
 
+  sendApplyFriend = () => {
+    waitDialog.show();
+    console.log(this.nowUserInfo);
+    addApplyFriend(this.nowUserInfo.id, this.props.match.params.userId, (res) => {
+      eventService.emitEvent("reloadFriends", {
+        id:  this.props.match.params.userId,
+        type: "recommend",
+      });
+      this.reloadLoginUserFriends();
+      waitDialog.hide();
+    });
+  };
+
+  addFriendEvent = () => {
+    waitDialog.show();
+    addFriend({
+      userid: this.nowUserInfo.id,
+      friend: this.props.match.params.userId
+    }, (res) => {
+      eventService.emitEvent("reloadFriends", {
+        id: this.props.match.params.userId,
+        type: "accept",
+      });
+      this.reloadLoginUserFriends();
+      waitDialog.hide();
+    });
+  };
+
+
 
   render() {
     if (this.state.posterInfo == null) return (<div/>);
     // console.log(this.state.posterInfo);
     const menus = ["전체", "캘린더", "사진", "동영상", "장소", "뮤직", "더보기+6"];
     const menuClass = (i) => `story_link ${i === this.state.selectedMenuIdx ? "story_link_on" : ""}`;
-    const {posterInfo, sideMemoFixed, infoType, isFriend} = this.state;
+    const {posterInfo, sideMemoFixed, infoType, isFriend, isSendFriend, isAcceptFriend} = this.state;
     // console.log(postList);
     const userData = [{userid: posterInfo.id, name: posterInfo.name, profileimg: posterInfo.profileimg}];
     let postList = this.state.postList;
@@ -326,13 +371,18 @@ class UserStory extends React.Component {
                         (this.nowUserInfo.id === this.props.match.params.userId) ?
                             (<div className="btn_cover" onClick={this.showBgMenu}>배경 사진 편집</div>) :
                             (isFriend) ?
-                                (<>
+                                (<div style={{display:"flex"}}>
                                   <div className="btn_friend_cover" onClick={this.showBgMenu}>친구</div>
                                   <div className="area_ico">
                                     <span className="ico_ks ico_open"/>
                                   </div>
-                                </>) :
-                                (<div className="btn_cover">친구신청</div>)
+                                </div>) :
+                                // isSendFriend, isAcceptFriend}
+                                (isSendFriend) ?
+                                    (<div className="btn_cover">친구 승인 대기중</div>) :
+                                    (isAcceptFriend) ?
+                                        (<div className="btn_cover" onClick={this.addFriendEvent}>친구신청 승인</div>) :
+                                        (<div className="btn_cover" onClick={this.sendApplyFriend}>친구신청</div>)
                       }
                       {
                         (this.nowUserInfo.id === this.props.match.params.userId) ?

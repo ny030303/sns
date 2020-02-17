@@ -56,7 +56,10 @@ class WritingContainer extends React.Component {
       console.log(this.props.postData);
       this.divContents.current.innerHTML = unescape(this.props.postData.contents);
       let files = [];
-      (this.props.postData.urls || '').split('|').forEach(v => files.push(v));
+      if(this.props.postData.urls) {
+        (this.props.postData.urls).split('|').forEach(v => files.push(v));
+      }
+      console.log(files);
       if(this.props.postData.file) {
         getSnsFileData(this.props.postData.file, res => {
           if(res.files && res.files.length > 0) {
@@ -118,7 +121,7 @@ class WritingContainer extends React.Component {
         contents: escape(htmlchar_run(this.state.postContents)),
         fileData: (fArr.length <= 0) ? null : fArr.join("|"),
         isprivatenum: this.state.isPrivateNum,
-        link: this.linkInput.current.value
+        link: (this.linkInput.current) ? this.linkInput.current.value : "",
       };
       console.log(data);
       updatePost(data, (res) => {

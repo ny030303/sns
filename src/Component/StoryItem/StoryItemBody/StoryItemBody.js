@@ -90,7 +90,8 @@ export default class StoryItemBody extends React.Component {
                                  "storyImgSide absolute" :
                                  "storyImgSide"
                                  :
-                             (fileArr.length === 1 ? "storyImgBiger" : (fileArr.length === 5 ? (i === 0) ? "storyImgBigFor5" : "storyImgSideFor5" : "")))}/>
+                             (fileArr.length === 1 ? "storyImgBiger" :
+                                 (fileArr.length === 5 ? (i === 0) ? "storyImgBigFor5" : "storyImgSideFor5" : "")))}/>
                     )) : null
               }
             </div>) : null

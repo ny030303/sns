@@ -42,9 +42,9 @@ class LoginForm extends React.Component {
     }
 
     componentDidMount() {
-        if(window.userInfo !== undefined) this.props.history.push("/");
+        if (window.userInfo !== undefined) this.props.history.push("/");
         eventService.listenEvent("appLogined", logined => {
-            if( logined ) this.props.history.push("/");
+            if (logined) this.props.history.push("/");
         });
 
         eventService.emitEvent("topMenuHide", true);
@@ -52,7 +52,7 @@ class LoginForm extends React.Component {
             //let page = ;
             let nextImage = (this.state.nowBgPage + 1) % 4;
             // console.log(nextImage);
-            createImgDataUrl(`/images/login/image${nextImage+1}.jpg`).then(imgdataurl => {
+            createImgDataUrl(`/images/login/image${nextImage + 1}.jpg`).then(imgdataurl => {
                 // console.log(imgdataurl)
                 this.setState({nowBgPage: nextImage, imgDataUrl: imgdataurl});
             })
@@ -84,17 +84,17 @@ class LoginForm extends React.Component {
 
         getUser(this.state.userId, this.state.userPwd, (data) => {
             console.log("login getuser: ", data);
-            if(data.result) {
+            if (data.result) {
+
                 localStorage.setItem("userInfo", JSON.stringify(data.user));
-                if(!this.state.isAgree) {
+                if (!this.state.isAgree) {
                     // localStorage.setItem("isSaveUserInfo", true);
                     localStorage.setItem("isSaveUserInfo", false);
-                } else {
-
                 }
                 eventService.emitEvent("loginStatus", true);
                 alertDialog.show("로그인", `반갑습니다 ${data.user.name}님`);
                 this.props.history.push("/");
+
             } else {
                 alertDialog.show("로그인 오류!", "로그인에 실패했습니다.");
             }
@@ -129,7 +129,8 @@ class LoginForm extends React.Component {
                         <input type="password" className="tf_g" placeholder="비밀번호" onChange={this.changePwd}/>
                     </div>
                     <div className="set_login">
-                        <CheckTag type="login" text="로그인 상태 유지" agree={this.state.isAgree} agreeNum={0} onCheckChange={this.onCheckChange}/>
+                        <CheckTag type="login" text="로그인 상태 유지" agree={this.state.isAgree} agreeNum={0}
+                                  onCheckChange={this.onCheckChange}/>
                     </div>
 
                     <div className="wrap_btn">
