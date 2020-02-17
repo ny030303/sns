@@ -101,19 +101,19 @@ $userid = $_GET["userid"];
 //a.feeling,
 // 글 데이터
 $query = "
-SELECT a.id, a.userid, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, a.link, b.id as file , b.postid, b.urls, b.filecnt
+SELECT a.id, a.userid, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, a.comment_private_num, a.link, b.id as file , b.postid, b.urls, b.filecnt
     FROM `sns_post` as a
     left outer JOIN `sns_file` as b
     on a.userid=b.userid and a.id=b.postid
     where a.userid='". $userid ."' and (a.isprivate_num=2)
 UNION
-SELECT a.id, a.userid, a.sharing, a.up, a.feeling,  a.created, a.contents, a.isprivate_num, a.link, b.id as file, b.postid, b.urls, b.filecnt
+SELECT a.id, a.userid, a.sharing, a.up, a.feeling,  a.created, a.contents, a.isprivate_num, a.comment_private_num, a.link, b.id as file, b.postid, b.urls, b.filecnt
     FROM `sns_post` as a
     left outer join `sns_file` as b
     on a.userid=b.userid and a.id=b.postid
     where a.userid in (SELECT friend FROM `sns_friend` WHERE userid='". $userid ."' and request=100)  and (a.isprivate_num=2)
 UNION
-SELECT a.id, a.userid, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, a.link, b.id as file, b.postid, b.urls, b.filecnt
+SELECT a.id, a.userid, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, a.comment_private_num, a.link, b.id as file, b.postid, b.urls, b.filecnt
     FROM `sns_post` as a
     left outer JOIN `sns_file` as b
     on a.userid=b.userid and a.id=b.postid
@@ -143,7 +143,7 @@ $user_data= fetchAll($con, $query2, []);
 
 // up 데이터
 $query3 = "
-SELECT a.userid as upid, a.created as upcreated, b.userid, b.id, b.sharing, b.up, b.feeling, b.created, b.contents, b.isprivate_num, b.link,
+SELECT a.userid as upid, a.created as upcreated, b.userid, b.id, b.sharing, b.up, b.feeling, b.created, b.contents, b.isprivate_num, b.link, b.comment_private_num,
 c.id as file , c.postid, c.filecnt
 
     FROM `sns_up` as a
@@ -151,7 +151,7 @@ c.id as file , c.postid, c.filecnt
     left outer JOIN `sns_file` as c on b.userid=c.userid and b.id=c.postid
     where a.userid='". $userid ."'
 UNION 
-SELECT a.userid as upid, a.created as upcreated, b.userid, b.id, b.sharing, b.up, b.feeling, b.created, b.contents, b.isprivate_num, b.link,
+SELECT a.userid as upid, a.created as upcreated, b.userid, b.id, b.sharing, b.up, b.feeling, b.created, b.contents, b.isprivate_num, b.link, b.comment_private_num,
 c.id as file , c.postid, c.filecnt
 
     FROM `sns_up` as a

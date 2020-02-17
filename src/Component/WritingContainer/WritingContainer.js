@@ -37,6 +37,7 @@ class WritingContainer extends React.Component {
       files: [],
       fileUploadPopup: false,
       isPrivateNum: 2,
+      commentPrivateNum: 3,
 
       isLinkFormOn: false
     };
@@ -47,6 +48,11 @@ class WritingContainer extends React.Component {
       {text: "나만 공개", class: "ico_ks ic_lock"},
       {text: "친구 공개", class: "ico_ks ic_friend"},
       {text: "전체 공개", class: "ico_ks global"}];
+    this.commentPrivateBoxArr = [
+      {text: "불가능", class: "ico_ks ic_lock"},
+      {text: "댓글 친구", class: "ico_ks ic_friend"},
+      {text: "댓글 전체", class: "ico_ks global"},
+    ];
     this.divContents = React.createRef();
     this.linkInput = React.createRef();
   }
@@ -122,6 +128,7 @@ class WritingContainer extends React.Component {
         fileData: (fArr.length <= 0) ? null : fArr.join("|"),
         isprivatenum: this.state.isPrivateNum,
         link: (this.linkInput.current) ? this.linkInput.current.value : "",
+        comment_private_num: this.state.commentPrivateNum
       };
       console.log(data);
       updatePost(data, (res) => {
@@ -138,6 +145,7 @@ class WritingContainer extends React.Component {
         fileData: (fArr.length <= 0) ? null : fArr.join("|"),
         isprivatenum: this.state.isPrivateNum,
         link: (this.linkInput.current) ? this.linkInput.current.value : "",
+        comment_private_num: this.state.commentPrivateNum
       };
       // console.log(data.fileData.length);
       postWriting(data, (res) => {
@@ -160,7 +168,7 @@ class WritingContainer extends React.Component {
   };
 
   addFilesToState = (addList) => {
-    if(addList.length + this.state.files.length > 10) {
+    if(addList.length + this.state.files.length > 5) {
       let sliceNum = addList.length + this.state.files.length - 10;
       addList.splice(0, sliceNum);
       console.log(addList);
@@ -233,7 +241,7 @@ class WritingContainer extends React.Component {
   showIsPrivateListOn = () => this.setState({isPrivateListOn: !this.state.isPrivateListOn});
 
   changeIsPrivateNum = (e) => this.setState({isPrivateNum: e.target.dataset.num, isPrivateListOn: false});
-
+  changeCommentPrivateNum = (e) => this.setState({commentPrivateNum: e.target.dataset.num});
   showLinkForm = () => {
     this.setState({isLinkFormOn: !this.state.isLinkFormOn});
   };
@@ -317,6 +325,20 @@ class WritingContainer extends React.Component {
                     {text: "전체공개", icon: "ico_ks global", type: "checkBox", data_set: 3, eventCallback: this.changeIsPrivateNum},
                     {text: "친구공개", icon: "ico_ks ic_friend", type: "checkBox", data_set: 2, eventCallback: this.changeIsPrivateNum},
                     {text: "나만보기", icon: "ico_ks ic_lock", type: "checkBox", data_set: 1, eventCallback: this.changeIsPrivateNum},
+                  ]} menuPos={"bottom-left"}/>
+                </div>
+
+                <div className="uk-inline">
+                  <div className="inner_open" type="button" onClick={this.showIsPrivateListOn}>
+                    <div className="flexClass">
+                      <span className={this.commentPrivateBoxArr[this.state.commentPrivateNum-1].class}/><span>{this.commentPrivateBoxArr[this.state.commentPrivateNum-1].text}</span>
+                      <span className="ico_ks arr"/>
+                    </div>
+                  </div>
+                  <MyMenu menuInfo={[
+                    {text: "댓글 전체", icon: "ico_ks global", type: "checkBox", data_set: 3, eventCallback: this.changeCommentPrivateNum},
+                    {text: "댓글 친구", icon: "ico_ks ic_friend", type: "checkBox", data_set: 2, eventCallback: this.changeCommentPrivateNum},
+                    {text: "불가능", icon: "ico_ks ic_lock", type: "checkBox", data_set: 1, eventCallback: this.changeCommentPrivateNum},
                   ]} menuPos={"bottom-left"}/>
                 </div>
 

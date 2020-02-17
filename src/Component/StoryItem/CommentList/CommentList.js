@@ -2,7 +2,7 @@ import * as React from 'react';
 import "./CommentList.css";
 import CommentItem from "./CommentItem/CommentItem";
 import {CommentWriting} from "../../CommentWriting/CommentWriting";
-import {getComments} from "../../../services/DataService";
+import {getComments, getUserFriends} from "../../../services/DataService";
 
 
 export class CommentList extends React.Component {
@@ -12,6 +12,7 @@ export class CommentList extends React.Component {
     this.state = {
 
     };
+    this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
     this.input = React.createRef();
     // this.loadComments();
   }
@@ -21,6 +22,8 @@ export class CommentList extends React.Component {
     comments.push(comment);
     this.props.onUpdateComments(comments);
   };
+
+
 
   onUpdateComment = (dataid, comment) => {
     let comments = this.props.comments || [];
@@ -36,12 +39,24 @@ export class CommentList extends React.Component {
     }
   };
 
+
+
   render() {
     // console.log(this.props.comments);
     let comments = this.props.comments || [];
     return (
       <div className="commentList">
-      <CommentWriting postid={this.props.postid} type={"normal"} onAddComment={this.onAddComment}/>
+        {
+
+          (this.props.postData_userid === this.userInfo.id || this.props.comment_private_num == 3 ||
+              (this.props.comment_private_num == 2 && this.props.isFriend)) ?
+              (
+                  <CommentWriting postid={this.props.postid} type={"normal"} onAddComment={this.onAddComment}/>
+              )
+
+              : null
+        }
+
 
         <ul className="commentItemsWrap">
           {

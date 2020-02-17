@@ -2,7 +2,7 @@
 import './StoryItem.css';
 import 'react-image-lightbox/style.css';
 import {CommentList} from "./CommentList/CommentList";
-import {getComments} from "../../services/DataService";
+import {getComments, getUserFriends} from "../../services/DataService";
 import StoryItemBody from "./StoryItemBody/StoryItemBody";
 import StoryItemTail from "./StoryItemTail/StoryItemTail";
 import StoryItemHead from "./StoryItemHead/StoryItemHead";
@@ -17,7 +17,10 @@ class StoryItem extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userInfo: JSON.parse(localStorage.getItem("userInfo")),
+      isFriend: false
+    };
   }
 
   componentDidMount() {
@@ -27,6 +30,7 @@ class StoryItem extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.postData !== this.props.postData) {
       this.updateComments(this.props.postData);
+      this.reloadLoginUserFriends();
     }
   }
 
@@ -36,6 +40,16 @@ class StoryItem extends React.Component {
     });
   };
 
+  reloadLoginUserFriends = () => {
+    getUserFriends(this.state.userInfo.id, (data) => {
+      this.setState({isFriend: false});
+      data.friends.forEach((v, i) => {
+        if (this.props.postData.userid === v.friend) {
+          this.setState({isFriend: true});
+        }
+      });
+    });
+  };
 
 
   render() {
@@ -61,7 +75,11 @@ class StoryItem extends React.Component {
               <p>공유 <span>{Number(postData.sharing)}</span></p>
               <p>UP <span>{isNaN(postData.up) ? 0 : Number(postData.up)}</span></p>
             </div>
-            <CommentList comments={comments} postid={postData.id} onUpdateComments={postData.onUpdateComments}/>
+
+            <CommentList
+                comment_private_num={postData.comment_private_num} isFriend={this.state.isFriend}
+                postData_userid={postData.userid}
+                comments={comments} postid={postData.id} onUpdateComments={postData.onUpdateComments}/>
           </div>
         </div>
       </div>

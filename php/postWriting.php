@@ -10,13 +10,14 @@ $contents = $_POST["contents"];
 $fileData = $_POST["fileData"];
 $isprivate_num = $_POST["isprivatenum"];
 $link = $_POST["link"];
+$comment_private_num = $_POST["comment_private_num"];
 
 //var_dump($fileData);
 
 
 $postid = -1;
-$query = "INSERT INTO `sns_post`(`userid`, `created`,`contents`, `isprivate_num`, `link`) VALUES (?, now(),?,?, ?)";
-$bRes = execsql($con, $query, [$userid, $contents, $isprivate_num, $link]);
+$query = "INSERT INTO `sns_post`(`userid`, `created`,`contents`, `isprivate_num`, `link`, `comment_private_num`) VALUES (?, now(),?,?, ?,?)";
+$bRes = execsql($con, $query, [$userid, $contents, $isprivate_num, $link, $comment_private_num]);
 if ($bRes) {
     $result = fetch($con, "SELECT LAST_INSERT_ID() as postid", []);
     // var_dump($result->postid);

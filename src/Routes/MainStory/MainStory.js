@@ -2,7 +2,7 @@
 import LazyLoad from 'react-lazyload';
 import './MainStory.css';
 import WritingContainer from "../../Component/WritingContainer/WritingContainer";
-import {deletePost, getPost, setStoryUserData} from "../../services/DataService";
+import {deletePost, getPost, getUserFriends, setStoryUserData} from "../../services/DataService";
 import eventService from "../../services/EventService";
 import StoryItem, {StoryItemLoading} from "../../Component/StoryItem/StoryItem";
 
@@ -25,7 +25,6 @@ class MainStory extends React.Component {
     });
 
     if (this.state.userInfo !== undefined) this.getPostEvent();
-
   }
 
 
@@ -63,6 +62,8 @@ class MainStory extends React.Component {
       this.getPostEvent();
     }
   }
+
+
 
   getPostEvent = () => {
     getPost(this.state.userInfo.id, (data) => {

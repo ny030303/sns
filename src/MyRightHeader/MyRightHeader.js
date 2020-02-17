@@ -104,6 +104,7 @@ class MyRightHeader extends React.Component {
 
   logoutEvent = () => {
     localStorage.removeItem("userInfo");
+    localStorage.removeItem("isSaveUserInfo");
     eventService.emitEvent("loginStatus", false);
     logout((data) => {
       console.log(data)
