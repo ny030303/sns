@@ -7,6 +7,7 @@ import alertDialog from "../../services/AlertDialog";
 import eventService from "../../services/EventService";
 import {MyMenu} from "../MyMenu/MyMenu";
 import {fileToDataURL, fileToServerURL} from "../../services/CommonUtils";
+import {LinkForm} from "../HashtagForm/LinkForm";
 
 const replaceAll = (str, target, replacement) => {
   return str.split(target).join(replacement);
@@ -35,7 +36,9 @@ class WritingContainer extends React.Component {
       ],
       files: [],
       fileUploadPopup: false,
-      isPrivateNum: 2
+      isPrivateNum: 2,
+
+      isLinkFormOn: false
     };
 
     this.myPostFile = React.createRef();
@@ -45,6 +48,7 @@ class WritingContainer extends React.Component {
       {text: "친구 공개", class: "ico_ks ic_friend"},
       {text: "전체 공개", class: "ico_ks global"}];
     this.divContents = React.createRef();
+    this.linkInput = React.createRef();
   }
 
   componentDidMount() {
@@ -99,6 +103,9 @@ class WritingContainer extends React.Component {
       this.setState({isPostOn: false, files: []});
       let contents = document.querySelector("#contents_write");
       contents.innerText = "";
+      if(this.linkInput.current) {
+        this.linkInput.current.value = "";
+      }
     }
   };
 
@@ -111,6 +118,7 @@ class WritingContainer extends React.Component {
         contents: escape(htmlchar_run(this.state.postContents)),
         fileData: (fArr.length <= 0) ? null : fArr.join("|"),
         isprivatenum: this.state.isPrivateNum,
+        link: this.linkInput.current.value
       };
       console.log(data);
       updatePost(data, (res) => {
@@ -126,6 +134,7 @@ class WritingContainer extends React.Component {
         contents: escape(htmlchar_run(this.state.postContents)),
         fileData: (fArr.length <= 0) ? null : fArr.join("|"),
         isprivatenum: this.state.isPrivateNum,
+        link: (this.linkInput.current) ? this.linkInput.current.value : "",
       };
       // console.log(data.fileData.length);
       postWriting(data, (res) => {
@@ -147,30 +156,57 @@ class WritingContainer extends React.Component {
     e.preventDefault();
   };
 
-  dropEvent = (e) => {
-    e.preventDefault();
-    let list = Array.from(e.dataTransfer.files);
-    list.forEach(v => {
-      fileToDataURL(v).then(res => {
-        this.setState({files: [...this.state.files, ...[res]]});
-      });
+  addFilesToState = (addList) => {
+    if(addList.length + this.state.files.length > 10) {
+      let sliceNum = addList.length + this.state.files.length - 10;
+      addList.splice(0, sliceNum);
+      console.log(addList);
+    }
+    addList.forEach(v => {
+      if(v.type !== "image/png" && v.type !== "image/jpg" && v.type !== "image/jpeg" && !v.type.startsWith('video')) {
+        alertDialog.show("안내", "이미지나 동영상이 아닌 것은 제외합니다.");
+      } else {
+        if( v.type.startsWith('video') ) {
+          fileToServerURL(v).then(res => {
+            this.setState({files: [...this.state.files, ...[res]]});
+            // console.log('fileToServerURL:', res);
+          })
+        } else {
+          fileToDataURL(v).then(res => {
+            this.setState({files: [...this.state.files, ...[res]]});
+          });
+        }
+      }
     });
   };
 
+  dropEvent = (e) => {
+    e.preventDefault();
+    let list = Array.from(e.dataTransfer.files);
+    // console.log(Array.from(e.dataTransfer.files));
+    this.addFilesToState(list);
+  };
+
   selectFile = (e) => {
-    console.log(e.target.files[0]);
-    if( e.target.files[0].type.startsWith('video') ) {
-      fileToServerURL(e.target.files[0]).then(res => {
-        this.setState({files: [...this.state.files, ...[res]]});
-        console.log('fileToServerURL:', res);
-      })
-    }
-    else {
-      fileToDataURL(e.target.files[0]).then(res => {
-        this.setState({files: [...this.state.files, ...[res]]});
-        console.log(this.state.files);
-      });
-    }
+    console.log(Array.from(e.target.files));
+    this.addFilesToState(Array.from(e.target.files));
+    // if(e.target.files.length + this.state.files.length > 10) {
+    //   let sliceNum = e.target.files.length + this.state.files.length - 10;
+    //   e.target.files.splice(0, sliceNum);
+    //   console.log(e.target.files);
+    // }
+    // if(e.target.files && e.target.files[0].type.startsWith('video')) {
+    //   fileToServerURL(e.target.files[0]).then(res => {
+    //     this.setState({files: [...this.state.files, ...[res]]});
+    //     console.log('fileToServerURL:', res);
+    //   })
+    // }
+    // else {
+    //   fileToDataURL(e.target.files[0]).then(res => {
+    //     this.setState({files: [...this.state.files, ...[res]]});
+    //     console.log(this.state.files);
+    //   });
+    // }
   };
 
   showFileUploadPopup = (popupShow) => {
@@ -195,12 +231,12 @@ class WritingContainer extends React.Component {
 
   changeIsPrivateNum = (e) => this.setState({isPrivateNum: e.target.dataset.num, isPrivateListOn: false});
 
-  // showHashtagForm = () => {
-  //   this.setState({isHashtagFormOn: !this.state.isHashtagFormOn});
-  // };
+  showLinkForm = () => {
+    this.setState({isLinkFormOn: !this.state.isLinkFormOn});
+  };
   render() {
     // <input type="email|file" multiple>
-    console.log(this.state.files);
+    // console.log(this.state.files);
     return (
         <div className="writingContainer">
           {/*{this.state.fileUploadPopup ?*/}
@@ -243,7 +279,7 @@ class WritingContainer extends React.Component {
                       <span className="ico_ks ico_camera"/><span>사진/동영상</span>
                   </span>
                   </label>
-                  <input type="file" id="ex_file" accept="image/*,video/*" ref={this.myPostFile} onChange={this.selectFile}/>
+                  <input type="file" id="ex_file" accept="image/*,video/*" ref={this.myPostFile} onChange={this.selectFile} multiple/>
                 </li>
                 <li className="link_menu">
                   <div className="txt_menu">
@@ -261,12 +297,10 @@ class WritingContainer extends React.Component {
                 </li>
               </ul>
 
-              {/*{*/}
-              {/*  (this.state.isHashtagFormOn) ?*/}
-              {/*    (*/}
-              {/*     <HashtagForm/>*/}
-              {/*    ) : null*/}
-              {/*}*/}
+              {
+                (this.state.isLinkFormOn) ? (<LinkForm refName={this.linkInput}/>) : null
+              }
+
 
               <div className="bottomWriteContents" style={(this.state.isPostOn) ? {display: "block"} : {display: "none"}}>
                 <div className="uk-inline">
@@ -283,9 +317,8 @@ class WritingContainer extends React.Component {
                   ]} menuPos={"bottom-left"}/>
                 </div>
 
-
                 <div className="postIconWrap">
-                  <span uk-tooltip="해시태그 추가" className="hashtag_icon" onClick={this.showHashtagForm}>#</span>
+                  <span uk-tooltip="링크 추가" className="hashtag_icon" onClick={this.showLinkForm}>a</span>
                 </div>
                 <div className="writePostBtns">
                   <button className="btn blackLineBtn" onClick={this.postOff}>취소</button>

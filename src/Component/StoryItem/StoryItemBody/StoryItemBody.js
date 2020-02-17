@@ -41,6 +41,14 @@ export default class StoryItemBody extends React.Component {
       <div>
         <div className="storyContentsWrap">
           <div style={{fontSize: "14px", wordBreak: "break-all"}} ref={this.contents}/>
+
+          {
+            (this.props.postData.link.length > 0) ?
+                (
+                    <><br/><a  className="aTagStyle" href={this.props.postData.link}>{this.props.postData.link}</a></>
+                )
+                : null
+          }
           {/*<div className="storyitem_font_style" style={{cursor:"pointer"}}>...더보기</div>*/}
           {
             videoUrls.map((v,i) => (
@@ -53,7 +61,7 @@ export default class StoryItemBody extends React.Component {
             (fileArr !== null) ? (<div className="storyImgList">
               {
                 (fileArr !== null) ?
-                  (fileArr.length > 4) ?
+                  (fileArr.length > 5) ?
                     fileArr.slice(0, 4).map((v,i) =>
                       (
                         <div style={{backgroundImage: `url(${v})`}} key={i}
@@ -74,13 +82,15 @@ export default class StoryItemBody extends React.Component {
                     fileArr.map((v, i) => (
                       <div style={{backgroundImage: `url(${v})`}} key={i}
                            onClick={() => this.setState({isOpen: true, photoIndex: i})}
-                           className={(fileArr.length === 3 ?
-                             (i === 0) ?
-                               "storyImgBig" :
+                           className={
+                             (fileArr.length === 3 ?
+                                (i === 0) ?
+                                  "storyImgBig" :
                                (i === 1) ?
                                  "storyImgSide absolute" :
-                                 "storyImgSide" :
-                             (fileArr.length === 1 ? "storyImgBiger" : ""))}/>
+                                 "storyImgSide"
+                                 :
+                             (fileArr.length === 1 ? "storyImgBiger" : (fileArr.length === 5 ? (i === 0) ? "storyImgBigFor5" : "storyImgSideFor5" : "")))}/>
                     )) : null
               }
             </div>) : null

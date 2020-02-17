@@ -82,7 +82,7 @@ class UserStory extends React.Component {
       console.log(data);
       let posts = this.state.postList;
       [posts.find(v => v.id === data.postid)].forEach(v => {
-        if(v.feeling) {
+        if(v) {
           v.feeling = data.feeling;
           this.setState({postList: posts});
         }
@@ -212,11 +212,11 @@ class UserStory extends React.Component {
         let rtSrc = {x: 0, y: 0, w: img.width, h: img.height};
         if( img.width > img.height ) {
           rtSrc.w = img.height;
-          rtSrc.x = (img.width - rtSrc.w) / 2;
+          rtSrc.x = 0;
         }
         else {
           rtSrc.h = img.width;
-          rtSrc.y = (img.height - rtSrc.h) / 2;
+          rtSrc.y = 0;
         }
         console.log(rtSrc);
         ctx.drawImage(img, rtSrc.x,rtSrc.y, rtSrc.w, rtSrc.h, 0, 0, 128, 128);
@@ -321,30 +321,32 @@ class UserStory extends React.Component {
                     }
                   </ul>
                   <div className="info_btn">
-                    {
-                      (this.nowUserInfo.id === this.props.match.params.userId) ?
-                          (<div className="btn_cover" onClick={this.showBgMenu}>배경 사진 편집</div>) :
-                          (isFriend) ? (<>
-                                <div className="btn_friend_cover" onClick={this.showBgMenu}>친구</div>
-                                <div className="area_ico">
-                                  <span className="ico_ks ico_open"/>
-                                </div>
-                              </>) :
-                              (<div className="btn_cover">친구신청</div>)
-                    }
+                    <div className="uk-inline">
+                      {
+                        (this.nowUserInfo.id === this.props.match.params.userId) ?
+                            (<div className="btn_cover" onClick={this.showBgMenu}>배경 사진 편집</div>) :
+                            (isFriend) ?
+                                (<>
+                                  <div className="btn_friend_cover" onClick={this.showBgMenu}>친구</div>
+                                  <div className="area_ico">
+                                    <span className="ico_ks ico_open"/>
+                                  </div>
+                                </>) :
+                                (<div className="btn_cover">친구신청</div>)
+                      }
+                      {
+                        (this.nowUserInfo.id === this.props.match.params.userId) ?
+                            (<MyMenu menuInfo={[{text: "사진 업로드", type: "file", eventCallback: this.selectRandomBgImg},
+                              {text: "기본 이미지", type: "normal", eventCallback: (e) => this.changeUserBgImg(e)}]}
+                                     menuStyle={{marginTop: "41px"}} menuPos={"bottom-center"}/>)
+                            : (isFriend) ?
+                            (<MyMenu menuInfo={[{text: "친구 끊기", type: "normal", eventCallback: this.onUnfriendingEvent},
+                              {text: "차단하기", type: "normal"}]}
+                                     menuStyle={{marginTop: "41px"}} menuPos={"bottom-center"}/>) : null
 
-                    {
-                      (this.state.isBgMenuFade) ?
-                          (this.nowUserInfo.id === this.props.match.params.userId) ?
-                              (<MyMenu menuInfo={[{text: "사진 업로드", type: "file", eventCallback: this.selectRandomBgImg},
-                                {text: "기본 이미지", type: "normal", eventCallback: (e) => this.changeUserBgImg(e)}]}
-                                       menuStyle={{marginTop: "35px"}}/>)
-                              : (isFriend) ?
-                              (<MyMenu menuInfo={[{text: "친구 끊기", type: "normal", eventCallback: this.onUnfriendingEvent},
-                                {text: "차단하기", type: "normal"}]}
-                                       menuStyle={{marginTop: "35px"}}/>) : null
-                          : null
-                    }
+                      }
+                    </div>
+
                   </div>
                 </div>
               </div>

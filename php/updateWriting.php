@@ -9,6 +9,7 @@ $userid = $_POST["userid"];
 $contents = $_POST["contents"];
 $fileData = $_POST["fileData"];
 $isprivatenum = $_POST["isprivatenum"];
+$link = $_POST["link"];
 
 function divideFileData($fileData) {
     $files = explode("|", $fileData);
@@ -25,8 +26,8 @@ function divideFileData($fileData) {
     return array(implode( '|', $urls), implode( '|', $imgs), count($imgs));
 }
 
-$query = "UPDATE `sns_post` SET `contents`=?, `isprivate_num`=? where `userid`=? and `id`=?";
-$bRes = execsql($con, $query, [$contents, $isprivatenum, $userid, $postid]);
+$query = "UPDATE `sns_post` SET `contents`=?, `isprivate_num`=?, `link`=? where `userid`=? and `id`=?";
+$bRes = execsql($con, $query, [$contents, $isprivatenum, $link, $userid, $postid]);
 
 $is_have_file = fetch($con, "SELECT * FROM `sns_file` WHERE postid='" . $postid . "'", []);
 

@@ -1,3 +1,12 @@
+.aTagStyle {
+    overflow: hidden;
+    vertical-align: top;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3
+}
+
 .frame_type6 {
     width: 56px;
     height: 56px;
@@ -89,6 +98,15 @@
     width: 331px !important;
     height: 331px !important;
 }
+.storyImgBigFor5 {
+    width: 490px !important;
+    height: 300px !important;
+}
+
+.storyImgSideFor5 {
+    width: 122px !important;
+    height: 122px !important;
+}
 
 .storyImgSide {
     width: 165px !important;
@@ -162,6 +180,7 @@
     cursor: pointer;
     margin-left: 10px;
 }
+
 /* -----circle icons-----*/
 
 .bn_feel {
@@ -342,7 +361,6 @@
 }
 
 
-
 .feelingUserIconWrap {
     width: 63px;
     position: absolute;
@@ -401,7 +419,7 @@
 }
 
 .bn_pleasure {
-    background-position: -140px -200px!important;
+    background-position: -140px -200px !important;
 }
 
 .bn_sad {
@@ -409,11 +427,13 @@
 }
 
 .bn_cheerup {
-    background-position: -230px -200px!important;
+    background-position: -230px -200px !important;
 }
+
 .bn_good {
     background-position: -95px -200px !important;
 }
+
 /*--------------count_group----------------*/
 
 

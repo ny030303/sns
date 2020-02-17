@@ -5,7 +5,7 @@ require("db.php");
 
 $userid = $_GET["userid"];
 
-$query = "SELECT a.id, a.userid, a.feeling, a.sharing, a.up, a.feeling, a.created, a.contents, a.isprivate_num, b.urls, b.id as file, b.postid, b.filecnt
+$query = "SELECT a.id, a.userid, a.feeling, a.sharing, a.up, a.feeling, a.created, a.contents, a.link, a.isprivate_num, b.urls, b.id as file, b.postid, b.filecnt
     FROM `sns_post` as a
     left outer JOIN `sns_file` as b
     on a.userid=b.userid and a.id=b.postid
