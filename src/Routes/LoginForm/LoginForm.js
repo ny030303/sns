@@ -36,6 +36,7 @@ class LoginForm extends React.Component {
             imgDataUrl: `/images/login/image1.jpg`,
             userId: "",
             userPwd: "",
+            isAgree: false
         };
         this.count = null;
     }
@@ -85,6 +86,12 @@ class LoginForm extends React.Component {
             console.log("login getuser: ", data);
             if(data.result) {
                 localStorage.setItem("userInfo", JSON.stringify(data.user));
+                if(!this.state.isAgree) {
+                    // localStorage.setItem("isSaveUserInfo", true);
+                    localStorage.setItem("isSaveUserInfo", false);
+                } else {
+
+                }
                 eventService.emitEvent("loginStatus", true);
                 alertDialog.show("로그인", `반갑습니다 ${data.user.name}님`);
                 this.props.history.push("/");
@@ -93,6 +100,10 @@ class LoginForm extends React.Component {
             }
 
         });
+    };
+
+    onCheckChange = () => {
+        this.setState({isAgree: !this.state.isAgree})
     };
 
     render() {
@@ -118,7 +129,7 @@ class LoginForm extends React.Component {
                         <input type="password" className="tf_g" placeholder="비밀번호" onChange={this.changePwd}/>
                     </div>
                     <div className="set_login">
-                        <CheckTag type="login" text="로그인 상태 유지"/>
+                        <CheckTag type="login" text="로그인 상태 유지" agree={this.state.isAgree} agreeNum={0} onCheckChange={this.onCheckChange}/>
                     </div>
 
                     <div className="wrap_btn">

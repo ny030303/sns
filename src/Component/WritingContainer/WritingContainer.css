@@ -159,6 +159,7 @@ input[type="file"] { /* 파일 필드 숨기기 */
     line-height: 21px;
     color: #000;
     cursor: pointer;
+    background-color: #fff;
     letter-spacing: -1px;
 }
 

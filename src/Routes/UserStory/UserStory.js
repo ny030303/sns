@@ -82,8 +82,10 @@ class UserStory extends React.Component {
       console.log(data);
       let posts = this.state.postList;
       [posts.find(v => v.id === data.postid)].forEach(v => {
-        v.feeling = data.feeling;
-        this.setState({postList: posts});
+        if(v.feeling) {
+          v.feeling = data.feeling;
+          this.setState({postList: posts});
+        }
       });
     });
 
@@ -202,8 +204,8 @@ class UserStory extends React.Component {
     this.showBgMenu();
     fileToDataURL(e.target.files[0]).then(res => {
       let canvas = document.createElement("canvas");
-      canvas.setAttribute("width", 100);
-      canvas.setAttribute("height", 100);
+      canvas.setAttribute("width", 128);
+      canvas.setAttribute("height", 128);
       let ctx = canvas.getContext("2d");
       let img = new Image();
       img.onload = () => {
@@ -217,7 +219,7 @@ class UserStory extends React.Component {
           rtSrc.y = (img.height - rtSrc.h) / 2;
         }
         console.log(rtSrc);
-        ctx.drawImage(img, rtSrc.x,rtSrc.y, rtSrc.w, rtSrc.h, 0, 0, 100, 100);
+        ctx.drawImage(img, rtSrc.x,rtSrc.y, rtSrc.w, rtSrc.h, 0, 0, 128, 128);
         updateUserProfileImg({userid: JSON.parse(localStorage.getItem("userInfo")).id, img: canvas.toDataURL()}, () => {
           this.loadUserInfo();
         });
@@ -282,137 +284,137 @@ class UserStory extends React.Component {
     }
 
     return (
-      <div className="userStory">
-        <div className="article_story">
-          <div className="story_cover"
-               style={{backgroundImage: `url(${(posterInfo.backimg == null) ? `/images/userBackground/bg10.jpg` : posterInfo.backimg})`}}>
-            <div className="story_cover_img"/>
-            <div className="bg_cover"/>
-            <div className="cover_cont">
-              <div className="info_pf">
-                {
-                  (posterInfo.profileimg) ? (<div className="link_pf userProfileImg"
-                                                  style={{backgroundImage: `url(${posterInfo.profileimg})`}}/>) : (
-                    <div className="link_pf bg_pf"/>)
-
-                }
-                {
-                  (this.nowUserInfo.id === this.props.match.params.userId) ?
-                    (<div className="filebox">
-                      <label htmlFor="story_img_file" className="ico_ks ico_pf"/>
-                      <input type="file" id="story_img_file" onChange={this.changeUserProfileImg}/>
-                    </div>) : null
-                }
-
-                <div className="userStoryName">{posterInfo.name}</div>
-                <p className="userStoryMemo">{posterInfo.memo}</p>
-              </div>
-              <div className="menu_story">
-                <ul className="story_list">
+        <div className="userStory">
+          <div className="article_story">
+            <div className="story_cover"
+                 style={{backgroundImage: `url(${(posterInfo.backimg == null) ? `/images/userBackground/bg10.jpg` : posterInfo.backimg})`}}>
+              <div className="story_cover_img"/>
+              <div className="bg_cover"/>
+              <div className="cover_cont">
+                <div className="info_pf">
                   {
-                    menus.map((menu, i) => (
-                      <li key={i} onClick={this.storyLinkEvent} data-midx={i}
-                          className={menuClass(i)}>
-                        {menu}
-                      </li>
-                    ))
+                    (posterInfo.profileimg) ? (<div className="link_pf userProfileImg"
+                                                    style={{backgroundImage: `url(${posterInfo.profileimg})`}}/>) : (
+                        <div className="link_pf bg_pf"/>)
+
                   }
-                </ul>
-                <div className="info_btn">
                   {
                     (this.nowUserInfo.id === this.props.match.params.userId) ?
-                      (<div className="btn_cover" onClick={this.showBgMenu}>배경 사진 편집</div>) :
-                      (isFriend) ? (<>
-                          <div className="btn_friend_cover" onClick={this.showBgMenu}>친구</div>
-                          <div className="area_ico">
-                            <span className="ico_ks ico_open"/>
-                          </div>
-                        </>) :
-                        (<div className="btn_cover">친구신청</div>)
+                        (<div className="filebox">
+                          <label htmlFor="story_img_file" className="ico_ks ico_pf"/>
+                          <input type="file" id="story_img_file" onChange={this.changeUserProfileImg}/>
+                        </div>) : null
                   }
 
-                  {
-                    (this.state.isBgMenuFade) ?
+                  <div className="userStoryName">{posterInfo.name}</div>
+                  <p className="userStoryMemo">{posterInfo.memo}</p>
+                </div>
+                <div className="menu_story">
+                  <ul className="story_list">
+                    {
+                      menus.map((menu, i) => (
+                          <li key={i} onClick={this.storyLinkEvent} data-midx={i}
+                              className={menuClass(i)}>
+                            {menu}
+                          </li>
+                      ))
+                    }
+                  </ul>
+                  <div className="info_btn">
+                    {
                       (this.nowUserInfo.id === this.props.match.params.userId) ?
-                        (<MyMenu menuInfo={[{text: "사진 업로드", type: "file", eventCallback: this.selectRandomBgImg},
-                          {text: "기본 이미지", type: "normal", eventCallback: (e) => this.changeUserBgImg(e)}]}
-                                 menuStyle={{marginTop: "35px"}}/>)
-                        : (isFriend) ?
-                        (<MyMenu menuInfo={[{text: "친구 끊기", type: "normal", eventCallback: this.onUnfriendingEvent},
-                          {text: "차단하기", type: "normal"}]}
-                                 menuStyle={{marginTop: "35px"}}/>) : null
-                      : null
-                  }
+                          (<div className="btn_cover" onClick={this.showBgMenu}>배경 사진 편집</div>) :
+                          (isFriend) ? (<>
+                                <div className="btn_friend_cover" onClick={this.showBgMenu}>친구</div>
+                                <div className="area_ico">
+                                  <span className="ico_ks ico_open"/>
+                                </div>
+                              </>) :
+                              (<div className="btn_cover">친구신청</div>)
+                    }
+
+                    {
+                      (this.state.isBgMenuFade) ?
+                          (this.nowUserInfo.id === this.props.match.params.userId) ?
+                              (<MyMenu menuInfo={[{text: "사진 업로드", type: "file", eventCallback: this.selectRandomBgImg},
+                                {text: "기본 이미지", type: "normal", eventCallback: (e) => this.changeUserBgImg(e)}]}
+                                       menuStyle={{marginTop: "35px"}}/>)
+                              : (isFriend) ?
+                              (<MyMenu menuInfo={[{text: "친구 끊기", type: "normal", eventCallback: this.onUnfriendingEvent},
+                                {text: "차단하기", type: "normal"}]}
+                                       menuStyle={{marginTop: "35px"}}/>) : null
+                          : null
+                    }
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="story_cont">
-            <div className="story_post_wrap">
+            <div className="story_cont">
+              <div className="story_post_wrap">
 
-              {
-                (() => {
-                  switch (infoType) {
-                    case "profileSetting":
-                      return (<ProfileSettingItem loadUserInfo={this.loadUserInfo}/>);
-                    case "calendar":
-                      return (<UserStoryCalendar/>);
-                    case "images":
-                      return (<UserStoryImages postData={postList}/>);
-                  }
-                  // "main" and default
-                  return postList.map((v, i) => (
-                    <LazyLoad key={i} placeholder={<StoryItemLoading/>}>
-                      <StoryItem key={i} postData={v} arrnum={i} userData={userData}
-                                 updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}/>
-                    </LazyLoad>
-                  ));
-                })()
-              }
+                {
+                  (() => {
+                    switch (infoType) {
+                      case "profileSetting":
+                        return (<ProfileSettingItem loadUserInfo={this.loadUserInfo}/>);
+                      case "calendar":
+                        return (<UserStoryCalendar/>);
+                      case "images":
+                        return (<UserStoryImages postData={postList}/>);
+                    }
+                    // "main" and default
+                    return postList.map((v, i) => (
+                        <LazyLoad key={i} placeholder={<StoryItemLoading/>}>
+                          <StoryItem key={i} postData={v} arrnum={i} userData={userData}
+                                     updatePostEvent={this.updatePostEvent} deletePostEvent={this.deletePostEvent}/>
+                        </LazyLoad>
+                    ));
+                  })()
+                }
 
-            </div>
-            <div className="story_widgets">
-              <div className="testStyle" style={(sideMemoFixed) ? {position: "fixed", top: "79px"} : null}>
-                <div className="section_widgets">
-                  <h3 className="tit_widgets">정보 <span className="ico_ks ico_more">채널정보 더보기</span></h3>
-                  <div className="list_info">
-                    <div className="subtit_info">
-                      <span className="ico_ks ico_birthday"/>
-                      <span className="tit_info">생일</span>
-                      <div className="desc_info">{posterInfo.birth}</div>
-                    </div>
-                    <div className="subtit_info tit_story">
-                      <span className="ico_ks ico_story"/>
-                      <span className="tit_info">스토리</span>
-                      <div className="desc_info">{postList.length}</div>
-                    </div>
-                    <div className="subtit_info tit_qna">
-                      <span className="tit_info">정보 더보기</span>
-                      <span className="ico_ks ico_plus"/>
+              </div>
+              <div className="story_widgets">
+                <div className="testStyle" style={(sideMemoFixed) ? {position: "fixed", top: "79px"} : null}>
+                  <div className="section_widgets">
+                    <h3 className="tit_widgets">정보 <span className="ico_ks ico_more">채널정보 더보기</span></h3>
+                    <div className="list_info">
+                      <div className="subtit_info">
+                        <span className="ico_ks ico_birthday"/>
+                        <span className="tit_info">생일</span>
+                        <div className="desc_info">{posterInfo.birth}</div>
+                      </div>
+                      <div className="subtit_info tit_story">
+                        <span className="ico_ks ico_story"/>
+                        <span className="tit_info">스토리</span>
+                        <div className="desc_info">{postList.length}</div>
+                      </div>
+                      <div className="subtit_info tit_qna">
+                        <span className="tit_info">정보 더보기</span>
+                        <span className="ico_ks ico_plus"/>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="section_widgets">
-                  <h3 className="tit_widgets" style={{paddingTop: "15px"}}>최근 키워드 </h3>
-                  <div className="keyword_widgets">
-                    <p className="link_keyword">#키워드</p>
-                    <p className="link_keyword">#키키워드</p>
-                    <p className="link_keyword">#키키키워드</p>
+                  <div className="section_widgets">
+                    <h3 className="tit_widgets" style={{paddingTop: "15px"}}>최근 키워드 </h3>
+                    <div className="keyword_widgets">
+                      <p className="link_keyword">#키워드</p>
+                      <p className="link_keyword">#키키워드</p>
+                      <p className="link_keyword">#키키키워드</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="section_widgets">
-                  <h3 className="tit_widgets" style={{paddingTop: "15px"}}>추천친구</h3>
-                  <div className="keyword_widgets">
-                    {/*<FriendItem listName={"storyWidgets"}/>*/}
+                  <div className="section_widgets">
+                    <h3 className="tit_widgets" style={{paddingTop: "15px"}}>추천친구</h3>
+                    <div className="keyword_widgets">
+                      {/*<FriendItem listName={"storyWidgets"}/>*/}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }

@@ -11,6 +11,7 @@ $memo = $_POST["memo"] || null;
 $birth = $_POST["birth"];
 $gender = $_POST["gender"];
 $basekeyword = $_POST["basekeyword"] || null;
+$profileimg = $_POST["profileimg"];
 $allow_search = $_POST["allow_search"] || 1;
 $allow_getnews = $_POST["allow_getnews"] || 0;
 $allow_reqfriends = $_POST["allow_reqfriends"] || 1;
@@ -23,14 +24,14 @@ $blocklist = $_POST["blocklist"] || null;
 
 $bRes = null;
 if (isset($_SESSION["loginUser"])) {
-    $query = "UPDATE `sns_users` SET `id`= ?,`pwd`=password(?),`name`=?,`memo`=?,`birth`=?,`gender`=?,`basekeyword`=?,
+    $query = "UPDATE `sns_users` SET `id`= ?,`pwd`=password(?),`name`=?,`memo`=?,`birth`=?,`gender`=?,`basekeyword`=?, `profileimg`=?,
 `allow_search`=?,`allow_getnews`=?,`allow_reqfriends`=?,`allow_message`=?,`allow_friendslist`=?,`allow_position`=?,`blocklist`=?";
     $bRes = execsql($con, $query,
-        [$id, $pwd, $name, $memo, $birth, $gender, $basekeyword, $allow_search,
+        [$id, $pwd, $name, $memo, $birth, $gender, $basekeyword, $profileimg, $allow_search,
             $allow_getnews, $allow_reqfriends, $allow_message, $allow_friendslist, $allow_position, $blocklist]);
 } else {
-    $query = "INSERT INTO `sns_users`(`id`, `pwd`, `name`,`birth`, `gender`) VALUES (?,password(?), ?,?, ?)";
-    $bRes = execsql($con, $query, [$id, $pwd, $name, $birth, $gender]);
+    $query = "INSERT INTO `sns_users`(`id`, `pwd`, `name`, `birth`, `gender`, `profileimg`) VALUES (?,password(?),?, ?,?,?)";
+    $bRes = execsql($con, $query, [$id, $pwd, $name, $birth, $gender, $profileimg]);
 }
 echo json_encode(array("result" => $bRes));
 

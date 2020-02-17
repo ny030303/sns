@@ -63,7 +63,7 @@ class WritingContainer extends React.Component {
         });
         this.setState({isPrivateNum: Number(this.props.postData.isprivate_num)});
       }
-    //  /php/downloadImage.php?id=19&subid=0
+      //  /php/downloadImage.php?id=19&subid=0
     }
   }
 
@@ -131,8 +131,8 @@ class WritingContainer extends React.Component {
       postWriting(data, (res) => {
         console.log(res);
         alertDialog.show("안내", "소식을 성공적으로 업로드 했습니다." +
-          "'나만보기'로 설정한 글은 내 스토리에서만 볼 수 있습니다." +
-          " 지금 올린 스토리를 확인해보세요.");
+            "'나만보기'로 설정한 글은 내 스토리에서만 볼 수 있습니다." +
+            " 지금 올린 스토리를 확인해보세요.");
         this.postOff();
         eventService.emitEvent("reloadStorys", "asdf");
         if(this.props.getPostEvent) {
@@ -202,107 +202,105 @@ class WritingContainer extends React.Component {
     // <input type="email|file" multiple>
     console.log(this.state.files);
     return (
-      <div className="writingContainer">
-        {/*{this.state.fileUploadPopup ?*/}
-        {/*  <FileUploadPopup showFileUploadPopup={this.showFileUploadPopup} fileToDataURL={fileToDataURL} attachFiles={this.attachFiles}/> : null}*/}
-        <div className="write">
-          <div className="section"onDragOver={this.dragOverEvent} onDrop={this.dropEvent}>
-            <div ref={this.divContents} id="contents_write" className="editable" contentEditable="true"
-                 onChange={this.writeEvent} onInput={this.writeEvent} onKeyUp={this.onKeyEvent}
-                 style={(this.state.isPostOn) ? {minHeight: "130px"} : {minHeight: "37px"}}
-                 placeholder={this.state.postMsg[this.randomNum]}/>
-            <br/>
-            <ul className="uk-list fileList writeFileList">
-              {
-                this.state.files.map((v, i) => (
-                  <div key={i} className="upload-item">
-                    <div className="img-box" style={v.startsWith("/movies") ? {backgroundColor: "#000"} : null}>
-                      {
-                        (v.substr(5,5) === "image") ?
-                          (<img src={v} alt="img"/>) :
-                          (<video style={{position: "absolute", top: "50%", transform: "translate(0, -50%)"}}
-                                  onLoadedData={(e) => e.target.currentTime = 1}>
-                            <source src={`http://localhost${v}`} type={"video/" + v.substr(v.length-3,3)}/>
-                          </video>)
-                      }
+        <div className="writingContainer">
+          {/*{this.state.fileUploadPopup ?*/}
+          {/*  <FileUploadPopup showFileUploadPopup={this.showFileUploadPopup} fileToDataURL={fileToDataURL} attachFiles={this.attachFiles}/> : null}*/}
+          <div className="write">
+            <div className="section"onDragOver={this.dragOverEvent} onDrop={this.dropEvent}>
+              <div ref={this.divContents} id="contents_write" className="editable" contentEditable="true"
+                   onChange={this.writeEvent} onInput={this.writeEvent} onKeyUp={this.onKeyEvent}
+                   style={(this.state.isPostOn) ? {minHeight: "130px"} : {minHeight: "37px"}}
+                   placeholder={this.state.postMsg[this.randomNum]}/>
+              <br/>
+              <ul className="uk-list fileList writeFileList">
+                {
+                  this.state.files.map((v, i) => (
+                      <div key={i} className="upload-item">
+                        <div className="img-box" style={v.startsWith("/movies") ? {backgroundColor: "#000"} : null}>
+                          {
+                            (v.substr(5,5) === "image") ?
+                                (<img src={v} alt="img"/>) :
+                                (<video style={{position: "absolute", top: "50%", transform: "translate(0, -50%)"}}
+                                        onLoadedData={(e) => e.target.currentTime = 1}>
+                                  <source src={`http://localhost${v}`} type={"video/" + v.substr(v.length-3,3)}/>
+                                </video>)
+                          }
 
-                      <span className="ico_ks bn_x" onClick={this.deleteFile} data-lnum={i}/>
-                    </div>
-                    <div className="text-box">
-                      {v.substr(5,5)} ({i+1})
-                    </div>
-                  </div>
-                ))
-              }
-            </ul>
+                          <span className="ico_ks bn_x" onClick={this.deleteFile} data-lnum={i}/>
+                        </div>
+                        <div className="text-box">
+                          {v.substr(5,5)} ({i+1})
+                        </div>
+                      </div>
+                  ))
+                }
+              </ul>
 
-            <ul className="fileUploadList">
-              <li className="link_menu" onClick={() => this.showFileUploadPopup(true)}>
-                <label className="txt_menu" htmlFor="ex_file">
+              <ul className="fileUploadList">
+                <li className="link_menu" onClick={() => this.showFileUploadPopup(true)}>
+                  <label className="txt_menu" htmlFor="ex_file">
                   <span style={{display: "flex"}}>
                       <span className="ico_ks ico_camera"/><span>사진/동영상</span>
                   </span>
-                </label>
-                <input type="file" id="ex_file" accept="image/*,video/*" ref={this.myPostFile} onChange={this.selectFile}/>
-              </li>
-              <li className="link_menu">
-                <div className="txt_menu">
+                  </label>
+                  <input type="file" id="ex_file" accept="image/*,video/*" ref={this.myPostFile} onChange={this.selectFile}/>
+                </li>
+                <li className="link_menu">
+                  <div className="txt_menu">
                   <span style={{display: "flex"}}>
                       <span className="ico_ks ico_music"/><span>뮤직</span>
                   </span>
-                </div>
-              </li>
-              <li className="link_menu">
-                <div className="txt_menu">
+                  </div>
+                </li>
+                <li className="link_menu">
+                  <div className="txt_menu">
                     <span style={{display: "flex"}}>
                         <span className="ico_ks ico_link"/><span>링크</span>
                     </span>
-                </div>
-              </li>
-            </ul>
+                  </div>
+                </li>
+              </ul>
 
-            {/*{*/}
-            {/*  (this.state.isHashtagFormOn) ?*/}
-            {/*    (*/}
-            {/*     <HashtagForm/>*/}
-            {/*    ) : null*/}
-            {/*}*/}
+              {/*{*/}
+              {/*  (this.state.isHashtagFormOn) ?*/}
+              {/*    (*/}
+              {/*     <HashtagForm/>*/}
+              {/*    ) : null*/}
+              {/*}*/}
 
-            <div className="bottomWriteContents" style={(this.state.isPostOn) ? {display: "block"} : {display: "none"}}>
-              <div className="inner_open" onClick={this.showIsPrivateListOn}>
-                <div className="flexClass">
-                  <span className={this.privateBoxArr[this.state.isPrivateNum-1].class}/><span>{this.privateBoxArr[this.state.isPrivateNum-1].text}</span>
-                  <span className="ico_ks arr"/>
-                </div>
-              </div>
-              {
-                (this.state.isPrivateListOn) ?
-                  (<MyMenu menuInfo={[
+              <div className="bottomWriteContents" style={(this.state.isPostOn) ? {display: "block"} : {display: "none"}}>
+                <div className="uk-inline">
+                  <div className="inner_open" type="button" onClick={this.showIsPrivateListOn}>
+                    <div className="flexClass">
+                      <span className={this.privateBoxArr[this.state.isPrivateNum-1].class}/><span>{this.privateBoxArr[this.state.isPrivateNum-1].text}</span>
+                      <span className="ico_ks arr"/>
+                    </div>
+                  </div>
+                  <MyMenu menuInfo={[
                     {text: "전체공개", icon: "ico_ks global", type: "checkBox", data_set: 3, eventCallback: this.changeIsPrivateNum},
                     {text: "친구공개", icon: "ico_ks ic_friend", type: "checkBox", data_set: 2, eventCallback: this.changeIsPrivateNum},
                     {text: "나만보기", icon: "ico_ks ic_lock", type: "checkBox", data_set: 1, eventCallback: this.changeIsPrivateNum},
-                  ]}/>): null
-                //{text: "친구만 댓글 허용", type: "checkBox"},
-                //{text: "공유 허용", type: "checkBox"}
-              }
+                  ]} menuPos={"bottom-left"}/>
+                </div>
 
-              <div className="postIconWrap">
-                <span uk-tooltip="해시태그 추가" className="hashtag_icon" onClick={this.showHashtagForm}>#</span>
-              </div>
-              <div className="writePostBtns">
-                <button className="btn blackLineBtn" onClick={this.postOff}>취소</button>
-                <button className="btn orangeColorBtn nullTextOrangeColor"
-                        style={(this.state.postContents.length > 0) ? {display: "none"} : {display: "inline-block"}}>올리기
-                </button>
-                <button className="btn orangeColorBtn"
-                        style={(this.state.postContents.length > 0) ? {display: "inline-block"} : {display: "none"}}
-                        onClick={this.postEvent}>올리기
-                </button>
+
+                <div className="postIconWrap">
+                  <span uk-tooltip="해시태그 추가" className="hashtag_icon" onClick={this.showHashtagForm}>#</span>
+                </div>
+                <div className="writePostBtns">
+                  <button className="btn blackLineBtn" onClick={this.postOff}>취소</button>
+                  <button className="btn orangeColorBtn nullTextOrangeColor"
+                          style={(this.state.postContents.length > 0) ? {display: "none"} : {display: "inline-block"}}>올리기
+                  </button>
+                  <button className="btn orangeColorBtn"
+                          style={(this.state.postContents.length > 0) ? {display: "inline-block"} : {display: "none"}}
+                          onClick={this.postEvent}>올리기
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }

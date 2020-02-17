@@ -32,3 +32,18 @@
     font-size: 12px;
     color: #000;
 }
+
+.signupChangeProfileWrap {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 102px;
+}
+
+.checkText {
+    display: block;
+    margin-top: 15px;
+    font-weight: 700;
+    font-size: 12px;
+    color: red;
+}
