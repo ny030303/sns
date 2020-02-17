@@ -413,6 +413,8 @@ class UserStory extends React.Component {
                         return (<UserStoryCalendar/>);
                       case "images":
                         return (<UserStoryImages postData={postList}/>);
+                      case "videos":
+                        return (<div/>);
                     }
                     // "main" and default
                     return postList.map((v, i) => (

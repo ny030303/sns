@@ -74,7 +74,7 @@ class MyRightHeader extends React.Component {
   getFriendEvent = () => {
     if (this.state.userInfo === null) return;
     getFriends(this.state.userInfo.id, 1, (fData) => { // 친구목록
-      console.log(fData);
+      // console.log(fData);
       this.setState({friendsList: fData.friends, acceptFriendList: fData.acceptFriends});
       eventService.emitEvent("getFriends");
     });
@@ -107,12 +107,12 @@ class MyRightHeader extends React.Component {
     localStorage.removeItem("isSaveUserInfo");
     eventService.emitEvent("loginStatus", false);
     logout((data) => {
-      console.log(data)
+      // console.log(data)
     });
   };
 
   showMessageWriting = (e, msgData) => {
-    console.log(msgData);
+    // console.log(msgData);
     this.msgData = msgData || null;
     this.setState({isMessageWritingFade: !this.state.isMessageWritingFade});
   };

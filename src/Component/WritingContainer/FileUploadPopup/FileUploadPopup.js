@@ -15,7 +15,7 @@ export default class FileUploadPopup extends React.Component {
   hidePopup = () => this.props.showFileUploadPopup(false);
 
   dragOverEvent = (e) => {
-    console.log("드래그 오버");
+    // console.log("드래그 오버");
     e.preventDefault();
   };
 

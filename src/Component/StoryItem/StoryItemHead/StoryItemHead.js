@@ -15,13 +15,15 @@ class StoryItemHead extends React.Component {
   }
 
   changeIsPrivateNum = (e) => {
-    console.log(e);
+    // console.log(e);
     let data = {
       postid: this.props.postData.id,
       isprivate_num: e.target.dataset.num,
     };
     eventService.emitEvent("updateIsPrivateNumToMainAndUserStory", data);
-    updateStoryIsPrivateNum(data, (res) => console.log(res));
+    updateStoryIsPrivateNum(data, (res) => {
+      // console.log(res)
+    });
   };
 
   moveUserStoryMain = (e) => {
@@ -31,7 +33,7 @@ class StoryItemHead extends React.Component {
 
   render() {
     const {postData, userData} = this.props;
-    console.log(postData, userData);
+    // console.log(postData, userData);
     let nowPoster = userData.filter(v => postData.userid === v.userid)[0] || {};
 
     return (
@@ -58,7 +60,7 @@ class StoryItemHead extends React.Component {
             <div className="uk-inline">
               <span className="ico_ks bn_modify" data-user={postData.userid}/>
               {
-                (postData.userid === this.nowUserInfo.id) ?
+                (postData.userid === this.nowUserInfo.id || this.nowUserInfo.id === "admin") ?
                   (<MyMenu menuInfo={[
                     {
                       text: "수정",

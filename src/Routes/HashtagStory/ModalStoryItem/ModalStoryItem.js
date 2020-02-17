@@ -18,19 +18,19 @@ export class ModalStoryItem extends React.Component {
 
   deletePostEvent = (e) => {
     let postid = e.target.dataset.num;
-    console.log('postid:', postid, this.state.postList);
+    // console.log('postid:', postid, this.state.postList);
     deletePost(postid, (res) => {
-      console.log(res);
+      // console.log(res);
       if (res.result === 1) {
         // this.getPostEvent();
         this.setState({postList: this.state.postList.filter(v => postid !== v.id)})
       }
-      console.log('result:', res.result, this.state.postList);
+      // console.log('result:', res.result, this.state.postList);
     });
   };
 
   render() {
-    console.log(this.props.post);
+    // console.log(this.props.post);
     let userTemp = getStoryUserData(this.props.post.userid);
     let userDatas = [{
       userid: this.props.post.userid,

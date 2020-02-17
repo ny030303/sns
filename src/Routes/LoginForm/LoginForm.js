@@ -83,18 +83,20 @@ class LoginForm extends React.Component {
         }
 
         getUser(this.state.userId, this.state.userPwd, (data) => {
-            console.log("login getuser: ", data);
+            // console.log("login getuser: ", data);
             if (data.result) {
-
                 localStorage.setItem("userInfo", JSON.stringify(data.user));
                 if (!this.state.isAgree) {
                     // localStorage.setItem("isSaveUserInfo", true);
                     localStorage.setItem("isSaveUserInfo", false);
                 }
                 eventService.emitEvent("loginStatus", true);
-                alertDialog.show("로그인", `반갑습니다 ${data.user.name}님`);
-                this.props.history.push("/");
-
+                if(data.user.id === "admin") {
+                    this.props.history.push("/adminpage");
+                } else {
+                    alertDialog.show("로그인", `반갑습니다 ${data.user.name}님`);
+                    this.props.history.push("/");
+                }
             } else {
                 alertDialog.show("로그인 오류!", "로그인에 실패했습니다.");
             }

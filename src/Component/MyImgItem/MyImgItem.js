@@ -16,7 +16,7 @@ export class MyImgItem extends React.Component {
 
   render() {
     const {imgSrc, type, postData} = this.props;
-    console.log(this.contents.current);
+    // console.log(this.contents.current);
     if(this.contents.current) {
       this.contents.current.innerHTML = unescape(postData.contents);
     }

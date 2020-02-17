@@ -46,15 +46,31 @@ export const getPostFromHashTag = (hashtag, callback) => {
   });
 };
 
+export const countCommentFromUser = (userid, callback) => {
+  axios.get(`/php/countCommentFromUser.php?userid=${userid}`).then(res => {
+
+    if (callback) callback(res.data);
+  });
+};
+
+export const countPostFromUser = (userid, callback) => {
+  axios.get(`/php/countPostFromUser.php?userid=${userid}`).then(res => {
+
+    if (callback) callback(res.data);
+  });
+};
+
+
 
 export const getLoginInfo = () => {
   let data = localStorage.getItem('loginUser');
   return (data) ? JSON.parse(data) : null;
 };
 
-export const deleteUser = (uid, callback) => {
-  axios.get(`/php/deleteUser.php?id=${uid}`, config).then(res => {
+export const deleteUser = (userid, callback) => {
+  axios.get(`/php/deleteUser.php?id=${userid}`, config).then(res => {
     // console.log('deleteUser:', res.data.result);
+    if (callback) callback(res.data);
   });
 };
 
@@ -90,7 +106,7 @@ export const getUserInfo = (uid, callback, passTrack) => {
 export const getUserInfoAll = (callback) => {
   axios.get(`/php/getUserInfoAll.php`, config).then(res => {
     res.data.users.forEach(v => setStoryUserData(v.id, v.name, v.profileimg));
-    console.log(res.data);
+    // console.log(res.data);
     if (callback) callback(res.data);
   })
 };
@@ -101,7 +117,9 @@ export const putUser = (data, callback) => {
   Object.keys(data).forEach(key => formData.append(key, data[key]));
   axios.post(`/php/signup.php`, formData).then(res => {
     // console.log('putUser:', res.data);
-    getUserInfo(data.id, () => console.log('pass'), true);
+    getUserInfo(data.id, () => {
+      // console.log('pass')
+    }, true);
     if (callback) callback(res.data);
   });
 
@@ -197,7 +215,7 @@ export const postWriting = (data, callback) => {
   Object.keys(data).forEach(key => formData.append(key, data[key]));
   waitDialog.show();
   axios.post(`/php/postWriting.php`, formData).then(res => {
-    console.log('postWriting:', res.data);
+    // console.log('postWriting:', res.data);
 // data.contents,res.data.postid
     addHashtag(data.contents, res.data.postid);
     if (callback) callback(res.data);
@@ -213,6 +231,17 @@ export const getPost = (uid, callback) => {
     })
   );
 };
+
+export const getPostFromAdminPage = (callback) => {
+  trackPromise(
+      axios.get(`/php/getPostFromAdminPage.php`).then(res => {
+        // console.log('getPost: ', res.data);
+        if (callback) callback(res.data);
+      })
+  );
+};
+
+
 
 export const getPostFeeling = (pid, callback) => {
   trackPromise(
@@ -254,7 +283,7 @@ export const deletePost = (postid, callback) => {
   addHashtag("", postid);
   waitDialog.show();
   axios.get(`/php/deletePost.php?postid=${postid}`).then(res => {
-    console.log('deletePost: ', res.data);
+    // console.log('deletePost: ', res.data);
     if (callback) callback(res.data);
     waitDialog.hide();
   });

@@ -43,14 +43,14 @@ export class MessageWriting extends React.Component {
     };
 
     addSnsMessage(data, res => {
-      console.log(res);
+      // console.log(res);
     });
     eventService.emitEvent("updateSendMessage", data);
     this.props.closeMessageWriting();
   };
 
   render() {
-    console.log(this.props.data);
+    // console.log(this.props.data);
     return (
       <div className="messageWriting">
         <div className="messageWriting_dark" onClick={this.props.closeMessageWriting}/>

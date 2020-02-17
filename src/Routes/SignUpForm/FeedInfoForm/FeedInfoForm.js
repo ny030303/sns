@@ -29,7 +29,7 @@ class FeedInfoForm extends React.Component {
     }
 
     IsValidText(nowText) {
-        console.log(nowText);
+        // console.log(nowText);
         let tests = nowText;
         let regEx1 = /^[0-9]*$/;
         let regEx2 = /^[0-9a-zA-Z]*$/;
@@ -37,14 +37,14 @@ class FeedInfoForm extends React.Component {
         let regEx4 = /^[ㄱ-ㅎ|ㅏ-ㅣ가-힣]*$/;
         if (regEx1.test(tests) === true || regEx2.test(tests)=== true  || regEx3.test(tests) === true  || regEx4.test(tests)=== true ) {
 
-            console.log("굳");
-            console.log(regEx1.test(tests), regEx2.test(tests), regEx3.test(tests), regEx4.test(tests));
+            // console.log("굳");
+            // console.log(regEx1.test(tests), regEx2.test(tests), regEx3.test(tests), regEx4.test(tests));
             return true;
         }
         else {
 
-            console.log("ㄴㄴ");
-            console.log(regEx1.test(tests), regEx2.test(tests), regEx3.test(tests), regEx4.test(tests));
+            // console.log("ㄴㄴ");
+            // console.log(regEx1.test(tests), regEx2.test(tests), regEx3.test(tests), regEx4.test(tests));
             return false;
         }
     }
@@ -91,7 +91,7 @@ class FeedInfoForm extends React.Component {
 
     signup = () => {
         const {state} = this;
-        console.log(this.state.profileimg);
+        // console.log(this.state.profileimg);
         if (state.idCheckText.length > 0 || state.pwdCheckText.length > 0 || state.nameCheckText.length > 0) {
             alertDialog.show("회원가입 실패", "맞지 않는 값이 들어있습니다.");
         } else if (state.id === "" || state.pwd === "" || state.name === "") {
@@ -114,7 +114,7 @@ class FeedInfoForm extends React.Component {
                 allow_message: 1, allow_friendslist: 1, allow_position: 0,
                 blocklist: null,
             }, (data) => {
-                console.log(data);
+                // console.log(data);
                 if (Number(data.result) === 1) {
                     alertDialog.show("회원가입 성공!", "정상적으로 회원가입 됐습니다.");
                     this.props.history.push("/login");
@@ -144,7 +144,7 @@ class FeedInfoForm extends React.Component {
                     rtSrc.h = img.width;
                     rtSrc.y = 0;
                 }
-                console.log(rtSrc);
+                // console.log(rtSrc);
                 ctx.drawImage(img, rtSrc.x, rtSrc.y, rtSrc.w, rtSrc.h, 0, 0, 128, 128);
                 // updateUserProfileImg({
                 //     userid: JSON.parse(localStorage.getItem("userInfo")).id,

@@ -34,7 +34,7 @@ export class CommentWriting extends React.Component {
 
 
   addCommentEvent = () => {
-    console.log(this.props.postid);
+    // console.log(this.props.postid);
     let data = {
       postid: this.props.postid,
       userid: JSON.parse(localStorage.getItem("userInfo")).id,
@@ -43,7 +43,7 @@ export class CommentWriting extends React.Component {
     };
 
     addComment(data, (res) => {
-      console.log(res);
+      // console.log(res);
       if(res.result === 1) {
         this.props.onAddComment(res.data);
         this.input.current.innerHTML = "";
@@ -78,7 +78,7 @@ export class CommentWriting extends React.Component {
   componentDidMount() {
     if(this.props.type === "edit") {
       const {commentData} = this.props;
-      console.log(commentData);
+      // console.log(commentData);
 
       this.input.current.innerHTML =  unescape(commentData.contents);
       this.setState({postContents: this.input.current.innerHTML,

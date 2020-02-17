@@ -10,12 +10,12 @@ export class ProfileSettingInput extends React.Component {
     };
 
     this.input = React.createRef();
-    console.log(props)
+    // console.log(props)
   }
 
   selectGender = (e) => {
     let num = e.target.dataset.gnum;
-    console.log(num);
+    // console.log(num);
     this.setState({gender: Number(num)});
     this.props.changeGenderEvent(Number(num));
   };

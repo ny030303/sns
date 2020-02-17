@@ -2,17 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fb93a97-cd4a-4ed9-91a0-bc566567a71f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/php/countCommentFromUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/countPostFromUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/deleteUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/getPostFromAdminPage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/getPost.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getPost.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/getPostFromHashTag.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getPostFromHashTag.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/getUserPosts.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/getUserPosts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/postWriting.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/postWriting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/updateWriting.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/updateWriting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/CommentList/CommentList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/CommentList/CommentList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/CommentWriting/CommentWriting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/CommentWriting/CommentWriting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MessageWriting/MessageWriting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/MyImgItem/MyImgItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/ProfileSettingItem/ProfileSettingInput/ProfileSettingInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ProfileSettingItem/ProfileSettingInput/ProfileSettingInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/CommentList/CommentItem/CommentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/CommentList/CommentItem/CommentItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemBody/StoryItemBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemBody/StoryItemBody.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemHead/StoryItemHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemHead/StoryItemHead.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemTail/StoryItemTail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/StoryItem/StoryItemTail/StoryItemTail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/WritingContainer/FileUploadPopup/FileUploadPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/WritingContainer/FileUploadPopup/FileUploadPopup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/WritingContainer/WritingContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/WritingContainer/WritingContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyHeader/MyHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyHeader/MyHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/MyRightHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyRightHeader/NoteItem/MessageItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/NoteItem/MessageItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyRightHeader/SnsMessage/SnsMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyRightHeader/SnsMessage/SnsMessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/AdminPage/AdminPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/AdminPage/AdminPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/AdminPage/AdminPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/AdminPage/AdminPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/HashtagStory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/HashtagStory/ModalStoryItem/ModalStoryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/HashtagStory/ModalStoryItem/ModalStoryItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/LoginForm/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/LoginForm/LoginForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Routes/MainStory/MainStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/MainStory/MainStory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/NormalSettingPage/NormalSettingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/NormalSettingPage/NormalSettingPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/SignUpForm/FeedInfoForm/FeedInfoForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/SignUpForm/FeedInfoForm/FeedInfoForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/UserStory/UserStory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/UserStory/UserStory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/CommonUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/CommonUtils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/DataService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/DataService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +195,7 @@
       <workItem from="1581659205810" duration="10246000" />
       <workItem from="1581721636832" duration="15831000" />
       <workItem from="1581819942740" duration="26735000" />
-      <workItem from="1581905217649" duration="17273000" />
+      <workItem from="1581905217649" duration="27030000" />
     </task>
     <task id="LOCAL-00001" summary="평가전 연습 26번 백업">
       <created>1581258569368</created>
@@ -209,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581919715241</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="-댓글 공개범위 권한 설정 추가">
+      <created>1581922780875</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1581922780875</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,17 +279,18 @@
     <MESSAGE value="-signup 프로필이미지 넣게 수정, 정규식으로 체크&#10;-login 자동로그인 구분 추가&#10;-프로필 사진 128x128, 그냥 cover 모양으로 수정" />
     <MESSAGE value="-post에서 link 추가, 입력 폼 만듦&#10;-이미지 10개, type 제한&#10;-userStory 배경 메뉴 안나오던 거 수정" />
     <MESSAGE value="-userStory에서 친구 승인 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="-userStory에서 친구 승인 추가" />
+    <MESSAGE value="-댓글 공개범위 권한 설정 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="-댓글 공개범위 권한 설정 추가" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Deployment" timestamp="1580964334489">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#Deployment/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580964334489" />
-    <state x="579" y="112" width="1268" height="862" key="CommitChangelistDialog2" timestamp="1581919714407">
+    <state x="579" y="112" width="1268" height="862" key="CommitChangelistDialog2" timestamp="1581922779994">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="579" y="112" width="1268" height="862" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581919714407" />
+    <state x="579" y="112" width="1268" height="862" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581922779994" />
     <state width="1877" height="2" key="GridCell.Tab.0.bottom" timestamp="1581914260458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -276,10 +307,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="2" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581914260458" />
-    <state x="837" y="375" key="NewPhpFileDialog" timestamp="1581500961149">
+    <state x="837" y="375" key="NewPhpFileDialog" timestamp="1581930467952">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="837" y="375" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581500961149" />
+    <state x="837" y="375" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581930467952" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1579482843880">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -300,17 +331,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580895989756" />
-    <state x="587" y="64" width="1017" height="912" key="find.popup" timestamp="1581920608720">
+    <state x="587" y="64" width="1017" height="912" key="find.popup" timestamp="1581931864145">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="587" y="64" width="1017" height="912" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581920608720" />
+    <state x="587" y="64" width="1017" height="912" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581931864145" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1581484270782">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581484270782" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1581921741942">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1581928155126">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581921741942" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1581928155126" />
   </component>
 </project>

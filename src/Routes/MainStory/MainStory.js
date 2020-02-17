@@ -20,7 +20,7 @@ class MainStory extends React.Component {
     };
 
     eventService.listenEvent("reloadStorys", (res) => {
-      console.log(res);
+      // console.log(res);
       this.getPostEvent();
     });
 
@@ -29,12 +29,12 @@ class MainStory extends React.Component {
 
 
   componentDidMount() {
-    console.log('MainStory');
+    // console.log('MainStory');
     this.getPostEvent();
     eventService.listenEvent("updatePostToMainAndUserStory", (postData) => {
       let posts = this.state.postList;
       let idx = posts.findIndex(v => v.id === postData.id);
-      console.log(postData, posts[idx]);
+      // console.log(postData, posts[idx]);
       posts[idx] = postData;
       this.setState({postList: posts});
     });
@@ -42,7 +42,7 @@ class MainStory extends React.Component {
     eventService.listenEvent("updateIsPrivateNumToMainAndUserStory", (isPrivateNumData) => {
       let posts = this.state.postList;
       let idx = posts.findIndex(v => v.id === isPrivateNumData.postid);
-      console.log(isPrivateNumData, posts[idx]);
+      // console.log(isPrivateNumData, posts[idx]);
       if (posts[idx].isprivate_num) posts[idx].isprivate_num = isPrivateNumData.isprivate_num;
       // posts[idx] = postData;
       this.setState({postList: posts});
@@ -58,7 +58,7 @@ class MainStory extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.state && this.state.postList !== prevState.state.postList) {
-      console.log(this.state.postList, prevState.state.postList);
+      // console.log(this.state.postList, prevState.state.postList);
       this.getPostEvent();
     }
   }
@@ -69,20 +69,20 @@ class MainStory extends React.Component {
     getPost(this.state.userInfo.id, (data) => {
       // console.log([...data.posts, ...data.ups]);
       if (data.posts !== undefined && data.ups !== undefined) {
-        console.log(data);
+        // console.log(data);
         let arr = [...data.posts, ...data.ups].sort((a, b) =>
           new Date((b.upcreated) ? b.upcreated : b.created).getTime() - new Date((a.upcreated) ? a.upcreated : a.created).getTime());
-        console.log(arr);
+        // console.log(arr);
         this.setState({postList: arr, userList: data.users});
         // this.render();
-        console.log(data.users);
+        // console.log(data.users);
         data.users.forEach(uv => setStoryUserData(uv.userid, uv.name, uv.profileimg));
 
         let posts = this.state.postList;
         // console.log(posts);
         posts.forEach(v => {
           v.onUpdateComments = (comments) => {
-            console.log(v.id, comments);
+            // console.log(v.id, comments);
             [this.state.postList.find(fv => fv.id === v.id)].forEach(postData => {
               postData.comments = comments;
               this.setState({postList: this.state.postList});
@@ -103,14 +103,14 @@ class MainStory extends React.Component {
 
   deletePostEvent = (e) => {
     let postid = e.target.dataset.num;
-    console.log('postid:', postid, this.state.postList);
+    // console.log('postid:', postid, this.state.postList);
     deletePost(postid, (res) => {
-      console.log(res);
+      // console.log(res);
       if (res.result == 1) {
         // this.getPostEvent();
         this.setState({postList: this.state.postList.filter(v => postid !== v.id)})
       }
-      console.log('result:', res.result, this.state.postList);
+      // console.log('result:', res.result, this.state.postList);
     });
   };
 

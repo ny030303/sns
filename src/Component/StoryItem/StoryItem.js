@@ -54,7 +54,7 @@ class StoryItem extends React.Component {
 
   render() {
     const {postData} = this.props;
-    console.log(postData);
+    // console.log(postData);
     let comments = postData.comments || [];
     let feelingCnt = 0;
     postData.feeling.split("|").forEach(v => feelingCnt += (( v.length > 2) ?  1 : 0));

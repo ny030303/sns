@@ -18,7 +18,7 @@ export class HashtagStory extends React.Component {
       let posts= res.posts;
       posts.forEach(v => {
         v.onUpdateComments = (comments) => {
-          console.log(v.id, comments);
+          // console.log(v.id, comments);
           [this.state.posts.find(fv => fv.id === v.id)].forEach(postData => {
             postData.comments = comments;
             this.setState({posts: this.state.posts});
@@ -26,7 +26,7 @@ export class HashtagStory extends React.Component {
         };
       });
       this.setState({posts: posts});
-      console.log(res.posts);
+      // console.log(res.posts);
     });
   };
 

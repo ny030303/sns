@@ -86,7 +86,7 @@ class CommentItem extends React.Component {
       if (hData.data[0] !== "") {
         if (Array.isArray(hData.data)) {
           this.setState({hearts: hData.data.map(v => JSON.parse(v))});
-          console.log(this.state.hearts);
+          // console.log(this.state.hearts);
           this.state.hearts.forEach((v, i) => {
             if (v.userid === this.nowUserInfo.id) {
               this.setState({heartClass: v.heart});
@@ -95,7 +95,7 @@ class CommentItem extends React.Component {
         }
         else {
           this.setState({hearts: JSON.parse(hData.data)});
-          console.log(this.state.hearts);
+          // console.log(this.state.hearts);
           this.state.hearts.forEach((v, i) => {
             if (v.userid === this.nowUserInfo.id) {
               this.setState({heartClass: this.state.hearts.heart});
@@ -114,7 +114,7 @@ class CommentItem extends React.Component {
   };
 
   onDeleteCommentEvent = () => {
-    console.log(this.props.data.id);
+    // console.log(this.props.data.id);
     deleteComment(this.props.data.id, res => {
       this.props.onUpdateComment(this.props.data.id, null);
     });

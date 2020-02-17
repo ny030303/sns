@@ -11,11 +11,11 @@ export const fileToServerURL = async(inputfile) => {
   let url;
   try {
     let res = await axios.post(`/php/uploadMovieFile.php`, formData, multipartFromDataConfig);
-    console.log(url);
+    // console.log(url);
     url = res.data.url;
   }
   catch(e) {
-    console.log(e);
+    // console.log(e);
   }
   waitDialog.hide();
   return url;

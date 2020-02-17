@@ -19,7 +19,7 @@ class MessageItem extends React.Component {
         } : {
             background: `url("/images/profile_defult.png"}) 50% 50% / cover no-repeat`,
         };
-        console.log(userid, msgUser);
+        // console.log(userid, msgUser);
         return (
             <li className="massageItem" data-msgrd="1" onClick={(e) => this.props.showMessageWriting(e, data)}>
                 <div className="link_message">

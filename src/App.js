@@ -43,8 +43,9 @@ class App extends React.Component {
       topMenuHide: false,
       authed: false
     };
+    this.aTag = React.createRef();
 
-    console.log(localStorage.getItem("isSaveUserInfo"));
+    // console.log(localStorage.getItem("isSaveUserInfo"));
     if(localStorage.getItem("isSaveUserInfo")) {
       localStorage.removeItem("userInfo");
       localStorage.removeItem("isSaveUserInfo");
@@ -57,14 +58,24 @@ class App extends React.Component {
 
     eventService.listenEvent('loginStatus', logined => this.setState({authed: logined}));
     eventService.listenEvent("topMenuHide", (visible) => {
-      console.log("visible: ", visible);
+      // console.log("visible: ", visible);
       this.setState({topMenuHide: visible});
     })
   }
 
   componentDidMount() {
+    if(this.userInfo) {
+      if(this.userInfo.id === "admin") {
+        // console.log("app 들어옴", this.state.authed);
+        this.setState({authed: true, topMenuHide: true}, () => {
+          this.aTag.current.click();
+        });
+        // this.aTag.current.click();
+      }
+    }
+
     getUser(null, null, res => {
-      console.log(res);
+      // console.log(res);
       if (res.result === 0) {
         localStorage.removeItem("userInfo");
         this.setState({authed: false});
@@ -77,7 +88,7 @@ class App extends React.Component {
     localStorage.removeItem("userInfo");
     eventService.emitEvent("loginStatus", false);
     logout((data) => {
-      console.log(data)
+      // console.log(data)
     });
   };
 
@@ -98,6 +109,7 @@ class App extends React.Component {
               <Route exact path="/signup" component={SignUpForm}/>
             </Switch>
           </HashRouter>
+          <a className="gotoAdminPage" href="/#/adminpage" ref={this.aTag}/>
         </div>
     )
   }

@@ -59,13 +59,13 @@ class WritingContainer extends React.Component {
 
   componentDidMount() {
     if(this.props.postData) {
-      console.log(this.props.postData);
+      // console.log(this.props.postData);
       this.divContents.current.innerHTML = unescape(this.props.postData.contents);
       let files = [];
       if(this.props.postData.urls) {
         (this.props.postData.urls).split('|').forEach(v => files.push(v));
       }
-      console.log(files);
+      // console.log(files);
       if(this.props.postData.file) {
         getSnsFileData(this.props.postData.file, res => {
           if(res.files && res.files.length > 0) {
@@ -81,7 +81,7 @@ class WritingContainer extends React.Component {
   }
 
   onKeyEvent  = (e) => {
-    console.log(e.keyCode);
+    // console.log(e.keyCode);
   };
 
   writeEvent = (e) => {
@@ -130,9 +130,9 @@ class WritingContainer extends React.Component {
         link: (this.linkInput.current) ? this.linkInput.current.value : "",
         comment_private_num: this.state.commentPrivateNum
       };
-      console.log(data);
+      // console.log(data);
       updatePost(data, (res) => {
-        console.log(res);
+        // console.log(res);
         eventService.emitEvent("updatePostToMainAndUserStory", res.postData);
         alertDialog.show("안내", "수정 되었습니다.");
         this.postOff();
@@ -149,7 +149,7 @@ class WritingContainer extends React.Component {
       };
       // console.log(data.fileData.length);
       postWriting(data, (res) => {
-        console.log(res);
+        // console.log(res);
         alertDialog.show("안내", "소식을 성공적으로 업로드 했습니다." +
             "'나만보기'로 설정한 글은 내 스토리에서만 볼 수 있습니다." +
             " 지금 올린 스토리를 확인해보세요.");
@@ -171,7 +171,7 @@ class WritingContainer extends React.Component {
     if(addList.length + this.state.files.length > 5) {
       let sliceNum = addList.length + this.state.files.length - 10;
       addList.splice(0, sliceNum);
-      console.log(addList);
+      // console.log(addList);
     }
     addList.forEach(v => {
       if(v.type !== "image/png" && v.type !== "image/jpg" && v.type !== "image/jpeg" && !v.type.startsWith('video')) {

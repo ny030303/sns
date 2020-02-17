@@ -42,7 +42,7 @@ export default class StoryItemTail extends React.Component {
     };
     //deletePostFeeling(data, (res) => eventService.emitEvent("feelingUpdate", data));
     updatePostFeeling(data, (res) => {
-      console.log(res);
+      // console.log(res);
       if( res.result === 1 ) {
         eventService.emitEvent("feelingUpdateToMainAndUserStory", res.data);
       }
@@ -55,7 +55,7 @@ export default class StoryItemTail extends React.Component {
       feelingInfo: JSON.stringify({userid: this.nowUserInfo.id, feeling: feeling})
     };
     updatePostFeeling(data, (res) => {
-      console.log(res);
+      // console.log(res);
       if( res.result === 1 ) {
         eventService.emitEvent("feelingUpdateToMainAndUserStory", res.data)
       }
@@ -63,16 +63,16 @@ export default class StoryItemTail extends React.Component {
   };
 
   onUpClickEvent = () => {
-    console.log(this.props.postData);
+    // console.log(this.props.postData);
 
     if (this.state.isUpOn) { // 삭제
       deletePostUp(this.props.postData.id, this.nowUserInfo.id, (res) => {
-        console.log(res);
+        // console.log(res);
       });
     }
     else { // 추가
       addPostUp(this.props.postData.id, this.nowUserInfo.id, (res) => {
-        console.log(res);
+        // console.log(res);
       });
     }
     this.setState({isUpOn: !this.state.isUpOn});

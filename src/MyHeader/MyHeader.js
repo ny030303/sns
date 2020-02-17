@@ -26,7 +26,7 @@ class MyHeader extends React.Component {
 
   onClickIconEvent = (e) => {
     let type = e.target.dataset.type;
-    console.log(type);
+    // console.log(type);
     switch (type) {
       case "write":
         // console.log(this.props.history);
@@ -50,21 +50,21 @@ class MyHeader extends React.Component {
 
 
   onSearch = () => {
-    console.log(this.searchInput.current.value);
+    // console.log(this.searchInput.current.value);
   };
 
   componentDidMount() {
     eventService.listenEvent("editPostToMyHeader", (editPostData) => {
       // 입력된 내용으로 표시
-      console.log(editPostData);
+      // console.log(editPostData);
       this.setState({isModalWritingContainerOn: true, editPostData: editPostData});
     });
 
     this.searchInput.current.addEventListener("input", (e) => {
       let texts = e.target.value;
-      console.log(e.data);
+      // console.log(e.data);
       getSearchBoxItemInfos({text: texts}, (res) => {
-        console.log(res);
+        // console.log(res);
         this.setState({searchItemList: res});
       });
       if (texts.length <= 0) {

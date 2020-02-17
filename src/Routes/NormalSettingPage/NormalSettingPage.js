@@ -10,7 +10,7 @@ export class NormalSettingPage extends React.Component {
       
     };
     this.userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(this.userInfo);
+    // console.log(this.userInfo);
   }
 
 

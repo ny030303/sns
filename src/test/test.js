@@ -77,7 +77,7 @@ class MiniEditor extends HTMLElement {
     if( this.hasAttribute('placeholder') ){
       placeholder.innerHTML = this.getAttribute('placeholder');
     }else{
-      console.log(this.hasAttribute('placeholder'));
+      // console.log(this.hasAttribute('placeholder'));
       placeholder.innerHTML = '';
     }
 

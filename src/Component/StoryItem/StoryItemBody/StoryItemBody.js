@@ -31,7 +31,7 @@ export default class StoryItemBody extends React.Component {
         fileArr.push(`/php/downloadImage.php?id=${postData.file}&subid=${i}`);
       })
     }
-    console.log(postData);
+    // console.log(postData);
     if( this.contents.current ) {
       let contentHtml = unescape(postData.contents);
       this.contents.current.innerHTML = contentHtml.replace(/#[\\d|A-Z|a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*/gm,

@@ -15,7 +15,7 @@ export default class SnsMessage extends React.Component {
 
   updateSnsMessage = (uid) => {
     getSnsMessage(uid, (res) => {
-      console.log(res);
+      // console.log(res);
       this.setState({messages: res.msg});
     });
   };
@@ -23,7 +23,7 @@ export default class SnsMessage extends React.Component {
   componentDidMount() {
     this.updateSnsMessage(this.props.userInfo.id);
     eventService.listenEvent("updateUserInfoAll", () => {
-      console.log("-------------------updateUserInfoAll-----------------------");
+      // console.log("-------------------updateUserInfoAll-----------------------");
       this.setState({messages: this.state.messages});
     });
     eventService.listenEvent("updateSendMessage", (updateMessage) => {
@@ -33,7 +33,7 @@ export default class SnsMessage extends React.Component {
 
   render() {
     const {showMessageWriting} = this.props;
-    console.log(this.state.messages);
+    // console.log(this.state.messages);
     return (
       <div className="btn_message">
         <div className="grayColorBtn" onClick={showMessageWriting}>새 쪽지 작성</div>
